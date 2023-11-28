@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\Typing tests.props" />
+</Project>

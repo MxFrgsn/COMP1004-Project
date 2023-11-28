@@ -1,0 +1,26 @@
+C:\Users\maxth\Desktop\Usefuls\Coding\dev\Typing tests\Typing tests\bin\Debug\net6.0\appsettings.Development.json
+C:\Users\maxth\Desktop\Usefuls\Coding\dev\Typing tests\Typing tests\bin\Debug\net6.0\appsettings.json
+C:\Users\maxth\Desktop\Usefuls\Coding\dev\Typing tests\Typing tests\bin\Debug\net6.0\Typing tests.staticwebassets.runtime.json
+C:\Users\maxth\Desktop\Usefuls\Coding\dev\Typing tests\Typing tests\bin\Debug\net6.0\Typing tests.exe
+C:\Users\maxth\Desktop\Usefuls\Coding\dev\Typing tests\Typing tests\bin\Debug\net6.0\Typing tests.deps.json
+C:\Users\maxth\Desktop\Usefuls\Coding\dev\Typing tests\Typing tests\bin\Debug\net6.0\Typing tests.runtimeconfig.json
+C:\Users\maxth\Desktop\Usefuls\Coding\dev\Typing tests\Typing tests\bin\Debug\net6.0\Typing tests.dll
+C:\Users\maxth\Desktop\Usefuls\Coding\dev\Typing tests\Typing tests\bin\Debug\net6.0\Typing tests.pdb
+C:\Users\maxth\Desktop\Usefuls\Coding\dev\Typing tests\Typing tests\obj\Debug\net6.0\Typing tests.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\maxth\Desktop\Usefuls\Coding\dev\Typing tests\Typing tests\obj\Debug\net6.0\Typing tests.AssemblyInfoInputs.cache
+C:\Users\maxth\Desktop\Usefuls\Coding\dev\Typing tests\Typing tests\obj\Debug\net6.0\Typing tests.AssemblyInfo.cs
+C:\Users\maxth\Desktop\Usefuls\Coding\dev\Typing tests\Typing tests\obj\Debug\net6.0\Typing tests.csproj.CoreCompileInputs.cache
+C:\Users\maxth\Desktop\Usefuls\Coding\dev\Typing tests\Typing tests\obj\Debug\net6.0\Typing tests.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\maxth\Desktop\Usefuls\Coding\dev\Typing tests\Typing tests\obj\Debug\net6.0\staticwebassets\msbuild.Typing tests.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\maxth\Desktop\Usefuls\Coding\dev\Typing tests\Typing tests\obj\Debug\net6.0\staticwebassets\msbuild.build.Typing tests.props
+C:\Users\maxth\Desktop\Usefuls\Coding\dev\Typing tests\Typing tests\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.Typing tests.props
+C:\Users\maxth\Desktop\Usefuls\Coding\dev\Typing tests\Typing tests\obj\Debug\net6.0\staticwebassets\msbuild.buildTransitive.Typing tests.props
+C:\Users\maxth\Desktop\Usefuls\Coding\dev\Typing tests\Typing tests\obj\Debug\net6.0\staticwebassets.pack.json
+C:\Users\maxth\Desktop\Usefuls\Coding\dev\Typing tests\Typing tests\obj\Debug\net6.0\staticwebassets.build.json
+C:\Users\maxth\Desktop\Usefuls\Coding\dev\Typing tests\Typing tests\obj\Debug\net6.0\staticwebassets.development.json
+C:\Users\maxth\Desktop\Usefuls\Coding\dev\Typing tests\Typing tests\obj\Debug\net6.0\scopedcss\bundle\Typing tests.styles.css
+C:\Users\maxth\Desktop\Usefuls\Coding\dev\Typing tests\Typing tests\obj\Debug\net6.0\Typing tests.dll
+C:\Users\maxth\Desktop\Usefuls\Coding\dev\Typing tests\Typing tests\obj\Debug\net6.0\refint\Typing tests.dll
+C:\Users\maxth\Desktop\Usefuls\Coding\dev\Typing tests\Typing tests\obj\Debug\net6.0\Typing tests.pdb
+C:\Users\maxth\Desktop\Usefuls\Coding\dev\Typing tests\Typing tests\obj\Debug\net6.0\Typing tests.genruntimeconfig.cache
+C:\Users\maxth\Desktop\Usefuls\Coding\dev\Typing tests\Typing tests\obj\Debug\net6.0\ref\Typing tests.dll

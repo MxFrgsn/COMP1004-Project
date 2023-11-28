@@ -1,9 +1,0 @@
-
-	body {background-color: powderblue;}
-	h1 {color: limegreen;}
-	h2 {color: orange;}
-	p {color: red;}
-	i, b {color: yellow;}
-	input{box-shadow: 0 0 5px 1px black;}
-	input:invalid {box-shadow: 0 0 5px 1px red;}
-	input:valid {box-shadow: 0 0 5px 1px green;}
