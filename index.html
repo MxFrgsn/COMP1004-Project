@@ -6,8 +6,8 @@
 	<meta name="description" content="This website is intended to be my project for the module
 	comp1004 using HTML, CSS and Javascript. The intention of this website is to be a typing test which measures
     your typing abilities and offers repeatable exercises to try and improve it."/>
-	<link rel="stylesheet" href="comp1004.css" />
-	<script src="comp1004.js" defer></script>
+	<link rel="stylesheet" href="stylesheet.css" />
+	<script src="javascriptProject.js" defer></script>
 	<meta name="viewport" content="width=device-width"/>
 	<title>Typing Tests Project</title>
 </head>
@@ -21,9 +21,9 @@
 		<br> Eagle, Black, Blue, Pigeon, Parrot, Extraordinary, Powerful, Earth, Air, Fire, Water, Avatar, Lazy, Brillant, Genius, Gas, Parliament, Government, Decree, Judge, Jury, Exectue, Program,
 		<br> Algorithm, Strong, Timid, Assembly, Require, Spontaneous, Tore, Rip, Schelude, Often, Ocassionally, Always, Never, Cow, Animal, Dog, Sheep, Banana, Rarely, However, Oil, Defined, Variable
 	</p>
-	<form>
+	<form onsubmit="validateForm()">
 	<label for="typing test">Input test word here:</label>
-	<input type="text" id="inputbox" class="inputbox" onsubmit="return validateForm() ><br>
+	<input type="text" id="inputbox" class="inputbox"><br>
 	</form>
 	<div class - "class1">
 		<p class = "words"></p>
