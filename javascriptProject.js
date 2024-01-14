@@ -1,4 +1,4 @@
-var expectedResults = ["Farm", "Cheese", "Apple", "Character", "Planet", "Godfrey", "Orange", "Story", "Animated", "User", "Empty", "Still", "Water", "Grapes", "Fill", "When", "Why", "Worry", "Sad", "Pensive", "Because", "Intuition", "Pattern", "Recognition",
+var expectedInputs = ["Farm", "Cheese", "Apple", "Character", "Planet", "Godfrey", "Orange", "Story", "Animated", "User", "Empty", "Still", "Water", "Grapes", "Fill", "When", "Why", "Worry", "Sad", "Pensive", "Because", "Intuition", "Pattern", "Recognition",
 "Oval", "Square", "Paper", "Developer", "Controls", "Button", "Listener", "String", "Data", "Explained", "Error", "Means", "Exist", "Queue", "Event", "Object", "Exuberant", "Terrified", "Grief", "Morning", "Sunny", "Rain", "Vigorously",
 "Rich", "Abundant", "Lush", "Lubricant", "Average", "Mode", "Mind", "Direction", "Rock", "Cartoon", "Stories", "Protagonist", "Anti-Hero", "Robot", "Drone", "King", "History", "Exiled", "Death", "Tortured", "Soul", "Religion",
 "Eagle", "Black", "Blue", "Pigeon", "Parrot", "Extraordinary", "Powerful", "Earth", "Air", "Fire", "Water", "Avatar", "Lazy", "Brilliant", "Genius", "Gas", "Parliament", "Government", "Decree", "Judge", "Jury", "Execute", "Program",
@@ -10,12 +10,12 @@ var timerInterval;
 var startTime;
 var interval;
 
-function displayExpectedResults()
+function displayExpectedInputs()
 {
 	let arrayDisplayElement = document.getElementById("displayArray");
-	for (var i = 0; i< expectedResults.length; i++)
+	for (var i = 0; i< expectedInputs.length; i++)
 	{
-        paragraph.textContent += expectedResults[i] + " ";
+        paragraph.textContent += expectedInputs[i] + " ";
 	}
 	arrayDisplayElement.appendChild(paragraph);
 }
@@ -24,12 +24,13 @@ function validateForm() {
   event.preventDefault(); 
   let inputBox = document.getElementById("inputBox").value;
   
-	if (inputBox == expectedResults[0])
+	if (inputBox == expectedInputs[0])
 	{
 		completedWords++;
-		expectedResults.shift(); // want it to glow green when true + remove it from the list on the html doc
+		expectedInputs.shift(); // want it to glow green when true + remove it from input box
 		paragraph.innerHTML = "";
-		displayExpectedResults();
+		inputBox.value = ""
+		displayExpectedInputs();
 		inputBox.className = "input.green";
 	}
 	else
@@ -55,14 +56,13 @@ function calculateWPM()
 {
 	var WPM = completedWords;
 	console.log("You have a",WPM," WPM") //changes this so it updates nicely on screen	
-}
+} // will also have to change for different inputs in time!
 
-function checkIfEmpty()
+function checkIfInputBoxEmpty()
 {
 	let inputBox = document.getElementById("inputBox").value;
 	if (inputBox != "")
 	{
-	//const minuteTimer = setTimeout(timerCallback, 60000);
 	startTime = new Date();
 	timerInterval = setInterval(timer, 1000);
 	clearInterval(interval);
@@ -74,6 +74,5 @@ function timerCallback()
 }
 
 
-displayExpectedResults();
-interval = setInterval(checkIfEmpty, 1000);
- 
+displayExpectedInputs();
+interval = setInterval(checkIfInputBoxEmpty, 1000);
