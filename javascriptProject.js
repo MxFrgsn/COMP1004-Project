@@ -44,18 +44,18 @@ function timer()
 	let currentTime = new Date();
     let timePassed = currentTime - startTime;
 
-    if (timePassed >= 60000) { // 60000 milliseconds = 60 seconds
-      console.log("60 seconds have passed!"); //changes this so it updates nicely on screen
+    if (timePassed >= 10000) { // 60000 milliseconds = 60 seconds
+      console.log("It has been ",timePassed/1000,"seconds."); //changes this so it updates nicely on screen
 	  clearInterval(timerInterval);
       calculateWPM()
     } else {
-      console.log("Not yet 60 seconds");
+      console.log("It has been",timePassed/1000,"seconds.");
     }
 }
 function calculateWPM()
 {
 	var WPM = completedWords;
-	console.log("You have a",WPM," WPM") //changes this so it updates nicely on screen	
+	console.log("You have a",WPM,"WPM") //changes this so it updates nicely on screen	
 } // will also have to change for different inputs in time!
 
 function checkIfInputBoxEmpty()
