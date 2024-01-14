@@ -5,35 +5,22 @@
 	<meta name="author" content="Max Ferguson"/>
 	<meta name="description" content="This website is intended to be my project for the module
 	comp1004 using HTML, CSS and Javascript. The intention of this website is to be a typing test which measures
-    your typing abilities and offers repeatable exercises to try and improve it."/>
-<<<<<<< HEAD
-	<link rel="stylesheet" href="comp1004.css" />
-	<script src="comp1004.js" defer></script>
-	<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
-=======
+    your typing abilities and offers repeatable exercises to try and improve it."/>	
 	<link rel="stylesheet" href="stylesheet.css" />
 	<script src="javascriptProject.js" defer></script>
->>>>>>> 3396e7b02d9f7ed940eb4738b50604a583e1c254
+	<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 	<meta name="viewport" content="width=device-width"/>
 	<title>Typing Tests Project</title>
 </head>
 
 <body>
 	<h1>Typing Tests</h1>
-	<p class = "ArrayOfWords">
-		Farm, Cheese, Apple, Character, Planet, Godfrey, Orange, Story, Animated, User, Empty, Still, Water, Grapes, Fill, When, Why, Worry, Sad, Pensive, Because, Initution, Pattern, Recognition,
-		<br> Oval, Square, Paper, Developer, Controls, Button, Listener, String, Data, Explained, Error, Means, Exist, Queue, Event, Object, Exuberant, Terrified, Grief, Morning, Sunny, Rain, Vigorously
-		<br> Rich, Abundant, Lush, Lubricant, Average, Mode, Mind, Direction, Rock, Cartoon, Stories, Protagonist, Anti-Hero, Robot, Drone, King, History, Exiled, Death, Tortured, Soul, Religion, 
-		<br> Eagle, Black, Blue, Pigeon, Parrot, Extraordinary, Powerful, Earth, Air, Fire, Water, Avatar, Lazy, Brillant, Genius, Gas, Parliament, Government, Decree, Judge, Jury, Exectue, Program,
-		<br> Algorithm, Strong, Timid, Assembly, Require, Spontaneous, Tore, Rip, Schelude, Often, Ocassionally, Always, Never, Cow, Animal, Dog, Sheep, Banana, Rarely, However, Oil, Defined, Variable
-	</p>
-	<form onsubmit="validateForm()">
-	<label for="typing test">Input test word here:</label>
-<<<<<<< HEAD
-	<input type="text" id="inputbox" onsubmit="return validateForm() ><br>
-=======
-	<input type="text" id="inputbox" class="inputbox"><br>
->>>>>>> 3396e7b02d9f7ed940eb4738b50604a583e1c254
+	<div id = displayArray> </div>
+	
+	<form onsubmit="return validateForm()">
+    <label for="inputBox">Input test word here:</label>
+    <input type="text" id="inputBox" class="inputbox"><br>
+    <button type="button" id="submitButton" onclick="validateForm(event)">Submit</button>
 	</form>
 	
 

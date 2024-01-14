@@ -4,6 +4,8 @@
 	h2 {color: orange;}
 	p {color: red;}
 	i, b {color: yellow;}
-	input{box-shadow: 0 0 5px 1px black;}
-	input:invalid {box-shadow: 0 0 5px 1px red;}
-	input:valid {box-shadow: 0 0 5px 1px green;}
+	#submitButton {display: none;}
+	#input {box-shadow: 0 0 5px 1px white;}
+	#input.green {box-shadow: 0 0 10px 1px green;}
+	#input.red {box-shadow: 0 0 10px 1px red;}	
+
