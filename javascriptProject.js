@@ -25,18 +25,18 @@ function validateForm() {
   event.preventDefault(); 
   let input_Box = document.getElementById("inputBox").value;
   
-	if (inputBox == expected_Inputs[0])
+	if (input_Box == expected_Inputs[0])
 	{
 		completed_Words++;
 		expected_Inputs.shift(); // want it to glow green when true + remove it from input box
 		paragraph.innerHTML = "";
-		inputBox.value = ""
+		input_Box.value = ""
 		displayExpectedInputs();
-		inputBox.className = "input.green";
+		input_Box.className = "input.green";
 	}
 	else
 	{
-		inputBox.className = "input.red";
+		input_Box.className = "input.red";
 	}
   }
 
@@ -45,10 +45,10 @@ function timer()
 	let current_Time = new Date();
     let time_Passed = current_Time - start_Time;
 
-    if (time_Passed >= 60000) { // 60000 milliseconds = 60 seconds
-      console.log("It has been ",timePassed/1000,"seconds."); //changes this so it updates nicely on screen
+    if (time_Passed >= 10000) { // 60000 milliseconds = 60 seconds
+      console.log("It has been ",time_Passed/1000,"seconds."); //changes this so it updates nicely on screen
 	  clearInterval(timer_Interval);
-      calculate_WPM()
+      calculateWPM()
     } else {
       console.log("It has been",time_Passed/1000,"seconds.");
     }
