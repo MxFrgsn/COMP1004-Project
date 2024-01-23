@@ -1,11 +1,11 @@
-var expectedInputs = ["Farm", "Cheese", "Apple", "Character", "Planet", "Godfrey", "Orange", "Story", "Animated", "User", "Empty", "Still", "Water", "Grapes", "Fill", "When", "Why", "Worry", "Sad", "Pensive", "Because", "Intuition", "Pattern", "Recognition",
+var expected_Inputs = ["Farm", "Cheese", "Apple", "Character", "Planet", "Godfrey", "Orange", "Story", "Animated", "User", "Empty", "Still", "Water", "Grapes", "Fill", "When", "Why", "Worry", "Sad", "Pensive", "Because", "Intuition", "Pattern", "Recognition",
 "Oval", "Square", "Paper", "Developer", "Controls", "Button", "Listener", "String", "Data", "Explained", "Error", "Means", "Exist", "Queue", "Event", "Object", "Exuberant", "Terrified", "Grief", "Morning", "Sunny", "Rain", "Vigorously",
 "Rich", "Abundant", "Lush", "Lubricant", "Average", "Mode", "Mind", "Direction", "Rock", "Cartoon", "Stories", "Protagonist", "Anti-Hero", "Robot", "Drone", "King", "History", "Exiled", "Death", "Tortured", "Soul", "Religion",
 "Eagle", "Black", "Blue", "Pigeon", "Parrot", "Extraordinary", "Powerful", "Earth", "Air", "Fire", "Water", "Avatar", "Lazy", "Brilliant", "Genius", "Gas", "Parliament", "Government", "Decree", "Judge", "Jury", "Execute", "Program",
 "Algorithm", "Strong", "Timid", "Assembly", "Require", "Spontaneous", "Tore", "Rip", "Schedule", "Often", "Occasionally", "Always", "Never", "Cow", "Animal", "Dog", "Sheep", "Banana", "Rarely", "However", "Oil", "Defined", "Variable"];
  
 let paragraph = document.createElement("p");
-var completedWords = 0;
+var completed_Words = 0;
 var timerInterval;
 var startTime;
 var interval;
@@ -13,21 +13,22 @@ var interval;
 function displayExpectedInputs()
 {
 	let arrayDisplayElement = document.getElementById("displayArray");
-	for (var i = 0; i< expectedInputs.length; i++)
+	arrayDisplayElement.style.fontWeight = "bold";
+	for (var i = 0; i< expected_Inputs.length; i++)
 	{
-        paragraph.textContent += expectedInputs[i] + " ";
+        paragraph.textContent += expected_Inputs[i] + " ";
 	}
 	arrayDisplayElement.appendChild(paragraph);
 }
 
 function validateForm() {
   event.preventDefault(); 
-  let inputBox = document.getElementById("inputBox").value;
+  let input_Box = document.getElementById("inputBox").value;
   
-	if (inputBox == expectedInputs[0])
+	if (inputBox == expected_Inputs[0])
 	{
-		completedWords++;
-		expectedInputs.shift(); // want it to glow green when true + remove it from input box
+		completed_Words++;
+		expected_Inputs.shift(); // want it to glow green when true + remove it from input box
 		paragraph.innerHTML = "";
 		inputBox.value = ""
 		displayExpectedInputs();
@@ -41,20 +42,20 @@ function validateForm() {
 
 function timer()
 {
-	let currentTime = new Date();
-    let timePassed = currentTime - startTime;
+	let current_Time = new Date();
+    let time_Passed = current_Time - start_Time;
 
-    if (timePassed >= 10000) { // 60000 milliseconds = 60 seconds
+    if (time_Passed >= 60000) { // 60000 milliseconds = 60 seconds
       console.log("It has been ",timePassed/1000,"seconds."); //changes this so it updates nicely on screen
-	  clearInterval(timerInterval);
-      calculateWPM()
+	  clearInterval(timer_Interval);
+      calculate_WPM()
     } else {
-      console.log("It has been",timePassed/1000,"seconds.");
+      console.log("It has been",time_Passed/1000,"seconds.");
     }
 }
 function calculateWPM()
 {
-	var WPM = completedWords;
+	var WPM = completed_Words;
 	console.log("You have a",WPM,"WPM") //changes this so it updates nicely on screen	
 } // will also have to change for different inputs in time!
 
@@ -63,8 +64,8 @@ function checkIfInputBoxEmpty()
 	let inputBox = document.getElementById("inputBox").value;
 	if (inputBox != "")
 	{
-	startTime = new Date();
-	timerInterval = setInterval(timer, 1000);
+	start_Time = new Date();
+	timer_Interval = setInterval(timer, 1000);
 	clearInterval(interval);
 	}
 }
@@ -73,6 +74,10 @@ function timerCallback()
 	console.log("End of Timer");
 }
 
+function selectTime()
+{
+	selected_time 
+}
 
 displayExpectedInputs();
 interval = setInterval(checkIfInputBoxEmpty, 1000);
