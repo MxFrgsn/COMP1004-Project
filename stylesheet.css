@@ -18,7 +18,7 @@
 	i, b {
 	color: yellow;
 	}
-	submitButton 
+	#submitButton 
 	{
 	display: none;
 	}
