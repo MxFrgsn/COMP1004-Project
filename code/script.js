@@ -20,8 +20,7 @@ var start_Time;
 var interval;
 let paragraph = document.createElement("p");
 
-// Displays expected inputs on website, removing previously correct input
-function displayExpectedInputs() 
+function displayExpectedInputs() // Displays expected inputs on website, removing previously correct input
 {
 	document.getElementById("inputBox").value = ""
 	let arrayDisplayElement = document.getElementById("displayArray");
@@ -42,7 +41,6 @@ function randomiseArray(array) // Durstenfeld shuffle, psuedo-randomises the arr
         array[randomIndex] = temp;
     }
 }
-
 //Might change it so its sumbitted automatically if correct instead of requiring pressing enter.
 function validateForm() //Checks if value within inputbox is correct value, this is called on sumbit currently. 
 {
@@ -50,9 +48,8 @@ function validateForm() //Checks if value within inputbox is correct value, this
 	if (document.getElementById("inputBox").value == expected_Inputs[0])
 	{
 		completed_Words++;
-
 		expected_Inputs.shift();
-		if (calculateHeight() <= 287) 
+		if (calculateHeight() <= 287 || completed_Words%2!=0) 
 		// want to find a better solution to ensure clean UI is maintained + to ensure that the same words dont appear at the start every time
 		{
 		expected_Inputs.push(back_up[back_up.length - 1]);
@@ -88,7 +85,7 @@ function timer() //Checks the amount of time that has passed and formatts it to 
     let formattedTime = " ‎ ‎ "+minutes + ":" + (seconds < 10 ? "0" : "") + seconds + " ‎ ‎ ‎";
     timerHTML.textContent = formattedTime; // while this works, need to realign for cleaner UI
 }
-//Should I use alert()? Should I also display accuracy percentage?
+//Should I also display accuracy percentage?
 function calculateWPM() //Calculates WPM, which is to be displayed to the user
 {
 	var WPM = completed_Words;
@@ -105,6 +102,7 @@ function checkIfInputBoxEmpty() //Checks if inputbox is empty, if its not that m
 	timer_Interval = setInterval(timer, 950);
 	}
 }
+
 
 function main() // Start of typing test
 {
