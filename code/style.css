@@ -4,7 +4,7 @@
 	color: rgb(89, 109, 123);
 	position:absolute;
 	top:0%;
-	left:40%
+	left:43.5%
 	}
 	
 	.expected_inputs 
@@ -15,16 +15,18 @@
 	width: 750px;
 	position: absolute; 
 	top: 16%;
-	left: 22.5%;
+	left: 27.5%;
 	height: 287px
 	}
 	
 	.timer
 	{
-	color: rgb(238, 241, 244);
+	color: white;
+	background-color: rgb(89, 109, 123);
 	font-size: 25px;
-	postion: absolute;
-	top: 5%;
+	position: absolute;
+	top: 25%;
+	left: 73%;
 	}
 
 	#submitButton 
@@ -38,6 +40,6 @@
 	background-color: rgb(89, 109, 123);
 	width: 600px;
 	position: absolute;
-	top: 50.1%;
-	left: 27.3%
+	top: 48.1%;
+	left: 31.8%
 	}
