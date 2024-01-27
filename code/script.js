@@ -59,7 +59,7 @@ function submitForm() //Sumbits inputted word automatically
 }
 function validateForm() //Checks if input box has been written in, if so, starts time and checks if inputted value is correct
 {
-	if (timer_started == false)
+	if (timer_started == false && document.getElementById("inputBox").value !="")
 	{
 		timer_started = true;
 		start_Time = new Date();
@@ -79,7 +79,8 @@ function timer() //Checks the amount of time that has passed
 	let current_Time = new Date();
     let time_Passed = current_Time - start_Time;
 	let timer_HTML = document.getElementById("timer");
-    if (time_Passed >= 10000) { // 60000 milliseconds = 60 seconds
+    if (time_Passed >= 10000) 
+	{ // 60000 milliseconds = 60 seconds
 	  clearInterval(timer_Interval);
       calculateWPM();
 	  main();
