@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-GB">
 <head>
+
 	<meta charset="utf-8"/>
 	<meta name="author" content="Max Ferguson"/>
 	<meta name="description" content="This website is intended to be my project for the module
@@ -10,22 +11,24 @@
 	<script src="script.js" defer></script>
 	<meta name="viewport" content="width=device-width"/>
 	<title>Typing Test - COMP1004 Project</title>
+	
 </head>
 
 <body>
+
 	<h1>Typing Test</h1>
-	<div id= "options" class = "optionsPicker"> </div>
-	<div id = "timer" class = "timer">	
-	<p>‎ ‎ ‎ 0:00‎‎ ‎ ‎ ‎</p> </div>
-	<div id = "displayArray" class = "expected_inputs"> </div>
+	<div id= "options" class="optionsPicker"> </div>
+	<div id="timer" class="timer">	
+	<p>‎ ‎ ‎ 0:00‎‎ ‎ ‎ ‎</p> 
+	</div>
+	<div id="displayWordBank" class="work_bank"> </div>
 	
-	<form onsubmit="return validateForm()">
+	<form id ="submit">
     <label for="inputBox"></label>
-    <input type="text" id="inputBox" class="inputbox"><br>
-    <button type="button" id="submitButton" onclick="validateForm(event)">Submit</button>
+    <input type="text" id="inputBox" class="inputbox" oninput="validateForm()"><br>
+    <button type="button" id="submitButton" ></button>
 	</form>
 	
-
 </body>
 
 </html>
