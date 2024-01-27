@@ -34,8 +34,8 @@ function displayWords() // Displays expected inputs on website, removing previou
 	while (current_Height < max_Height && i < word_bank.length)
 	{
 		paragraph.textContent += word_bank[i] + " ";
-		arrayDisplayElement.innerHTML = paragraph.textContent;
-		current_Height = arrayDisplayElement.offsetHeight;
+		word_bank_html.innerHTML = paragraph.textContent;
+		current_Height = word_bank_html.offsetHeight;
 		i++;
 	}
 }
@@ -57,7 +57,7 @@ function submitForm() //Sumbits inputted word automatically
      document.getElementById('submit').submit();
     }
 }
-function validateForm() //Checks if value within inputbox is correct value, this is called on sumbit currently. 
+function validateForm() //Checks if input box has been written in, if so, starts time and checks if inputted value is correct
 {
 	if (timer_started == false)
 	{
@@ -84,16 +84,16 @@ function timer() //Checks the amount of time that has passed
       calculateWPM();
 	  main();
     } 	
-	updateTimerUI(time_Passed,timerHTML);
+	updateTimerUI(time_Passed,timer_HTML);
 }
 
-function updateTimerUI(time_Passed,timerHTML) // Formats amount of time passed onto website
+function updateTimerUI(time_Passed,timer_HTML) // Formats amount of time passed onto website
 {
 	let totalSeconds = Math.floor(time_Passed / 1000);
     let minutes = Math.floor(totalSeconds / 60);
     let seconds = totalSeconds % 60;
     let formattedTime = " ‎ ‎ "+ minutes + ":" + (seconds < 10 ? "0" : "") + seconds + " ‎ ‎ ‎";
-    timerHTML.textContent = formattedTime; // while this works, need to realign for cleaner UI
+    timer_HTML.innerHTML = formattedTime; // while this works, need to realign for cleaner UI
 }
 //Should I also display accuracy percentage?
 function calculateWPM() //Calculates WPM, which is to be displayed to the user
