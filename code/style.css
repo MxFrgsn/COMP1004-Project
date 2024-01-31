@@ -33,6 +33,15 @@
 	display: none;
 	}
 	
+	#WordsPerMinutes
+	{
+	color: white;
+	background-color: rgb(89, 109, 123);
+	font-size: 25px;
+	position: absolute;
+	top: 25%;
+	left: 22%;	
+	}
 	input
 	{
 	box-shadow: 0 0 10px 2px rgb(89, 109, 170);
