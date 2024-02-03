@@ -109,10 +109,18 @@ function updateWpmUI(WPM)
  	wpm_HTML.innerHTML = formattedWPM;
 }
 
-function validateTimerOptions()
+function validateTimerOptions() // Enables changing of length of typing test (by default its 60s long)
 {
-	//write code here to change the value of time when radio button pressed.
+	var timerOptions = [30,60,90]
+	for(var i= 0; i < timerOptions.length; i++)
+	{
+		if (document.getElementById(timerOptions[i]).checked)
+		{
+			time = timerOptions[i] * 1000
+		}
+	}
 }
+
 function main() // Start of typing test
 {
 document.getElementById("inputBox").value="";
