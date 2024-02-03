@@ -62,7 +62,7 @@ function validateInputBox() //Checks if input box has been written in, if so, st
 		start_Time = new Date();
 		timer_Interval = setInterval(timer, 950);
 	}
-	if (document.getElementById("inputBox").value == word_bank[0])
+	if (document.getElementById("inputBox").value == word_bank[0] && timer_started == true)
 	{
 		written_characteres+=word_bank[0].length;
 		word_bank.shift();
@@ -124,6 +124,7 @@ function validateDifficultyOptions()
 {
 	//continue here, do new flowchart and ulm diagram, show red if incorrect show green if correct in display words bank
 }
+
 function main() // Start of typing test
 {
 document.getElementById("inputBox").value="";
