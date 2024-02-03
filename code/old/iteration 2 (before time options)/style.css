@@ -1,0 +1,71 @@
+
+	h1 
+	{
+	color: rgb(89, 109, 123);
+	position:absolute;
+	top:0%;
+	left:43.5%
+	}
+	
+	#displayWordBank 
+	{
+	color: rgb(238, 241, 244);
+	background-color: rgb(137, 159, 176);
+	font-size: 25px;
+	width: 750px;
+	position: absolute; 
+	top: 16%;
+	left: 27.5%;
+	}
+	
+	#submitButton 
+	{
+	display: none;
+	}
+	
+	#WordsPerMinutes
+	{
+	color: rgb(238, 241, 244);
+	font-size: 24px;
+	position: absolute;
+	left: 25%;
+	top: 22%;
+	}
+	.squarewpm
+	{
+	background-color: rgb(89, 109, 123);
+	height: 100px;
+	width: 110px;
+	position: absolute;
+	top: 25%;
+	left: 21%;
+	}
+	
+	#timer
+	{
+	color: rgb(238, 241, 244);
+	font-size: 29px;
+	position: absolute;
+	left: 14%;
+	top: 30%;
+	}
+	
+	.squaretimer
+	{
+	background-color: rgb(89, 109, 123);
+	height: 100px;
+	width: 110px;
+	position: absolute;
+	top: 25%;
+	left: 68%;
+	}
+	
+	input
+	{
+	box-shadow: 0 0 10px 2px rgb(89, 109, 170);
+	background-color: rgb(89, 109, 123);
+	width: 600px;
+	position: absolute;
+	top: 47.1%;
+	left: 31.1%
+	}

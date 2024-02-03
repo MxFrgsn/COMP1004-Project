@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+
+	<meta charset="utf-8"/>
+	<meta name="author" content="Max Ferguson"/>
+	<meta name="description" content="This website is intended to be my project for the module
+	comp1004 using HTML, CSS and Javascript. The intention of this website is to be a typing test which measures
+    your typing abilities and offers repeatable exercises to try and improve it."/>	
+	<link rel="stylesheet" href="style.css" />
+	<script src="script.js" defer></script>
+	<meta name="viewport" content="width=device-width"/>
+	<title>Typing Test - COMP1004 Project</title>
+	
+</head>
+
+<body>
+
+	<h1>Typing Test</h1>4
+	<div class = squaretimer>	
+		<div id="timer"></div>
+	</div>
+	<div class = squarewpm>	
+		<div id ="WordsPerMinutes"> </div>
+	</div>
+	<div id="displayWordBank"> </div>
+	
+	<form id ="submit">
+    <label for="inputBox"></label>
+    <input type="text" id="inputBox" class="inputBox" oninput="validateForm()"><br>
+    <button type="button" id="submitButton" ></button>
+	</form>
+	
+</body>
+
+</html>
