@@ -18,16 +18,6 @@
 	left: 27.5%;
 	}
 	
-	#timer
-	{
-	color: white;
-	background-color: rgb(89, 109, 123);
-	font-size: 25px;
-	position: absolute;
-	top: 25%;
-	left: 73%;
-	}
-
 	#submitButton 
 	{
 	display: none;
@@ -35,12 +25,39 @@
 	
 	#WordsPerMinutes
 	{
-	color: white;
+	color: rgb(238, 241, 244);
+	font-size: 24px;
+	position: absolute;
+	left: 25%;
+	top: 22%;
+	}
+	.squarewpm
+	{
 	background-color: rgb(89, 109, 123);
-	font-size: 25px;
+	height: 100px;
+	width: 110px;
 	position: absolute;
 	top: 25%;
-	left: 22%;	
+	left: 21%;
+	}
+	
+	#timer
+	{
+	color: rgb(238, 241, 244);
+	font-size: 29px;
+	position: absolute;
+	left: 14%;
+	top: 30%;
+	}
+	
+	.squaretimer
+	{
+	background-color: rgb(89, 109, 123);
+	height: 100px;
+	width: 110px;
+	position: absolute;
+	top: 25%;
+	left: 68%;
 	}
 	
 	input
@@ -49,6 +66,6 @@
 	background-color: rgb(89, 109, 123);
 	width: 600px;
 	position: absolute;
-	top: 50.1%;
+	top: 47.1%;
 	left: 31.1%
 	}

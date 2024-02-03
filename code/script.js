@@ -24,6 +24,8 @@ var written_characteres = 0;
 let paragraph = document.createElement("p");
 var timer_started = false;
 var time = 5000; // 60000 milliseconds = 60 seconds
+let time_Passed = 0
+var WPM = 0; 
 
 function displayWords() // Displays expected inputs on website, removing previously correct input
 {
@@ -79,22 +81,28 @@ function validateForm() //Checks if input box has been written in, if so, starts
 function timer() //Checks the amount of time that has passed
 {
 	let current_Time = new Date();
-    let time_Passed = current_Time - start_Time;
-	let timer_HTML = document.getElementById("timer");
+    time_Passed = current_Time - start_Time;
+	console.log(time_Passed);
     if (time_Passed >= time)
 	{ 
 	  clearInterval(timer_Interval);
       calculateWPM();
 	  main();
     } 	
-	updateTimerUI(time_Passed,timer_HTML);
+	updateTimerUI(time_Passed);
 }
 
-function updateTimerUI(time_Passed,timer_HTML) // Formats amount of time passed onto website
+function updateTimerUI(time_Passed) // Formats amount of time passed onto website
 {
+	let timer_HTML = document.getElementById("timer");
+	timer_HTML.style.fontWeight = "bold";
 	let totalSeconds = Math.floor(time_Passed / 1000);
     let minutes = Math.floor(totalSeconds / 60);
     let seconds = totalSeconds % 60;
+	console.log(time_Passed);
+	console.log(totalSeconds);
+	console.log(minutes);
+	console.log(seconds);
     let formattedTime = " ‎ ‎ "+ minutes + ":" + (seconds < 10 ? "0" : "") + seconds + " ‎ ‎ ‎";
     timer_HTML.innerHTML = formattedTime; // while this works, need to realign for cleaner UI, same with WPM
 }
@@ -102,14 +110,15 @@ function updateTimerUI(time_Passed,timer_HTML) // Formats amount of time passed 
 //Should I also display accuracy percentage?
 function calculateWPM() //Calculates WPM, which is to be displayed to the user
 {	
-	var WPM = (written_characteres/5)/(time/60000);
-	let wpm_HTML = document.getElementById("WordsPerMinute");
-	updateWpmUI(WPM,wpm_HTML); 
+	WPM = (written_characteres/5)/(time/60000);
+	updateWpmUI(WPM); 
 }
 
-function updateWpmUI(WPM,wpm_HTML)
+function updateWpmUI(WPM)
 {
-	let formattedWPM = "WPM: " + WPM 
+	let wpm_HTML = document.getElementById("WordsPerMinutes");
+	wpm_HTML.style.fontWeight = "bold";
+	let formattedWPM = "WPM: " + WPM;
  	wpm_HTML.innerHTML = formattedWPM;
 }
 
@@ -117,8 +126,10 @@ function main() // Start of typing test
 {
 document.getElementById("inputBox").value="";
 timer_started = false;
+var start_Time = 0;
 var timer_Interval;
-var start_Time;
+updateTimerUI(time_Passed);
+updateWpmUI(WPM);
 randomiseArray();
 paragraph.innerHTML = "";
 displayWords();
