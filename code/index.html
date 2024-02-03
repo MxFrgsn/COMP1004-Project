@@ -16,29 +16,28 @@
 
 <body>
 
-	<h1>Typing Test</h1>4
-	<div class = squareOptions>
-		<form id = "timeOptions">
-			<input type="radio" id="30s"  value = "30s">
-			<label for="30s">30s </label> <br>
-			<input type="radio" id="60s"  value = "60s">
-			<label for="60s">60s </label> <br>
-			<input type="radio" id="90s"  value = "90s">
-			<label for="90s">90s </label> <br>
-		</form>
-	</div>
-	<div class = squaretimer>	
+	<h1>Typing Test</h1>
+	<div class = squareOptions></div>
+	<form id = "timerOptions">
+			<label> TIMER: </label> 
+			<input type="radio" id="30s" name="timer" value = "30s" onchange = "validateTimerOptions()">
+			<label for="30s">30s </label>
+			<input type="radio" id="60s" name="timer"  value = "60s" onchange = "validateTimerOptions()"> // will onchange work?
+			<label for="60s">60s </label>
+			<input type="radio" id="90s" name="timer"  value = "90s" onchange = "validateTimerOptions()">
+			<label for="90s">90s </label> 
+	</form>
+	<div class = squareTimer>	
 		<div id="timer"></div>
 	</div>
-	<div class = squarewpm>	
+	<div class = squareWpm>	
 		<div id ="WordsPerMinutes"> </div>
 	</div>
 	<div id="displayWordBank"> </div>
 	
 	<form id ="submit">
     <label for="inputBox"></label>
-    <input type="text" id="inputBox" class="inputBox" oninput="validateForm()"><br>
-    <button type="button" id="submitButton" ></button>
+    <input type="text" id="inputBox" class="inputBox" oninput="validateInputBox()"><br>
 	</form>
 	
 </body>

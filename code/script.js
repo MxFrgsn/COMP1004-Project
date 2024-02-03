@@ -23,7 +23,7 @@ var word_bank= ["Farm", "Cheese", "Apple", "Character", "Planet", "Godfrey", "Or
 var written_characteres = 0;
 let paragraph = document.createElement("p");
 var timer_started = false;
-var time = 5000; // 60000 milliseconds = 60 seconds
+var time = 60000; // 60000 milliseconds = 60 seconds
 let time_Passed = 0
 var WPM = 0; 
 
@@ -31,7 +31,6 @@ function displayWords() // Displays expected inputs on website, removing previou
 {
 	document.getElementById("inputBox").value = ""
 	let word_bank_html = document.getElementById("displayWordBank");
-	word_bank_html.style.fontWeight = "bold";
 	let max_Height = 300;
     let current_Height = 0;
 	var i = 0;
@@ -54,14 +53,8 @@ function randomiseArray() // Durstenfeld shuffle, psuedo-randomises the array
         word_bank[randomIndex] = temp;
     }
 }
-function submitForm() //Sumbits inputted word automatically
-{
-	if (validateForm()) 
-	{
-     document.getElementById('submit').submit();
-    }
-}
-function validateForm() //Checks if input box has been written in, if so, starts time and checks if inputted value is correct
+
+function validateInputBox() //Checks if input box has been written in, if so, starts time and checks if inputted value is correct
 {
 	if (timer_started == false && document.getElementById("inputBox").value !="")
 	{
@@ -95,7 +88,6 @@ function timer() //Checks the amount of time that has passed
 function updateTimerUI(time_Passed) // Formats amount of time passed onto website
 {
 	let timer_HTML = document.getElementById("timer");
-	timer_HTML.style.fontWeight = "bold";
 	let totalSeconds = Math.floor(time_Passed / 1000);
     let minutes = Math.floor(totalSeconds / 60);
     let seconds = totalSeconds % 60;
@@ -113,11 +105,14 @@ function calculateWPM() //Calculates WPM, which is to be displayed to the user
 function updateWpmUI(WPM)
 {
 	let wpm_HTML = document.getElementById("WordsPerMinutes");
-	wpm_HTML.style.fontWeight = "bold";
 	let formattedWPM = "WPM: " + WPM;
  	wpm_HTML.innerHTML = formattedWPM;
 }
 
+function validateTimerOptions()
+{
+	//write code here to change the value of time when radio button pressed.
+}
 function main() // Start of typing test
 {
 document.getElementById("inputBox").value="";
@@ -132,4 +127,4 @@ displayWords();
 }
 
 main();
-document.getElementById('submit').addEventListener('submit', submitForm())
+
