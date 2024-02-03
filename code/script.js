@@ -111,7 +111,7 @@ function updateWpmUI(WPM)
 
 function validateTimerOptions() // Enables changing of length of typing test (by default its 60s long)
 {
-	var timerOptions = [30,60,90]
+	var timerOptions = [30,60,90,120]
 	for(var i= 0; i < timerOptions.length; i++)
 	{
 		if (document.getElementById(timerOptions[i]).checked)
@@ -120,7 +120,10 @@ function validateTimerOptions() // Enables changing of length of typing test (by
 		}
 	}
 }
-
+function validateDifficultyOptions()
+{
+	//continue here, do new flowchart and ulm diagram, show red if incorrect show green if correct in display words bank
+}
 function main() // Start of typing test
 {
 document.getElementById("inputBox").value="";

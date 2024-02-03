@@ -83,10 +83,21 @@
 	#timerOptions
 	{
 		position: absolute;
-		top: 12%;
+		top: 12.5%;
 		left: 25.8%;
 		color: rgb(238, 241, 244); 
-		font-size: 28px;
+		font-size: 22px;
 		font-weight:bold;
 	}
+	
+	#difficultyOptions
+	{
+		position: absolute;
+		top: 12.5%;
+		left: 45.8%;
+		color: rgb(238, 241, 244); 
+		font-size: 22px;
+		font-weight:bold;
+	}
+	
 	

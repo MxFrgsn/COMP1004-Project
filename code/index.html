@@ -26,6 +26,18 @@
 			<label for="60">60s </label>
 			<input type="radio" id="90" name="timer"  value = "90s" onchange = "validateTimerOptions()">
 			<label for="90">90s </label> 
+			<input type="radio" id="120" name="timer"  value = "120s" onchange = "validateTimerOptions()">
+			<label for="120">120s </label> 
+	</form>
+	<form id = "difficultyOptions">
+			<label> DIFFICULTY: </label> 
+			<input type="radio" id="Easy" name="difficulty" value = "Easy" onchange = "validateDifficultyOptions()">
+			<label for="Easy">Easy </label>
+			<input type="radio" id="Medium" name="difficulty"  value = "Medium" onchange = "validateDifficultyOptions()"> 
+			<label for="60">Medium </label>
+			<input type="radio" id="Hard" name="difficulty"  value = "Hard" onchange = "validateDifficultyOptions()">
+			<label for="Hard">Hard </label> 
+
 	</form>
 	<div class = squareTimer>	
 		<div id="timer"></div>
