@@ -99,12 +99,8 @@ function updateTimerUI(time_Passed) // Formats amount of time passed onto websit
 	let totalSeconds = Math.floor(time_Passed / 1000);
     let minutes = Math.floor(totalSeconds / 60);
     let seconds = totalSeconds % 60;
-	console.log(time_Passed);
-	console.log(totalSeconds);
-	console.log(minutes);
-	console.log(seconds);
     let formattedTime = " ‎ ‎ "+ minutes + ":" + (seconds < 10 ? "0" : "") + seconds + " ‎ ‎ ‎";
-    timer_HTML.innerHTML = formattedTime; // while this works, need to realign for cleaner UI, same with WPM
+    timer_HTML.innerHTML = formattedTime; 
 }
 
 //Should I also display accuracy percentage?

@@ -69,3 +69,15 @@
 	top: 47.1%;
 	left: 31.1%
 	}
+
+	#timerOptions
+	{
+		position: absolute;
+		text-shadow:  black;
+		color: rgb(238, 241, 244);
+	}
+	
+	.squareOptions
+	{
+		position: absolute;
+	}
