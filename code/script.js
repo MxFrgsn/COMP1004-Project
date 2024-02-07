@@ -1,6 +1,6 @@
-var word_bank= ["Farm", "Cheese", "Apple", "Character", "Planet", "Godfrey", "Orange", "Story", "Animated", "User", "Empty", "Still", "Grapes", "Fill", 
-"Worry", "Sad", "Pensive", "Because", "Intuition", "Pattern", "Recognition","Oval", "Square", "Paper", "Developer", "Controls", "Button", "Listener", "String", "Data", "Explained",
- "Error", "Means", "Exist", "Queue", "Event", "Object", "Exuberant", "Terrified", "Grief", "Morning", "Sunny", "Rain", "Vigorously",
+var word_bank= ["farm", "cheese", "apple", "character", "planet", "godfrey", "orange", "story", "animated", "user", "empty", "still", "grapes", "fill", 
+"worry", "sad", "pensive", "because", "intuition", "pattern", "recognition","oval", "square", "paper", "developer", "controls", "button", "listener", "string", "data", "explained",
+ "error", "means", "exist", "queue", "Event", "Object", "Exuberant", "Terrified", "Grief", "Morning", "Sunny", "Rain", "Vigorously",
 "Rich", "Abundant", "Lush", "Lubricant", "Average", "Mode", "Mind", "Direction", "Rock", "Cartoon", "Stories", "Protagonist", "Anti-Hero", "Robot", "Drone", "King", "History", 
 "Exiled", "Death", "Tortured", "Soul", "Religion","Eagle", "Black", "Blue", "Pigeon", "Parrot", "Extraordinary", "Powerful", "Earth", "Air", "Fire","Water", "Avatar","Prophet","Lazy",
  "Brilliant", "Genius", "Gas", "Parliament", "Government", "Decree", "Judge", "Jury", "Execute", "Program","Algorithm", "Strong", "Timid", 
@@ -14,12 +14,16 @@ var word_bank= ["Farm", "Cheese", "Apple", "Character", "Planet", "Godfrey", "Or
 "Unveil", "Infinity", "Catharsis", "Arthritis", "Bone", "Undead", "Lich", "Dragon", "Greater", "Zombie","Apocalypse","Paradox",  "Labyrinth", 
 "Phenomenon","Solitude", "Serene", "Tranquil","Emperor","Ironic","Enigmatic", "Utopia", "Vivid", "Pandemonium", "Chaos", "Fragile",
 "Arcane", "Divergence", "Eclipse", "Radiance", "Glimmer","Bow","Adore","Pink","Princess",  "Lustrous", "Pantheon", "Vortex", "Juxtapose", "Epiphany", "Harbinger", "Is",
-"The", "Why", "You", "Who", "What", "Where", "When", "How", "Then", "Than", "Happy", "Depressed", "Dinosaur", "Common", "Uncommon", "Legendary", "Rare", "Exotic", "If", "I",
- "Are", "I'm", "Good", "Bad", "That", "Will", "Be", "Going", "Now", "Okay", "End", "Beginning", "Narrative", "Games", "Manga", "Anime", "Slime", "Isekai", "Books", "Movies", "Mouse", 
+"The", "Why", "You", "Who", "What", "Where", "When", "How", "Then", "Than", "Happy", "Depressed", "Dinosaur", "Common", "Uncommon", "Legendary", "Rare", "Exotic", "If",
+ "Are", "Good", "Bad", "That", "Will", "Be", "Going", "Now", "Okay", "End", "Beginning", "Narrative", "Games", "Manga", "Anime", "Slime", "Isekai", "Books", "Movies", "Mouse", 
  "Keyboard", "Laptop", "Cable", "Wire", "Vector", "Parallel", "Line", "Drawing", "Drew", "Fan", "Gone", "Baked", "Walked", "Walking", "Music", "Smiling", "Likes", "Hates",
- "Love", "Too", "Late", "To", "Smitten", "Her", "They", "Them", "Him", "She", "Her", "Fiction", "Non-fiction", "Early", "Let", "Go","Grimoire","Elves","Dwarves","Humans","Induction",
- "Electrical","Lighting","Yard","Couch","Desk","Chair","Baby","Parent"]
- 
+ "love", "too", "late", "to", "Smitten", "Her", "They", "Them", "Him", "She", "Her", "Fiction", "Non-fiction", "Early", "Let", "Go","Grimoire","Elves","Dwarves","Humans","Induction",
+ "electrical","lighting","yard","couch","desk","chair","baby","arent"]
+ //Ensures it's all lowercase
+ for(var i = 0; i < word_bank.length; i++)
+			{
+			word_bank[i] = word_bank[i].toLowerCase();
+			} 
 var written_characteres = 0;
 let paragraph = document.createElement("p");
 var timer_started = false;
@@ -122,8 +126,67 @@ function validateTimerOptions() // Enables changing of length of typing test (by
 }
 function validateDifficultyOptions()
 {
+	var difficultyOptions = ["Punctuation" ,"Capitalization","Paragraphs"]
+	for(var i= 0; i < difficultyOptions.length; i++)
+	{
+		if (document.getElementById(difficultyOptions[i]).checked)
+		{
+			console.log(difficultyOptions[i]);
+			 GenerateDifficultyOptions(difficultyOptions[i]);
+		}
+	}
 	//continue here, do new flowchart and ulm diagram, show red if incorrect show green if correct in display words bank
 }
+
+function GenerateDifficultyOptions(difficultyOptions) //using checkboxes, lets say i picked Punctuation, and afterwards i picked capitalisation, would it see punctuation is ticked and attempt to reapply it?
+{
+
+		if(difficultyOptions == "Punctuation")
+		{
+			const possiblePunctuation ="-,.;:'";
+			for(var i = 0; i < word_bank.length; i++) //not working
+			{
+			word_bank[i].concat(Math.floor(Math.random()*possiblePunctuation.length));
+			} 
+		}
+		else if (difficultyOptions == "Capitalization") //not working
+		{
+			for(var i = 0; i < word_bank.length; i++)
+			{
+				if (word_bank[i].length>1)
+				{
+					word_bank[i] = word_bank[i].charAt(0).toUpperCase()+word_bank.slice(1);
+				}
+				else
+				{
+					word_bank[i] = word_bank[i].charAt(0).toUpperCase();
+				}
+			console.log(word_bank[i]);
+			}
+		}
+		else if (difficultyOptions == "Paragraphs")
+		{
+			console.log("not finished");
+		}
+	
+	//use this to generate a list of words/capitalised words or paragraphs dependind on difficulty options
+	displayWords();
+}
+//use this to generate words and edit it?
+function makeWord(wordMax) {
+let text = '';
+const possibleLetters='bcdfghjklmnpqrstvwxyz';
+const possibleVowels='aeiou';
+
+  for(let i=0; i<wordMax; i=i+3)
+  {
+    text += possibleLetters[Math.floor(Math.random()*possible.length)];
+    text += possibleVowels[Math.floor(Math.random()*possibleVowels.length)];
+    text += possibleLetters[Math.floor(Math.random()*possible.length)];
+  }
+console.log(text);
+}
+
 
 function main() // Start of typing test
 {
