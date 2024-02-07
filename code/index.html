@@ -16,9 +16,10 @@
 
 <body>
 
+	<div class="outsideContainer">
 	<h1>Typing Test</h1>
-	<div class = squareOptions></div>
-	<form id = "timerOptions">
+		<div id = "squareOptions">
+		<form id = "timerOptions" >
 			<label> TIMER: </label> 
 			<input type="radio" id="30" name="timer" value = "30s" onchange = "validateTimerOptions()">
 			<label for="30">30s </label>
@@ -37,20 +38,23 @@
 			<label for="60">Capitalization </label>
 			<input type="radio" id="Paragraphs" name="difficulty"  value = "Paragraphs" onchange = "validateDifficultyOptions()">
 			<label for="Hard">Paragraphs </label> 
+	</form>
+	</div>
+	<div class = "insideContainer">
+		<div class = "square">	
+			<div id ="WordsPerMinutes"> </div>
+		</div>
+		<div id="displayWordBank"><p></p></div>
+		<div class = "square">	
+			<div id="timer"></div>
+		</div>
 
-	</form>
-	<div class = "square" id="posTimer">	
-		<div id="timer"></div>
 	</div>
-	<div class = "square" id="posWPM">	
-		<div id ="WordsPerMinutes"> </div>
+		<form>
+			<label for="inputBox"></label>
+			<input type="text" id="inputBox" class="inputBox" oninput="validateInputBox()"><br>
+		</form>
 	</div>
-	<div id="displayWordBank"> </div>
-	
-	<form>
-    <label for="inputBox"></label>
-    <input type="text" id="inputBox" class="inputBox" oninput="validateInputBox()"><br>
-	</form>
 	
 </body>
 

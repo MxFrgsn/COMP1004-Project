@@ -24,25 +24,32 @@ var word_bank= ["farm", "cheese", "apple", "character", "planet", "godfrey", "or
 			{
 			word_bank[i] = word_bank[i].toLowerCase();
 			} 
-var written_characteres = 0;
-let paragraph = document.createElement("p");
+var written_characters = 0;
 var timer_started = false;
-var time = 60000; // 60000 milliseconds = 60 seconds
+var time = 5000; // 60000 milliseconds = 60 seconds
 let time_Passed = 0
 var WPM = 0; 
+let word_bank_span = document.querySelector("#displayWordBank p");
 
 function displayWords() // Displays expected inputs on website, removing previously correct input
 {
 	document.getElementById("inputBox").value = ""
-	let word_bank_html = document.getElementById("displayWordBank");
 	let max_Height = 300;
     let current_Height = 0;
 	var i = 0;
 	while (current_Height < max_Height && i < word_bank.length)
 	{
-		paragraph.textContent += word_bank[i] + " ";
-		word_bank_html.innerHTML = paragraph.textContent;
-		current_Height = word_bank_html.offsetHeight;
+		var string = word_bank[i]
+		for (var j = 0; j<string.length;j++)
+		{
+			var span = document.createElement("span");
+			span.textContent = string[j];
+			word_bank_span.appendChild(span);
+		}
+		var span2 = document.createElement("span")
+		span2.textContent = " ";
+		word_bank_span.appendChild(span2);
+		current_Height = word_bank_span	.offsetHeight;
 		i++;
 	}
 }
@@ -66,13 +73,35 @@ function validateInputBox() //Checks if input box has been written in, if so, st
 		start_Time = new Date();
 		timer_Interval = setInterval(timer, 950);
 	}
-	if (document.getElementById("inputBox").value == word_bank[0] && timer_started == true)
+	var input_value = document.getElementById("inputBox").value;
+	document.querySelectorAll("#displayWordBank p span").forEach(span => {span.style.color="white";});
+	for (var i = 0; i< input_value.length;i++)
 	{
-		written_characteres+=word_bank[0].length;
-		word_bank.shift();
-		paragraph.innerHTML = "";
-		displayWords();
+		if(input_value[i] == word_bank_span.textContent[i])
+		{
+			var temp = document.querySelector("#displayWordBank p span:nth-child("+(i+1)+")");
+			temp.style.color = "green";
+		}
+		else
+		{
+			var temp = document.querySelector("#displayWordBank p span:nth-child("+(i+1)+")");
+			temp.style.color = "red";
+		}
+			
 	}
+	const last_letter_typed = input_value[inputValue.length - 1];
+	if (lastLetterTyped == " ")
+	{
+		const first_Word = input_value.split(" ")[0];
+		if (first_word == word_bank_span.textContent.split(" ")[0])
+			{
+			document.getElementById("inputBox").value = "";
+			written_characteres += word_bank[0].length;
+			word_bank.shift();
+			word_bank_span.innerHTML = "";
+			displayWords();
+    }
+  }
  }
  
 function timer() //Checks the amount of time that has passed
@@ -102,7 +131,7 @@ function updateTimerUI(time_Passed) // Formats amount of time passed onto websit
 //Should I also display accuracy percentage?
 function calculateWPM() //Calculates WPM, which is to be displayed to the user
 {	
-	WPM = (written_characteres/5)/(time/60000);
+	WPM = (written_characters/5)/(time/60000);
 	updateWpmUI(WPM); 
 }
 
@@ -172,7 +201,7 @@ function GenerateDifficultyOptions(difficultyOptions) //using checkboxes, lets s
 	//use this to generate a list of words/capitalised words or paragraphs dependind on difficulty options
 	displayWords();
 }
-//use this to generate words and edit it?
+//use this to generate words and edit it???
 function makeWord(wordMax) {
 let text = '';
 const possibleLetters='bcdfghjklmnpqrstvwxyz';
@@ -197,7 +226,6 @@ var timer_Interval;
 updateTimerUI(time_Passed);
 updateWpmUI(WPM);
 randomiseArray();
-paragraph.innerHTML = "";
 displayWords();
 }
 
