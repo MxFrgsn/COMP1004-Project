@@ -67,28 +67,14 @@ function randomiseArray() // Durstenfeld shuffle, psuedo-randomises the array
 
 function validateInputBox() //Checks if input box has been written in, if so, starts time and checks if inputted value is correct
 {
-	if (timer_started == false && document.getElementById("inputBox").value !="")
+	var input_value = document.getElementById("inputBox").value;
+	if (timer_started == false && input_value !="")
 	{
 		timer_started = true;
 		start_time = new Date();
 		timer_interval = setInterval(timer, 950);
 	}
-	var input_value = document.getElementById("inputBox").value;
-	document.querySelectorAll("#displayWordBank p span").forEach(span => {span.style.color="white";});
-	for (var i = 0; i< input_value.length;i++)
-	{
-		if(input_value[i] == word_bank_span.textContent[i])
-		{
-			var current_letter = document.querySelector("#displayWordBank p span:nth-child("+(i+1)+")");
-			current_letter.style.color = "green";
-		}
-		else
-		{
-			var current_letter = document.querySelector("#displayWordBank p span:nth-child("+(i+1)+")");
-			current_letter.style.color = "red";
-		}
-			
-	}
+	styleWordBank(input_value);
 	const last_letter_typed = input_value[input_value.length - 1];
 	if (last_letter_typed == " ")
 	{
@@ -104,6 +90,23 @@ function validateInputBox() //Checks if input box has been written in, if so, st
     }
  }
  
+ function styleWordBank(input_value) // styles wordbank, comparing it to inputbox checking if its right or wrong. 
+ {
+	document.querySelectorAll("#displayWordBank p span").forEach(span => {span.style.color="white";});
+	for (var i = 0; i< input_value.length;i++)
+	{
+		if(input_value[i] == word_bank_span.textContent[i])
+		{
+			var current_letter = document.querySelector("#displayWordBank p span:nth-child("+(i+1)+")");
+			current_letter.style.color = "green";
+		}
+		else
+		{
+			var current_letter = document.querySelector("#displayWordBank p span:nth-child("+(i+1)+")");
+			current_letter.style.color = "red";
+		}
+	}
+ }
 function timer() //Checks the amount of time that has passed
 {
 	let current_Time = new Date();
@@ -122,7 +125,7 @@ function updateTimerUI(time_passed) // Formats amount of time passed onto websit
 	let timer_HTML = document.getElementById("timer");
 	let total_seconds = Math.floor(time_passed / 1000);
     let minutes = Math.floor(total_seconds / 60);
-    let seconds = totalSeconds % 60;
+    let seconds = total_seconds % 60;
     let formatted_time = " ‎ ‎ " + minutes + ":" + (seconds < 10 ? "0" : "") + seconds + " ‎ ‎ ‎";
     timer_HTML.innerHTML = formatted_time; 
 }
