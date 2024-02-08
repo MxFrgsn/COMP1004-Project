@@ -17,39 +17,38 @@
 <body>
 
 	<div class="outsideContainer">
-	<h1>Typing Test</h1>
-		<div id = "squareOptions">
-		<form id = "timerOptions" >
-			<label> TIMER: </label> 
-			<input type="radio" id="30" name="timer" value = "30s" onchange = "validateTimerOptions()">
-			<label for="30">30s </label>
-			<input type="radio" id="60" name="timer"  value = "60s" onchange = "validateTimerOptions()"> 
-			<label for="60">60s </label>
-			<input type="radio" id="90" name="timer"  value = "90s" onchange = "validateTimerOptions()">
-			<label for="90">90s </label> 
-			<input type="radio" id="120" name="timer"  value = "120s" onchange = "validateTimerOptions()">
-			<label for="120">120s </label> 
-	</form>
-	<form id = "difficultyOptions">
-			<label> DIFFICULTY: </label> 
-			<input type="radio" id="Punctuation" name="difficulty" value = "Punctuation" onchange = "validateDifficultyOptions()">
-			<label for="Easy">Punctuation </label>
-			<input type="radio" id="Capitalization" name="difficulty"  value = "Capitalization" onchange = "validateDifficultyOptions()"> 
-			<label for="60">Capitalization </label>
-			<input type="radio" id="Paragraphs" name="difficulty"  value = "Paragraphs" onchange = "validateDifficultyOptions()">
-			<label for="Hard">Paragraphs </label> 
-	</form>
-	</div>
-	<div class = "insideContainer">
-		<div class = "square">	
-			<div id ="WordsPerMinutes"> </div>
+		<h1>Typing Test</h1>
+		<div id = "squareOptions"> 
+			<form id = "timerOptions" >
+				<label> TIMER: </label> 
+				<input type="radio" id="30" name="timer" value = "30s" onchange = "validateTimerOptions()">
+				<label for="30">30s </label>
+				<input type="radio" id="60" name="timer"  value = "60s" onchange = "validateTimerOptions()"> 
+				<label for="60">60s </label>
+				<input type="radio" id="90" name="timer"  value = "90s" onchange = "validateTimerOptions()">
+				<label for="90">90s </label> 
+				<input type="radio" id="120" name="timer"  value = "120s" onchange = "validateTimerOptions()">
+				<label for="120">120s </label> 
+			</form>
+			<form id = "difficultyOptions">
+				<label> DIFFICULTY: </label> 
+				<input type="radio" id="Punctuation" name="difficulty" value = "Punctuation" onchange = "validateDifficultyOptions()">
+				<label for="Easy">Punctuation </label>
+				<input type="radio" id="Capitalization" name="difficulty"  value = "Capitalization" onchange = "validateDifficultyOptions()"> 
+				<label for="60">Capitalization </label>
+				<input type="radio" id="Paragraphs" name="difficulty"  value = "Paragraphs" onchange = "validateDifficultyOptions()">
+				<label for="Hard">Paragraphs </label> 
+			</form>
 		</div>
-		<div id="displayWordBank"><p></p></div>
-		<div class = "square">	
-			<div id="timer"></div>
+		<div class = "insideContainer">
+			<div class = "square">	
+				<div id ="WordsPerMinutes"> </div>
+			</div>
+			<div id="displayWordBank"><p></p></div>
+			<div class = "square">	
+				<div id="timer"></div>
+			</div>
 		</div>
-
-	</div>
 		<form>
 			<label for="inputBox"></label>
 			<input type="text" id="inputBox" class="inputBox" oninput="validateInputBox()"><br>

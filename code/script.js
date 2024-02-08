@@ -18,12 +18,12 @@ var word_bank= ["farm", "cheese", "apple", "character", "planet", "godfrey", "or
  "Are", "Good", "Bad", "That", "Will", "Be", "Going", "Now", "Okay", "End", "Beginning", "Narrative", "Games", "Manga", "Anime", "Slime", "Isekai", "Books", "Movies", "Mouse", 
  "Keyboard", "Laptop", "Cable", "Wire", "Vector", "Parallel", "Line", "Drawing", "Drew", "Fan", "Gone", "Baked", "Walked", "Walking", "Music", "Smiling", "Likes", "Hates",
  "love", "too", "late", "to", "Smitten", "Her", "They", "Them", "Him", "She", "Her", "Fiction", "Non-fiction", "Early", "Let", "Go","Grimoire","Elves","Dwarves","Humans","Induction",
- "electrical","lighting","yard","couch","desk","chair","baby","arent"]
+ "electrical","lighting","yard","couch","desk","chair","baby"]
  //Ensures it's all lowercase
  for(var i = 0; i < word_bank.length; i++)
-			{
-			word_bank[i] = word_bank[i].toLowerCase();
-			} 
+{
+	word_bank[i] = word_bank[i].toLowerCase();
+} 
 var written_characters = 0;
 var timer_started = false;
 var time = 60000; // 60000 milliseconds = 60 seconds
@@ -111,7 +111,7 @@ function timer() //Checks the amount of time that has passed
     if (time_Passed >= time)
 	{ 
 	  clearInterval(timer_Interval);
-      calculateWPM();
+      calculateWPM(); // create an alert when test is over!!!
 	  main();
     } 	
 	updateTimerUI(time_Passed);
@@ -123,7 +123,7 @@ function updateTimerUI(time_Passed) // Formats amount of time passed onto websit
 	let totalSeconds = Math.floor(time_Passed / 1000);
     let minutes = Math.floor(totalSeconds / 60);
     let seconds = totalSeconds % 60;
-    let formattedTime = " ‎ ‎ "+ minutes + ":" + (seconds < 10 ? "0" : "") + seconds + " ‎ ‎ ‎";
+    let formattedTime = " ‎ ‎ " + minutes + ":" + (seconds < 10 ? "0" : "") + seconds + " ‎ ‎ ‎";
     timer_HTML.innerHTML = formattedTime; 
 }
 
@@ -200,31 +200,31 @@ function GenerateDifficultyOptions(difficultyOptions) //using checkboxes, lets s
 	displayWords();
 }
 //use this to generate words and edit it???
-function makeWord(wordMax) {
-let text = '';
-const possibleLetters='bcdfghjklmnpqrstvwxyz';
-const possibleVowels='aeiou';
-
-  for(let i=0; i<wordMax; i=i+3)
-  {
-    text += possibleLetters[Math.floor(Math.random()*possible.length)];
-    text += possibleVowels[Math.floor(Math.random()*possibleVowels.length)];
-    text += possibleLetters[Math.floor(Math.random()*possible.length)];
-  }
-console.log(text);
+function makeWord(wordMax) 
+{
+	let text = '';
+	const possibleLetters='bcdfghjklmnpqrstvwxyz';
+	const possibleVowels='aeiou';
+	for(let i=0; i<wordMax; i=i+3)	
+	{
+		text += possibleLetters[Math.floor(Math.random()*possible.length)];
+		text += possibleVowels[Math.floor(Math.random()*possibleVowels.length)];
+		text += possibleLetters[Math.floor(Math.random()*possible.length)];
+	}
+	console.log(text);
 }
 
 
 function main() // Start of typing test
 {
-document.getElementById("inputBox").value="";
-timer_started = false;
-var start_Time = 0;
-var timer_Interval;
-updateTimerUI(time_Passed);
-updateWpmUI(WPM);
-randomiseArray();
-displayWords();
+	document.getElementById("inputBox").value="";
+	timer_started = false;
+	var start_Time = 0;
+	var timer_Interval;
+	updateTimerUI(time_Passed);
+	updateWpmUI(WPM);
+	randomiseArray();
+	displayWords();
 }
 
 main();
