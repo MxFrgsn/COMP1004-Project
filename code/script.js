@@ -44,11 +44,11 @@ function displayWords() // Displays expected inputs on website, removing previou
 		{
 			var span_word = document.createElement("span");
 			span_word.textContent = string[j];
-			word_bank_span.appendChild(span);
+			word_bank_span.appendChild(span_word);
 		}
 		var span_space = document.createElement("span")
 		span_space.textContent = " ";
-		word_bank_span.appendChild(span2);
+		word_bank_span.appendChild(span_space);
 		current_Height = word_bank_span	.offsetHeight;
 		i++;
 	}
@@ -94,14 +94,14 @@ function validateInputBox() //Checks if input box has been written in, if so, st
 	{
 		const first_word = input_value.split(" ")[0];
 		if (first_word == word_bank_span.textContent.split(" ")[0])
-			{
+		{
 			document.getElementById("inputBox").value = "";
 			written_characters += word_bank[0].length;
 			word_bank.shift();
 			word_bank_span.innerHTML = "";
 			displayWords();
+		}
     }
-  }
  }
  
 function timer() //Checks the amount of time that has passed
@@ -152,6 +152,7 @@ function validateTimerOptions() // Enables changing of length of typing test (by
 		}
 	}
 }
+
 function validateDifficultyOptions()
 {
 	var difficultyOptions = ["Punctuation" ,"Capitalization","Paragraphs"]
@@ -168,7 +169,6 @@ function validateDifficultyOptions()
 
 function GenerateDifficultyOptions(difficultyOptions) //using checkboxes, lets say i picked Punctuation, and afterwards i picked capitalisation, would it see punctuation is ticked and attempt to reapply it?
 {
-
 		if(difficultyOptions == "Punctuation")
 		{
 			const possiblePunctuation ="-,.;:'";
@@ -196,7 +196,6 @@ function GenerateDifficultyOptions(difficultyOptions) //using checkboxes, lets s
 		{
 			console.log("not finished");
 		}
-	
 	//use this to generate a list of words/capitalised words or paragraphs dependind on difficulty options
 	displayWords();
 }
