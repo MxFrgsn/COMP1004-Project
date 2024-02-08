@@ -42,12 +42,12 @@ function displayWords() // Displays expected inputs on website, removing previou
 		var string = word_bank[i]
 		for (var j = 0; j<string.length;j++)
 		{
-			var span = document.createElement("span");
-			span.textContent = string[j];
+			var span_word = document.createElement("span");
+			span_word.textContent = string[j];
 			word_bank_span.appendChild(span);
 		}
-		var span2 = document.createElement("span")
-		span2.textContent = " ";
+		var span_space = document.createElement("span")
+		span_space.textContent = " ";
 		word_bank_span.appendChild(span2);
 		current_Height = word_bank_span	.offsetHeight;
 		i++;
