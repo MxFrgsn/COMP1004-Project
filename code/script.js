@@ -27,17 +27,17 @@ var word_bank= ["farm", "cheese", "apple", "character", "planet", "godfrey", "or
 var written_characters = 0;
 var timer_started = false;
 var time = 60000; // 60000 milliseconds = 60 seconds
-let time_Passed = 0
+let time_passed = 0
 var WPM = 0; 
 let word_bank_span = document.querySelector("#displayWordBank p");
 
 function displayWords() // Displays expected inputs on website, removing previously correct input
 {
 	document.getElementById("inputBox").value = ""
-	let max_Height = 300;
-    let current_Height = 0;
+	let max_height = 300;
+    let current_height = 0;
 	var i = 0;
-	while (current_Height < max_Height && i < word_bank.length)
+	while (current_height < max_height && i < word_bank.length)
 	{
 		var string = word_bank[i]
 		for (var j = 0; j<string.length;j++)
@@ -49,20 +49,20 @@ function displayWords() // Displays expected inputs on website, removing previou
 		var span_space = document.createElement("span")
 		span_space.textContent = " ";
 		word_bank_span.appendChild(span_space);
-		current_Height = word_bank_span	.offsetHeight;
+		current_height = word_bank_span	.offsetHeight;
 		i++;
 	}
 }
 
 function randomiseArray() // Durstenfeld shuffle, psuedo-randomises the array
 {
-	for (var currentIndex = 0; currentIndex < word_bank.length; currentIndex++) 
+	for (var current_index = 0; current_index < word_bank.length; current_index++) 
 	{
-        var randomIndex = Math.floor(Math.random() * (currentIndex + 1));
-        var temp = word_bank[currentIndex];
-        word_bank[currentIndex] = word_bank[randomIndex];
-        word_bank[randomIndex] = temp;
-    }
+        var random_index = Math.floor(Math.random() * (current_index + 1));
+        var temp = word_bank[current_index];
+        word_bank[current_index] = word_bank[random_index];
+        word_bank[random_index] = temp;
+    }	
 }
 
 function validateInputBox() //Checks if input box has been written in, if so, starts time and checks if inputted value is correct
@@ -70,8 +70,8 @@ function validateInputBox() //Checks if input box has been written in, if so, st
 	if (timer_started == false && document.getElementById("inputBox").value !="")
 	{
 		timer_started = true;
-		start_Time = new Date();
-		timer_Interval = setInterval(timer, 950);
+		start_time = new Date();
+		timer_interval = setInterval(timer, 950);
 	}
 	var input_value = document.getElementById("inputBox").value;
 	document.querySelectorAll("#displayWordBank p span").forEach(span => {span.style.color="white";});
@@ -107,24 +107,24 @@ function validateInputBox() //Checks if input box has been written in, if so, st
 function timer() //Checks the amount of time that has passed
 {
 	let current_Time = new Date();
-    time_Passed = current_Time - start_Time;
-    if (time_Passed >= time)
+    time_passed = current_Time - start_time;
+    if (time_passed >= time)
 	{ 
-	  clearInterval(timer_Interval);
+	  clearInterval(timer_interval);
       calculateWPM(); // create an alert when test is over!!!
 	  main();
     } 	
-	updateTimerUI(time_Passed);
+	updateTimerUI(time_passed);
 }
 
-function updateTimerUI(time_Passed) // Formats amount of time passed onto website
+function updateTimerUI(time_passed) // Formats amount of time passed onto website
 {
 	let timer_HTML = document.getElementById("timer");
-	let totalSeconds = Math.floor(time_Passed / 1000);
-    let minutes = Math.floor(totalSeconds / 60);
+	let total_seconds = Math.floor(time_passed / 1000);
+    let minutes = Math.floor(total_seconds / 60);
     let seconds = totalSeconds % 60;
-    let formattedTime = " ‎ ‎ " + minutes + ":" + (seconds < 10 ? "0" : "") + seconds + " ‎ ‎ ‎";
-    timer_HTML.innerHTML = formattedTime; 
+    let formatted_time = " ‎ ‎ " + minutes + ":" + (seconds < 10 ? "0" : "") + seconds + " ‎ ‎ ‎";
+    timer_HTML.innerHTML = formatted_time; 
 }
 
 //Should I also display accuracy percentage?
@@ -137,47 +137,47 @@ function calculateWPM() //Calculates WPM, which is to be displayed to the user
 function updateWpmUI(WPM)
 {
 	let wpm_HTML = document.getElementById("WordsPerMinutes");
-	let formattedWPM = "WPM: " + WPM;
- 	wpm_HTML.innerHTML = formattedWPM;
+	let formatted_WPM = "WPM: " + WPM;
+ 	wpm_HTML.innerHTML = formatted_WPM;
 }
 
 function validateTimerOptions() // Enables changing of length of typing test (by default its 60s long)
 {
-	var timerOptions = [30,60,90,120]
+	var timer_options = [30,60,90,120]
 	for(var i= 0; i < timerOptions.length; i++)
 	{
-		if (document.getElementById(timerOptions[i]).checked)
+		if (document.getElementById(timer_options[i]).checked)
 		{
-			time = timerOptions[i] * 1000
+			time = timer_options[i] * 1000
 		}
 	}
 }
 
 function validateDifficultyOptions()
 {
-	var difficultyOptions = ["Punctuation" ,"Capitalization","Paragraphs"]
+	var difficulty_options = ["Punctuation" ,"Capitalization","Paragraphs"]
 	for(var i= 0; i < difficultyOptions.length; i++)
 	{
-		if (document.getElementById(difficultyOptions[i]).checked)
+		if (document.getElementById(difficulty_options[i]).checked)
 		{  
-			console.log(difficultyOptions[i]);
-			GenerateDifficultyOptions(difficultyOptions[i]);
+			console.log(difficulty_options[i]);
+			GenerateDifficultyOptions(difficulty_options[i]);
 		}
 	}
 	//continue here, do new flowchart and ulm diagram, show red if incorrect show green if correct in display words bank
 }
 
-function GenerateDifficultyOptions(difficultyOptions) //using checkboxes, lets say i picked Punctuation, and afterwards i picked capitalisation, would it see punctuation is ticked and attempt to reapply it?
+function GenerateDifficultyOptions(difficulty_options) //using checkboxes, lets say i picked Punctuation, and afterwards i picked capitalisation, would it see punctuation is ticked and attempt to reapply it?
 {
-		if(difficultyOptions == "Punctuation")
+		if(difficulty_options == "Punctuation")
 		{
-			const possiblePunctuation ="-,.;:'";
+			const possible_punctuation ="-,.;:'";
 			for(var i = 0; i < word_bank.length; i++) //not working
 			{
-			word_bank[i].concat(Math.floor(Math.random()*possiblePunctuation.length));
+			word_bank[i].concat(Math.floor(Math.random()*possible_punctuation.length));
 			} 
 		}
-		else if (difficultyOptions == "Capitalization") //not working
+		else if (difficulty_options == "Capitalization") //not working
 		{
 			for(var i = 0; i < word_bank.length; i++)
 			{
@@ -192,7 +192,7 @@ function GenerateDifficultyOptions(difficultyOptions) //using checkboxes, lets s
 			console.log(word_bank[i]);
 			}
 		}
-		else if (difficultyOptions == "Paragraphs")
+		else if (difficulty_options == "Paragraphs")
 		{
 			console.log("not finished");
 		}
@@ -202,16 +202,16 @@ function GenerateDifficultyOptions(difficultyOptions) //using checkboxes, lets s
 //use this to generate words and edit it???
 function makeWord(wordMax) 
 {
-	let text = '';
-	const possibleLetters='bcdfghjklmnpqrstvwxyz';
+	let string = '';
+	const possible_consonants='bcdfghjklmnpqrstvwxyz';
 	const possibleVowels='aeiou';
 	for(let i=0; i<wordMax; i=i+3)	
 	{
-		text += possibleLetters[Math.floor(Math.random()*possible.length)];
-		text += possibleVowels[Math.floor(Math.random()*possibleVowels.length)];
-		text += possibleLetters[Math.floor(Math.random()*possible.length)];
+		string += possibleLetters[Math.floor(Math.random()*possible_consonants.length)];
+		string += possibleVowels[Math.floor(Math.random()*possible_vowels.length)];
+		string += possibleLetters[Math.floor(Math.random()*possible_consonants.length)];
 	}
-	console.log(text);
+	console.log(string);
 }
 
 
@@ -219,9 +219,9 @@ function main() // Start of typing test
 {
 	document.getElementById("inputBox").value="";
 	timer_started = false;
-	var start_Time = 0;
-	var timer_Interval;
-	updateTimerUI(time_Passed);
+	var start_time = 0;
+	var timer_interval;
+	updateTimerUI(time_passed);
 	updateWpmUI(WPM);
 	randomiseArray();
 	displayWords();
