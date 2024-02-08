@@ -27,7 +27,7 @@ var word_bank= ["farm", "cheese", "apple", "character", "planet", "godfrey", "or
 var written_characters = 0;
 var timer_started = false;
 var time = 60000; // 60000 milliseconds = 60 seconds
-let time_passed = 0
+let time_passed = 0;
 var WPM = 0; 
 let word_bank_span = document.querySelector("#displayWordBank p");
 
@@ -39,14 +39,14 @@ function displayWords() // Displays expected inputs on website, removing previou
 	var i = 0;
 	while (current_height < max_height && i < word_bank.length)
 	{
-		var string = word_bank[i]
+		var string = word_bank[i];
 		for (var j = 0; j<string.length;j++)
 		{
 			var span_word = document.createElement("span");
 			span_word.textContent = string[j];
 			word_bank_span.appendChild(span_word);
 		}
-		var span_space = document.createElement("span")
+		var span_space = document.createElement("span");
 		span_space.textContent = " ";
 		word_bank_span.appendChild(span_space);
 		current_height = word_bank_span	.offsetHeight;
@@ -90,8 +90,8 @@ function validateInputBox() //Checks if input box has been written in, if so, st
     }
  }
  
- function styleWordBank(input_value) // styles wordbank, comparing it to inputbox checking if its right or wrong. 
- {
+ function styleWordBank(input_value) // Styles wordbank, comparing each letter to input box value, checking if its right or wrong and displays it apporiately. 
+ {//(currently does not include lack of space as incorrect) 
 	document.querySelectorAll("#displayWordBank p span").forEach(span => {span.style.color="white";});
 	for (var i = 0; i< input_value.length;i++)
 	{
@@ -107,6 +107,7 @@ function validateInputBox() //Checks if input box has been written in, if so, st
 		}
 	}
  }
+ 
 function timer() //Checks the amount of time that has passed
 {
 	let current_Time = new Date();
@@ -151,7 +152,7 @@ function validateTimerOptions() // Enables changing of length of typing test (by
 	{
 		if (document.getElementById(timer_options[i]).checked)
 		{
-			time = timer_options[i] * 1000
+			time = timer_options[i] * 1000;
 		}
 	}
 }
