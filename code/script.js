@@ -89,14 +89,14 @@ function validateInputBox() //Checks if input box has been written in, if so, st
 		}
 			
 	}
-	const last_letter_typed = input_value[inputValue.length - 1];
-	if (lastLetterTyped == " ")
+	const last_letter_typed = input_value[input_value.length - 1];
+	if (last_letter_typed == " ")
 	{
-		const first_Word = input_value.split(" ")[0];
+		const first_word = input_value.split(" ")[0];
 		if (first_word == word_bank_span.textContent.split(" ")[0])
 			{
 			document.getElementById("inputBox").value = "";
-			written_characteres += word_bank[0].length;
+			written_characters += word_bank[0].length;
 			word_bank.shift();
 			word_bank_span.innerHTML = "";
 			displayWords();
@@ -108,7 +108,6 @@ function timer() //Checks the amount of time that has passed
 {
 	let current_Time = new Date();
     time_Passed = current_Time - start_Time;
-	console.log(time_Passed);
     if (time_Passed >= time)
 	{ 
 	  clearInterval(timer_Interval);
@@ -159,9 +158,9 @@ function validateDifficultyOptions()
 	for(var i= 0; i < difficultyOptions.length; i++)
 	{
 		if (document.getElementById(difficultyOptions[i]).checked)
-		{
+		{  
 			console.log(difficultyOptions[i]);
-			 GenerateDifficultyOptions(difficultyOptions[i]);
+			GenerateDifficultyOptions(difficultyOptions[i]);
 		}
 	}
 	//continue here, do new flowchart and ulm diagram, show red if incorrect show green if correct in display words bank
