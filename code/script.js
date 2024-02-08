@@ -26,7 +26,7 @@ var word_bank= ["farm", "cheese", "apple", "character", "planet", "godfrey", "or
 			} 
 var written_characters = 0;
 var timer_started = false;
-var time = 5000; // 60000 milliseconds = 60 seconds
+var time = 60000; // 60000 milliseconds = 60 seconds
 let time_Passed = 0
 var WPM = 0; 
 let word_bank_span = document.querySelector("#displayWordBank p");
