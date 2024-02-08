@@ -79,13 +79,13 @@ function validateInputBox() //Checks if input box has been written in, if so, st
 	{
 		if(input_value[i] == word_bank_span.textContent[i])
 		{
-			var temp = document.querySelector("#displayWordBank p span:nth-child("+(i+1)+")");
-			temp.style.color = "green";
+			var current_letter = document.querySelector("#displayWordBank p span:nth-child("+(i+1)+")");
+			current_letter.style.color = "green";
 		}
 		else
 		{
-			var temp = document.querySelector("#displayWordBank p span:nth-child("+(i+1)+")");
-			temp.style.color = "red";
+			var current_letter = document.querySelector("#displayWordBank p span:nth-child("+(i+1)+")");
+			current_letter.style.color = "red";
 		}
 			
 	}
