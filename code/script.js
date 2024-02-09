@@ -118,10 +118,10 @@ function timer() //Checks the amount of time that has passed
       calculateWPM(); // create an alert when test is over!!!
 	  main();
     } 	
-	updateTimerUI(time_passed);
+	updateTimerUI();
 }
 
-function updateTimerUI(time_passed) // Formats amount of time passed onto website
+function updateTimerUI() // Formats amount of time passed onto website
 {
 	let timer_HTML = document.getElementById("timer");
 	let total_seconds = Math.floor(time_passed / 1000);
@@ -130,15 +130,14 @@ function updateTimerUI(time_passed) // Formats amount of time passed onto websit
     let formatted_time = " ‎ ‎ " + minutes + ":" + (seconds < 10 ? "0" : "") + seconds + " ‎ ‎ ‎";
     timer_HTML.innerHTML = formatted_time; 
 }
-
 //Should I also display accuracy percentage?
 function calculateWPM() //Calculates WPM, which is to be displayed to the user
 {	
 	WPM = (written_characters/5)/(time/60000);
-	updateWpmUI(WPM); 
+	updateWpmUI(); 
 }
 
-function updateWpmUI(WPM)
+function updateWpmUI()
 {
 	let wpm_HTML = document.getElementById("WordsPerMinutes");
 	let formatted_WPM = "WPM: " + WPM;
@@ -165,13 +164,13 @@ function validateDifficultyOptions()
 		if (document.getElementById(difficulty_options[i]).checked)
 		{  
 			console.log(difficulty_options[i]);
-			GenerateDifficultyOptions(difficulty_options[i]);
+			generateDifficultyOptions(difficulty_options[i]);
 		}
 	}
 	//continue here, do new flowchart and ulm diagram, show red if incorrect show green if correct in display words bank
 }
 
-function GenerateDifficultyOptions(difficulty_options) //using checkboxes, lets say i picked Punctuation, and afterwards i picked capitalisation, would it see punctuation is ticked and attempt to reapply it?
+function generateDifficultyOptions(difficulty_options) //using checkboxes, lets say i picked Punctuation, and afterwards i picked capitalisation, would it see punctuation is ticked and attempt to reapply it?
 {
 		if(difficulty_options == "Punctuation")
 		{
@@ -218,15 +217,14 @@ function makeWord(wordMax)
 	console.log(string);
 }
 
-
 function main() // Start of typing test
 {
 	document.getElementById("inputBox").value="";
 	timer_started = false;
 	var start_time = 0;
 	var timer_interval;
-	updateTimerUI(time_passed);
-	updateWpmUI(WPM);
+	updateTimerUI();
+	updateWpmUI();
 	randomiseArray();
 	displayWords();
 }

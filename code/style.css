@@ -5,6 +5,9 @@
 	justify-content: center;
     align-items: center;
 	gap: 15px;
+	color: rgb(238, 241, 244);
+	font-size: 25px;
+	font-weight:bold;
 	}
 	.outsideContainer
 	{
@@ -28,13 +31,6 @@
 	max-width: 750px;
 	width: 90%;
     font-weight: bold;
-	}
-	
-	#WordsPerMinutes,#timer,#displayWordBank
-	{
-	color: rgb(238, 241, 244);
-	font-size: 25px;
-	font-weight:bold;
 	}
 	
 	.square
