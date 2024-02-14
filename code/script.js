@@ -176,7 +176,7 @@ function updateTimerUI() {
     " ‎ ‎ " + minutes + ":" + (seconds < 10 ? "0" : "") + seconds + " ‎ ‎ ‎";
   timer_HTML.innerHTML = formatted_time;
 }
-//Should I also display accuracy percentage?
+
 function calculateWPM() {
   //Calculates WPM, which is to be displayed to the user
   console.log(written_characters);
