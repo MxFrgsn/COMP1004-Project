@@ -37,7 +37,8 @@ function displayWords() // Displays expected inputs on website, removing previou
 	let max_height = 300;
     let current_height = 0;
 	var i = 0;
-	while (current_height < max_height && i < word_bank.length)
+	var num_Of_Spans = 0;
+	while (i < word_bank.length && current_height < max_height)
 	{
 		var string = word_bank[i];
 		for (var j = 0; j<string.length;j++)
@@ -45,16 +46,25 @@ function displayWords() // Displays expected inputs on website, removing previou
 			var span_word = document.createElement("span");
 			span_word.textContent = string[j];
 			word_bank_span.appendChild(span_word);
+			num_Of_Spans++
 		}
 		var span_space = document.createElement("span");
 		span_space.textContent = " ";
 		word_bank_span.appendChild(span_space);
+		num_Of_Spans++
 		current_height = word_bank_span	.offsetHeight;
+		if (current_height>= max_height)
+		{
+			for(var j = 0; j <string.length;j++)
+			{
+			let last_word = word_bank_span.lastChild.previousSibling;
+			last_word.remove();
+			}
+		}
 		i++;
 	}
 }
 
-    }	
 function validateInputBox() //Checks if input box has been written in, if so, starts time and checks if inputted value is correct
 {
 	var input_value = document.getElementById("inputBox").value;
@@ -79,7 +89,6 @@ function validateInputBox() //Checks if input box has been written in, if so, st
 		}
     }
  }
- 
  function randomiseArray() // Durstenfeld shuffle, psuedo-randomises the array
 {
 	for (var current_index = 0; current_index < word_bank.length; current_index++) 
@@ -134,6 +143,7 @@ function updateTimerUI() // Formats amount of time passed onto website
 //Should I also display accuracy percentage?
 function calculateWPM() //Calculates WPM, which is to be displayed to the user
 {	
+	console.log(written_characters)
 	WPM = (written_characters/5)/(time/60000);
 	updateWpmUI(); 
 	alert("Test finished") //change this, but keep idea
