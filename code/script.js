@@ -274,13 +274,13 @@ function main() {
   timer_started = false;
   var start_time = 0;
   var timer_interval;
+  updateWpmUI();
   written_characters = 0;
   time_passed = 0;
   WPM = 0;
   words_Correct = 0;
   chars_Correct = 0;
   updateTimerUI();
-  updateWpmUI();
   randomiseArray();
   displayWords();
 }
