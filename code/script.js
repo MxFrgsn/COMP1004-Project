@@ -203,7 +203,7 @@ function generateDifficultyOptions(difficulty_options) {
   //using checkboxes, lets say i picked Punctuation, and afterwards i picked capitalisation, would it see punctuation is ticked and attempt to reapply it?
   // DIFFICULTY OPTIONS NOT YET FINISHED
   if (difficulty_options == "Punctuation")
-	  {
+  {
     const possible_punctuation = "-,.;:'";
     for (var i = 0;i < word_bank.length;i++) //not working) 
 	{
@@ -211,7 +211,7 @@ function generateDifficultyOptions(difficulty_options) {
     }
   } 
   else if (difficulty_options == "Capitalization")
-	  {
+  {
     //not working
     for (var i = 0; i < word_bank.length; i++) 
 	{
