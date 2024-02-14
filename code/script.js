@@ -37,7 +37,6 @@ function displayWords() // Displays expected inputs on website, removing previou
 	let max_height = 300;
     let current_height = 0;
 	var i = 0;
-	var num_Of_Spans = 0;
 	while (i < word_bank.length && current_height < max_height)
 	{
 		var string = word_bank[i];
@@ -46,13 +45,11 @@ function displayWords() // Displays expected inputs on website, removing previou
 			var span_word = document.createElement("span");
 			span_word.textContent = string[j];
 			word_bank_span.appendChild(span_word);
-			num_Of_Spans++
 		}
 		var span_space = document.createElement("span");
 		span_space.textContent = " ";
 		word_bank_span.appendChild(span_space);
-		num_Of_Spans++
-		current_height = word_bank_span	.offsetHeight;
+		current_height = word_bank_span.offsetHeight;
 		if (current_height>= max_height)
 		{
 			for(var j = 0; j <string.length;j++)
