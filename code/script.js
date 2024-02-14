@@ -84,12 +84,10 @@ function validateInputBox() {
 //Checks whether we are at the end of the line, if so, removes the line and redisplays words
 function checkEndOfLine() {
   /** @type {HTMLSpanElement} */
-  const first_Span = document.querySelector(
-    "#displayWordBank p span:nth-child(1)");
+  const first_Span = document.querySelector(`#displayWordBank p span:nth-child(1)`);
 	
   /** @type {HTMLSpanElement} */
-  const next_Span = document.querySelector(
-    `#displayWordBank p span:nth-child(${chars_Correct + 1})`);
+  const next_Span = document.querySelector(`#displayWordBank p span:nth-child(${chars_Correct + 1})`);
 	
   if (next_Span.offsetTop > first_Span.offsetTop) 
   {
