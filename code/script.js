@@ -41,7 +41,8 @@ function displayWords() {
   var i = 0;
   while (i < word_bank.length && current_height < max_height) {
     var string = word_bank[i];
-    for (var j = 0; j < string.length; j++) {
+    for (var j = 0; j < string.length; j++)
+		{
       var span_word = document.createElement("span");
       span_word.textContent = string[j];
       word_bank_span.appendChild(span_word);
@@ -50,8 +51,10 @@ function displayWords() {
     span_space.textContent = " ";
     word_bank_span.appendChild(span_space);
     current_height = word_bank_span.offsetHeight;
-    if (current_height >= max_height) {
-      for (var j = 0; j < string.length; j++) {
+    if (current_height >= max_height) 
+	{
+      for (var j = 0; j < string.length; j++) 
+	  {
         let last_word = word_bank_span.lastChild.previousSibling;
         last_word.remove();
       }
@@ -63,16 +66,19 @@ function displayWords() {
 function validateInputBox() {
   //Checks if input box has been written in, if so, starts time and checks if inputted value is correct
   var input_value = document.getElementById("inputBox").value;
-  if (timer_started == false && input_value != "") {
+  if (timer_started == false && input_value != "") 
+  {
     timer_started = true;
     start_time = new Date();
     timer_interval = setInterval(timer, 950);
   }
   styleWordBank(input_value);
   const last_letter_typed = input_value[input_value.length - 1];
-  if (last_letter_typed == " ") {
+  if (last_letter_typed == " ")
+  {
     const word = input_value.split(" ")[0];
-    if (word == word_bank_span.textContent.split(" ")[words_Correct]) {
+    if (word == word_bank_span.textContent.split(" ")[words_Correct]) 
+	{
       chars_Correct += input_value.length;
       words_Correct++;
       checkEndOfLine();
@@ -112,11 +118,19 @@ function randomiseArray() {
   }
 }
 function styleWordBank(input_value) {
-  // Styles wordbank, comparing each letter to input box value, checking if its right or wrong and displays it apporiately.
+  // Styles wordbank, comparing each letter to input box value, checking if its right or wrong and displays it apporiately. 
+  //make it so the style remains after a word is submitted? allow incorrect words to be submitted and use accuracy as part of calculation?
+  //problem that at end of test, in middle of line
   document.querySelectorAll("#displayWordBank p span").forEach((span, i) => 
   {
-    if (i < chars_Correct) return;
+    if (i < chars_Correct && window.matchMedia("(prefers-color-scheme: dark)").matches) 
+	{
     span.style.color = "white";
+	}
+	else
+	{
+		span.style.color="black"
+	}
   });
   for (var i = 0; i < input_value.length; i++) 
   {
@@ -143,6 +157,10 @@ function timer() {
   {
     clearInterval(timer_interval);
     calculateWPM(); // create an alert when test is over!!!
+	for (let i = 0; i < words_Correct; i++)
+	{
+      word_bank.shift();
+    }
     main();
   }
   updateTimerUI();
@@ -254,6 +272,11 @@ function main() {
   timer_started = false;
   var start_time = 0;
   var timer_interval;
+  written_characters = 0;
+  time_passed = 0;
+  WPM = 0;
+  words_Correct = 0;
+  chars_Correct = 0;
   updateTimerUI();
   updateWpmUI();
   randomiseArray();
