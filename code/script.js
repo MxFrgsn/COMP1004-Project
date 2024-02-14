@@ -72,13 +72,12 @@ function validateInputBox() {
   const last_letter_typed = input_value[input_value.length - 1];
   if (last_letter_typed == " ") {
     const word = input_value.split(" ")[0];
-
     if (word == word_bank_span.textContent.split(" ")[words_Correct]) {
       chars_Correct += input_value.length;
       words_Correct++;
       checkEndOfLine();
       document.getElementById("inputBox").value = "";
-      written_characters += word_bank[words_Correct].length;
+      written_characters += word_bank[words_Correct].length+1; // Add one to include spaces
     }
   }
 }
@@ -86,34 +85,28 @@ function validateInputBox() {
 function checkEndOfLine() {
   /** @type {HTMLSpanElement} */
   const first_Span = document.querySelector(
-    "#displayWordBank p span:nth-child(1)"
-  );
-
+    "#displayWordBank p span:nth-child(1)");
+	
   /** @type {HTMLSpanElement} */
   const next_Span = document.querySelector(
-    `#displayWordBank p span:nth-child(${chars_Correct + 1})`
-  );
-
-  if (next_Span.offsetTop > first_Span.offsetTop) {
-    for (let i = 0; i < words_Correct; i++) {
+    `#displayWordBank p span:nth-child(${chars_Correct + 1})`);
+	
+  if (next_Span.offsetTop > first_Span.offsetTop) 
+  {
+    for (let i = 0; i < words_Correct; i++)
+	{
       word_bank.shift();
     }
-
     word_bank_span.innerHTML = "";
-
     words_Correct = 0;
     chars_Correct = 0;
-
     displayWords();
   }
 }
 function randomiseArray() {
   // Durstenfeld shuffle, psuedo-randomises the array
-  for (
-    var current_index = 0;
-    current_index < word_bank.length;
-    current_index++
-  ) {
+  for (var current_index = 0;current_index < word_bank.length;current_index++)
+{
     var random_index = Math.floor(Math.random() * (current_index + 1));
     var temp = word_bank[current_index];
     word_bank[current_index] = word_bank[random_index];
@@ -122,20 +115,23 @@ function randomiseArray() {
 }
 function styleWordBank(input_value) {
   // Styles wordbank, comparing each letter to input box value, checking if its right or wrong and displays it apporiately.
-  document.querySelectorAll("#displayWordBank p span").forEach((span, i) => {
+  document.querySelectorAll("#displayWordBank p span").forEach((span, i) => 
+  {
     if (i < chars_Correct) return;
     span.style.color = "white";
   });
-  for (var i = 0; i < input_value.length; i++) {
-    if (input_value[i] == word_bank_span.textContent[i + chars_Correct]) {
+  for (var i = 0; i < input_value.length; i++) 
+  {
+    if (input_value[i] == word_bank_span.textContent[i + chars_Correct])
+	{
       var current_letter = document.querySelector(
-        "#displayWordBank p span:nth-child(" + (i + 1 + chars_Correct) + ")"
-      );
+      "#displayWordBank p span:nth-child(" + (i + 1 + chars_Correct) + ")");
       current_letter.style.color = "green";
-    } else {
+    } 
+	else 
+	{
       var current_letter = document.querySelector(
-        "#displayWordBank p span:nth-child(" + (i + 1 + chars_Correct) + ")"
-      );
+      "#displayWordBank p span:nth-child(" + (i + 1 + chars_Correct) + ")" );
       current_letter.style.color = "red";
     }
   }
@@ -145,7 +141,8 @@ function timer() {
   //Checks the amount of time that has passed
   let current_Time = new Date();
   time_passed = current_Time - start_time;
-  if (time_passed >= time) {
+  if (time_passed >= time) 
+  {
     clearInterval(timer_interval);
     calculateWPM(); // create an alert when test is over!!!
     main();
@@ -181,8 +178,10 @@ function updateWpmUI() {
 function validateTimerOptions() {
   // Enables changing of length of typing test (by default its 60s long)
   var timer_options = [30, 60, 90, 120];
-  for (var i = 0; i < timerOptions.length; i++) {
-    if (document.getElementById(timer_options[i]).checked) {
+  for (var i = 0; i < timerOptions.length; i++) 
+  {
+    if (document.getElementById(timer_options[i]).checked)
+	{
       time = timer_options[i] * 1000;
     }
   }
@@ -190,8 +189,10 @@ function validateTimerOptions() {
 
 function validateDifficultyOptions() {
   var difficulty_options = ["Punctuation", "Capitalization", "Paragraphs"];
-  for (var i = 0; i < difficultyOptions.length; i++) {
-    if (document.getElementById(difficulty_options[i]).checked) {
+  for (var i = 0; i < difficultyOptions.length; i++) 
+  {
+    if (document.getElementById(difficulty_options[i]).checked) 
+	{
       console.log(difficulty_options[i]);
       generateDifficultyOptions(difficulty_options[i]);
     }
@@ -201,29 +202,32 @@ function validateDifficultyOptions() {
 function generateDifficultyOptions(difficulty_options) {
   //using checkboxes, lets say i picked Punctuation, and afterwards i picked capitalisation, would it see punctuation is ticked and attempt to reapply it?
   // DIFFICULTY OPTIONS NOT YET FINISHED
-  if (difficulty_options == "Punctuation") {
+  if (difficulty_options == "Punctuation")
+	  {
     const possible_punctuation = "-,.;:'";
-    for (
-      var i = 0;
-      i < word_bank.length;
-      i++ //not working
-    ) {
-      word_bank[i].concat(
-        Math.floor(Math.random() * possible_punctuation.length)
-      );
+    for (var i = 0;i < word_bank.length;i++) //not working) 
+	{
+      word_bank[i].concat(Math.floor(Math.random() * possible_punctuation.length));
     }
-  } else if (difficulty_options == "Capitalization") {
+  } 
+  else if (difficulty_options == "Capitalization")
+	  {
     //not working
-    for (var i = 0; i < word_bank.length; i++) {
-      if (word_bank[i].length > 1) {
-        word_bank[i] =
-          word_bank[i].charAt(0).toUpperCase() + word_bank.slice(1);
-      } else {
+    for (var i = 0; i < word_bank.length; i++) 
+	{
+      if (word_bank[i].length > 1) 
+	  {
+        word_bank[i] =word_bank[i].charAt(0).toUpperCase() + word_bank.slice(1);
+      }
+	  else 
+	  {
         word_bank[i] = word_bank[i].charAt(0).toUpperCase();
       }
       console.log(word_bank[i]);
     }
-  } else if (difficulty_options == "Paragraphs") {
+  } 
+  else if (difficulty_options == "Paragraphs") 
+  {
     console.log("not finished");
   }
   //use this to generate a list of words/capitalised words or paragraphs dependind on difficulty options
@@ -234,7 +238,8 @@ function makeWord(wordMax) {
   let string = "";
   const possible_consonants = "bcdfghjklmnpqrstvwxyz";
   const possibleVowels = "aeiou";
-  for (let i = 0; i < wordMax; i = i + 3) {
+  for (let i = 0; i < wordMax; i = i + 3) 
+  {
     string +=
       possibleLetters[Math.floor(Math.random() * possible_consonants.length)];
     string +=

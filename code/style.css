@@ -40,8 +40,9 @@
 	{
 	background-color: rgb(44, 46, 49);
 	max-width: 780px;
-	border-radius:5px;
+	border-radius:15px;
 	font-family: sans-serif;
+	padding: 5px
 	}
 	
 	.square
@@ -129,7 +130,7 @@
 	background-color: white;
 	max-width: 780px;
 	font-family: sans-serif;
-	border-radius:5px;
+	border-radius:15px;
 	}
 	
 	.square
