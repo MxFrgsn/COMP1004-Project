@@ -75,16 +75,22 @@ function validateInputBox() //Checks if input box has been written in, if so, st
 	const last_letter_typed = input_value[input_value.length - 1];
 	if (last_letter_typed == " ")
 	{
-		const first_word = input_value.split(" ")[0];
-		if (first_word == word_bank_span.textContent.split(" ")[0])
+		const word = input_value.split(" ")[0];
+		if (word == word_bank_span.textContent.split(" ")[0])
 		{
+			checkEndOfLine();
 			document.getElementById("inputBox").value = "";
 			written_characters += word_bank[0].length;
 			word_bank.shift(); // make UI look nicer + add difficulty functionalitly + remove .shift(), make it so it naturally scrolls up, showing the new words to make, + include lack of space as incorrect 
-			word_bank_span.innerHTML = "";
 			displayWords();
 		}
     }
+ }
+ 
+ function checkEndOfLine()
+ {
+	 
+	 
  }
  function randomiseArray() // Durstenfeld shuffle, psuedo-randomises the array
 {
