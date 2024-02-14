@@ -34,7 +34,7 @@ let word_bank_span = document.querySelector("#displayWordBank p");
 function displayWords() // Displays expected inputs on website, removing previously correct input
 {
 	document.getElementById("inputBox").value = ""
-	let max_height = 100;
+	let max_height = 200;
     let current_height = 0;
 	var i = 0;
 	while (i < word_bank.length && current_height < max_height)
