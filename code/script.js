@@ -19,7 +19,7 @@ var word_bank= ["farm", "cheese", "apple", "character", "planet", "godfrey", "or
  "Keyboard", "Laptop", "Cable", "Wire", "Vector", "Parallel", "Line", "Drawing", "Drew", "Fan", "Gone", "Baked", "Walked", "Walking", "Music", "Smiling", "Likes", "Hates",
  "love", "too", "late", "to", "Smitten", "Her", "They", "Them", "Him", "She", "Her", "Fiction", "Non-fiction", "Early", "Let", "Go","Grimoire","Elves","Dwarves","Humans","Induction",
  "electrical","lighting","yard","couch","desk","chair","baby"]
- //Ensures it's all lowercase
+ //Ensures it's all lowercase, if can make it all lowercase using chatgpt, this wont be needed
  for(var i = 0; i < word_bank.length; i++)
 {
 	word_bank[i] = word_bank[i].toLowerCase();
@@ -83,7 +83,7 @@ function validateInputBox() //Checks if input box has been written in, if so, st
 		{
 			document.getElementById("inputBox").value = "";
 			written_characters += word_bank[0].length;
-			word_bank.shift();
+			word_bank.shift(); // make UI look nicer + add difficulty functionalitly + remove .shift(), make it so it naturally scrolls up, showing the new words to make, + include lack of space as incorrect 
 			word_bank_span.innerHTML = "";
 			displayWords();
 		}
@@ -91,7 +91,7 @@ function validateInputBox() //Checks if input box has been written in, if so, st
  }
  
  function styleWordBank(input_value) // Styles wordbank, comparing each letter to input box value, checking if its right or wrong and displays it apporiately. 
- {//(currently does not include lack of space as incorrect) 
+ {
 	document.querySelectorAll("#displayWordBank p span").forEach(span => {span.style.color="white";});
 	for (var i = 0; i< input_value.length;i++)
 	{
@@ -135,6 +135,7 @@ function calculateWPM() //Calculates WPM, which is to be displayed to the user
 {	
 	WPM = (written_characters/5)/(time/60000);
 	updateWpmUI(); 
+	alert("Test finished") //change this, but keep idea
 }
 
 function updateWpmUI()
@@ -167,11 +168,10 @@ function validateDifficultyOptions()
 			generateDifficultyOptions(difficulty_options[i]);
 		}
 	}
-	//continue here, do new flowchart and ulm diagram, show red if incorrect show green if correct in display words bank
 }
 
 function generateDifficultyOptions(difficulty_options) //using checkboxes, lets say i picked Punctuation, and afterwards i picked capitalisation, would it see punctuation is ticked and attempt to reapply it?
-{
+{ // DIFFICULTY OPTIONS NOT YET FINISHED
 		if(difficulty_options == "Punctuation")
 		{
 			const possible_punctuation ="-,.;:'";
@@ -202,7 +202,7 @@ function generateDifficultyOptions(difficulty_options) //using checkboxes, lets 
 	//use this to generate a list of words/capitalised words or paragraphs dependind on difficulty options
 	displayWords();
 }
-//use this to generate words and edit it???
+//use this to generate words and edit it??? simply an idea with the addition of difficulties, may not use.
 function makeWord(wordMax) 
 {
 	let string = '';
