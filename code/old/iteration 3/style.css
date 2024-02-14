@@ -1,6 +1,4 @@
-	@media (prefers-color-scheme: dark)
-	{
-		
+
 	body
 	{
 	background-color: rgb(37, 37, 37);
@@ -79,10 +77,3 @@
 	{
 	margin: 3px;
 	}
-
-	}
-	
-	@media (prefers-color-scheme: light)
-	{
-		
-	}	
