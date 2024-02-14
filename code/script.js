@@ -54,17 +54,7 @@ function displayWords() // Displays expected inputs on website, removing previou
 	}
 }
 
-function randomiseArray() // Durstenfeld shuffle, psuedo-randomises the array
-{
-	for (var current_index = 0; current_index < word_bank.length; current_index++) 
-	{
-        var random_index = Math.floor(Math.random() * (current_index + 1));
-        var temp = word_bank[current_index];
-        word_bank[current_index] = word_bank[random_index];
-        word_bank[random_index] = temp;
     }	
-}
-
 function validateInputBox() //Checks if input box has been written in, if so, starts time and checks if inputted value is correct
 {
 	var input_value = document.getElementById("inputBox").value;
@@ -90,6 +80,17 @@ function validateInputBox() //Checks if input box has been written in, if so, st
     }
  }
  
+ function randomiseArray() // Durstenfeld shuffle, psuedo-randomises the array
+{
+	for (var current_index = 0; current_index < word_bank.length; current_index++) 
+	{
+        var random_index = Math.floor(Math.random() * (current_index + 1));
+        var temp = word_bank[current_index];
+        word_bank[current_index] = word_bank[random_index];
+        word_bank[random_index] = temp;
+    }	
+}
+
  function styleWordBank(input_value) // Styles wordbank, comparing each letter to input box value, checking if its right or wrong and displays it apporiately. 
  {
 	document.querySelectorAll("#displayWordBank p span").forEach(span => {span.style.color="white";});
