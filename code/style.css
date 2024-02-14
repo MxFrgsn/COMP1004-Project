@@ -1,7 +1,7 @@
 
 	body
 	{
-		background-color: gray;
+	background-color: rgb(37, 37, 37);
 	}
 	.insideContainer
 	{
@@ -33,13 +33,12 @@
 	
 	#displayWordBank 
 	{
-	background-color: black;
+	background-color: rgb(44, 46, 49);
 	max-width: 780px;
 	}
 	
 	.square
 	{
-	background-color: black;
 	height: 100px;
 	width: 110px;
 	display: flex;
@@ -49,8 +48,8 @@
 	
 	input[type = "text"]
 	{
-	box-shadow: 0 0 10px 2px white;
-	background-color: black;
+	box-shadow: 0 0 5px 2px white;
+	background-color: rgb(44, 46, 49);
 	width: 600px;
 	color:white;
 	}
@@ -59,7 +58,7 @@
 	{
 	color: white; 
 	font-size: 16px;
-	background-color:black;
+	background-color:rgb(44, 46, 49);
 	height:35px;
 		
 	}
@@ -70,7 +69,7 @@
 	align-items: center;
 	justify-content: between;
 	gap: 70px;
-	background-color: black; 	
+	background-color: rgb(44, 46, 49); 	
 	width: 800px;
 	}	
 	
