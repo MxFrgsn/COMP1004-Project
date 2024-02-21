@@ -125,7 +125,7 @@ function styleWordBank(input_value) {
   {
     if (i < chars_Correct && window.matchMedia("(prefers-color-scheme: dark)").matches) 
 	{
-    span.style.color = "white";
+		span.style.color = "white";
 	}
 	else
 	{
