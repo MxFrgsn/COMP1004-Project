@@ -25,91 +25,55 @@ var word_bank= ["farm", "cheese", "apple", "character", "planet", "godfrey", "or
  "jump", "eat", "drink","dream", "hope", "fear", "today", "tomorrow", "yesterday", "afternoon", "evening", "spring", "summer", "autumn", "winter", "one", "two", "three", "four", "five", "six", "seven", "eight", 
  "nine", "ten"]
 
-var paragraph_bank = "When we hear outlaw we think of criminals. But outlaws aren't just any kind of criminal, they are considered type of criminal, they are considererd outside of the protection of the law. This means that they can be persecuted by anyone A man, who was falsely imprisoned for 10 years, spent most of his time studying law to prove his innocence. After he succeeded, he became a lawyer to help free those who were also falsely convicted."
-
-It might come as no surpirse that guitars are the most popular music instrument, followed closely by pianos. However, neither of them are the best-selling instrument. That title goes to the harmonica. 
-, "You can dividie
-a pie into 8 equal pieces using just 3 cuts! First, make a horizontal cut in the middle, then a vertical cut, and then you stack 4 slices and make a cut a in the middle of that.
-"In 1998, Sony had the chance to buy the rights to most of the Marvelcharacters. However, they only bought the rights for Spiderman, stating that no one cares about the other Characters." 
-"Almost all 195 countries in the world have a real-life animal as their national animal, but 6 of them have mythical animals. Scotland, for example,appointed the unicorn as their national animal."
-"There is a single plant speices that a wide variety of vegetable comes from. It produces kale, brussels sprouts cauliflower, cabbage and broccoli which are all varieties of the same plants. "
-"A parrit named Willie once saved a toddler's life. When this owner was in another room, the toddler, who was being babysat, began to choke. Willie quickly alerted his owner by screaming, 'mama, baby'."
-"Despite media portrayal after Steve Irwin died from one, stringray attacks are almost never fatal. In fact, it is quite rare. Every rare, only one or two stingray attacks are reported worldwide.
-"The United states has won 246 gold medals in the entire Olympics history. Michael Phelps happened to have earned 23 of those gold medals. This is equal to about 10% of all the gold medals."
-"When you think of where camels came from, you probably think of the desert in the Middle East. hOWE
-"The movie Godfather was adapted from a book written by Mario Puzo. Mario was also happened to tbe the screenwriter for the movie adaptation, even though he has not screenwriting experience or knowledge"
+var paragraph_bank = ["When we hear outlaw we think of criminals. But outlaws aren't just any kind of criminal, they are considered type of criminal, they are considererd outside of the protection of the law. This means that they can be persecuted by anyone A man, who was falsely imprisoned for 10 years, spent most of his time studying law to prove his innocence. After he succeeded, he became a lawyer to help free those who were also falsely convicted.",
+"It might come as no surprise that guitars are the most popular music instrument, followed closely by pianos. However, neither of them are the best-selling instrument. That title goes to the harmonica." ,
+"You can divide a pie into 8 equal pieces using just 3 cuts! First, make a horizontal cut in the middle, then a vertical cut, and then you stack 4 slices and make a cut a in the middle of that.",
+"In 1998, Sony had the chance to buy the rights to most of the Marvel characters. However, they only bought the rights for Spiderman, stating that no one cares about the other characters." ,
+"Almost all 195 countries in the world have a real-life animal as their national animal, but 6 of them have mythical animals. Scotland, for example,appointed the unicorn as their national animal.",
+"There is a single plant species that a wide variety of vegetable comes from. It produces kale, brussels sprouts cauliflower, cabbage and broccoli which are all varieties of the same plants. ",
+"A parrot named Willie once saved a toddler's life. When this owner was in another room, the toddler, who was being babysat, began to choke. Willie quickly alerted his owner by screaming, 'mama, baby'.",
+"Despite media portrayal after Steve Irwin died from one, stringray attacks are almost never fatal. In fact, it is quite rare. Every rare, only one or two stingray attacks are reported worldwide.",
+"The United States has won 246 gold medals in the entire Olympics history. Michael Phelps happened to have earned 23 of those gold medals. This is equal to about 10% of all the gold medals.",
+"The movie Godfather was adapted from a book written by Mario Puzo. Mario was also happened to tbe the screenwriter for the movie adaptation, even though he has not screenwriting experience or knowledge"]
 var written_characters = 0;
 var timer_started = false;
 var time = 60000; // 60000 milliseconds = 60 seconds
 let time_passed = 0;
 var WPM = 0;
-const bank_span = document.querySelector("#displayWordBank p");
+const display_bank_p = document.querySelector("#displayWordBank p");
 let chars_Correct = 0;
 let words_Correct = 0;
 
 
-function displayWordBank() {
+function displayArray(array) {
   // Displays expected inputs on website
   document.getElementById("inputBox").value = "";
   let max_height = 200;
   let current_height = 0;
   var i = 0;
-  while (i < word_bank.length && current_height < max_height) {
-    var string = word_bank[i];
+  while (i < array.length && current_height < max_height) {
+    var string = array[i];
     for (var j = 0; j < string.length; j++)
 	{
       const span_word = document.createElement("span");
       span_word.textContent = string[j];
-      bank_span.appendChild(span_word);
+      display_bank_p.appendChild(span_word);
     }
     const span_space = document.createElement("span");
     span_space.textContent = " ";
-    bank_span.appendChild(span_space);
-    current_height = bank_span.offsetHeight;
+    display_bank_p.appendChild(span_space);
+    current_height = display_bank_p.offsetHeight;
     if (current_height >= max_height) 
 	{
       for (var j = 0; j < string.length; j++) 
 	  {
-        let last_word = bank_span.lastChild.previousSibling;
+        let last_word = display_bank_p.lastChild.previousSibling;
         last_word.remove();
       }
     }
     i++;
-  }
 }
 
-function displayParagraphBank() {
-  // Displays expected inputs on website, instead its paragraphs not a list of words
-  document.getElementById("inputBox").value = "";
-  let max_height = 200;
-  let current_height = 0;
-  var i = 0;
-  while (i < paragraph_bank.length && current_height < max_height) {
-    var string = paragraph_bank[i];
-    for (var j = 0; j < string.length; j++)
-	{
-      const span_word = document.createElement("span");
-      span_word.textContent = string[j];
-      bank_span.appendChild(span_word);
-    }
-    const span_space = document.createElement("span");
-    span_space.textContent = " ";
-    bank_span.appendChild(span_space);
-    current_height = bank_span.offsetHeight;
-    if (current_height >= max_height) 
-	{
-      for (var j = 0; j < string.length; j++) 
-	  {
-        let last_word = bank_span.lastChild.previousSibling;
-        last_word.remove();
-      }
-    }
-    i++;
-  }	
-	
-	
-	
-	
 	
 }
 function validateInputBox() {
@@ -126,7 +90,7 @@ function validateInputBox() {
   if (last_letter_typed == " ")
   {
     const word = input_value.split(" ")[0];
-    if (word == bank_span.textContent.split(" ")[words_Correct]) 
+    if (word == display_bank_p.textContent.split(" ")[words_Correct]) 
 	{
       chars_Correct += input_value.length;
       words_Correct++;
@@ -146,24 +110,40 @@ function checkEndOfLine() {
 	
   if (next_Span.offsetTop > first_Span.offsetTop) 
   {
-    for (let i = 0; i < words_Correct; i++)
+    for (var i = 0; i < words_Correct; i++)
 	{
-      word_bank.shift();
+		if(document.getElementById("Paragraphs").checked)
+		{
+			break;
+		}	
+		else
+		{
+			word_bank.shift();
+		}	
     }
-    bank_span.innerHTML = "";
+	display_bank_p.innerHTML = "";
+	paragraph_bank[0]=paragraph_bank[0].slice(chars_Correct);
+	console.log(paragraph_bank[0]); // maybe works now????, might have to change [0] to something else, like paragraphs written count or smth
+	if(document.getElementById("Paragraphs").checked)]
+	{
+		displayArray(paragraph_bank);
+	}
+	else
+	{
+		displayArray(word_bank);
+	}
     words_Correct = 0;
     chars_Correct = 0;
-    displayWordBank();
   }
 }
-function randomiseword_bank() {
+function randomiseArray(array) {
   // Durstenfeld shuffle, psuedo-randomises the word_bank
-  for (var current_index = 0;current_index < word_bank.length;current_index++)
+  for (var current_index = 0;current_index < array.length;current_index++)
   {
     var random_index = Math.floor(Math.random() * (current_index + 1));
-    var temp = word_bank[current_index];
-    word_bank[current_index] = word_bank[random_index];
-    word_bank[random_index] = temp;
+    var temp = array[current_index];
+    array[current_index] = array[random_index];
+	array[random_index] = temp;
   }
 }
 function styleWordBank(input_value) {
@@ -181,7 +161,7 @@ function styleWordBank(input_value) {
   });
   for (var i = 0; i < input_value.length; i++) 
   {
-    if (input_value[i] == bank_span.textContent[i + chars_Correct])
+    if (input_value[i] == display_bank_p.textContent[i + chars_Correct])
 	{
       var current_letter = document.querySelector(
       "#displayWordBank p span:nth-child(" + (i + 1 + chars_Correct) + ")");
@@ -263,8 +243,9 @@ function main() {
   words_Correct = 0;
   chars_Correct = 0;
   updateTimerUI();
-  randomiseword_bank(); // will this line need to be removed?
-  displayWordBank();
+  randomiseArray(paragraph_bank)
+  randomiseArray(word_bank);
+  displayArray(word_bank);
 }
 
 //Event listener for Punctuation difficulty option
@@ -296,8 +277,8 @@ document.getElementById('Punctuation').addEventListener('change', (event) => {
 			}
 		}
 	}
-	bank_span.innerHTML="";
-	displayWordBank();
+	display_bank_p.innerHTML="";
+	displayArray(word_bank);
 });
 
 //Event listener for Capitalization difficulty option
@@ -330,20 +311,20 @@ document.getElementById('Capitalization').addEventListener('change', (event) => 
 			}
 		}
 	}	
-	bank_span.innerHTML="";
-	displayWordBank();
+	display_bank_p.innerHTML="";
+	displayArray(word_bank);
 });
 
-document.getElementById('Punctuation').addEventListener('change', (event) => {
+document.getElementById('Paragraphs').addEventListener('change', (event) => {
 	if (!event.currentTarget.checked) 
 	{
-		bank_span.innerHTML="";
-		displayWordBank()
+		display_bank_p.innerHTML="";
+		displayArray(word_bank);
 	}	
 	else
 	{
-		bank_span.innerHTML="";
-		displayParagraphBank()
+		display_bank_p.innerHTML="";
+		displayArray(paragraph_bank);
 	}
 });
 
