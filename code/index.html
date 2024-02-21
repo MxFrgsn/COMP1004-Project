@@ -15,9 +15,16 @@
 </head>
 
 <body>
-
-	<div class="outsideContainer">
+	
+	<div class="outsideContainer" id = "outsideContainer">
 		<h1>Typing Test</h1>
+		<div id="logInSquare">
+		<nav>
+			<ul>
+				<button><a href="#" id="logIn">Log in</a></button>
+			</ul>
+		</nav>
+		</div>
 		<div id = "squareOptions"> 
 			<form id = "timerOptions" >
 				<label> TIMER: </label> 
@@ -51,7 +58,7 @@
 		</div>
 		<form>
 			<label for="inputBox"></label>
-			<input type="text" id="inputBox" oninput="validateInputBox()"><br>
+			<input type="text" id="inputBox" placeholder = "Enter text here..." oninput="validateInputBox()"><br>
 		</form>
 	</div>
 	

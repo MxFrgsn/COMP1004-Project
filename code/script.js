@@ -30,7 +30,7 @@ var timer_started = false;
 var time = 60000; // 60000 milliseconds = 60 seconds
 let time_passed = 0;
 var WPM = 0;
-let word_bank_span = document.querySelector("#displayWordBank p");
+const word_bank_span = document.querySelector("#displayWordBank p");
 let chars_Correct = 0;
 let words_Correct = 0;
 
@@ -45,11 +45,11 @@ function displayWordBank() {
     var string = word_bank[i];
     for (var j = 0; j < string.length; j++)
 	{
-      var span_word = document.createElement("span");
+      const span_word = document.createElement("span");
       span_word.textContent = string[j];
       word_bank_span.appendChild(span_word);
     }
-    var span_space = document.createElement("span");
+    const span_space = document.createElement("span");
     span_space.textContent = " ";
     word_bank_span.appendChild(span_space);
     current_height = word_bank_span.offsetHeight;
@@ -220,7 +220,6 @@ function main() {
   displayWordBank();
 }
 
-main();
 //Event listener for Punctuation difficulty option
 const possible_punctuation = "-,.;:'";
 document.getElementById('Punctuation').addEventListener('change', (event) => {
@@ -287,3 +286,27 @@ document.getElementById('Capitalization').addEventListener('change', (event) => 
 	word_bank_span.innerHTML="";
 	displayWordBank();
 });
+
+
+function loadLoginForm() // does show new page but does nothing and style isnt right yet! -> move log in position somewhere else!
+{// and cannot get back to typing test 
+	const outside_container = document.getElementById("outsideContainer");
+	outside_container.innerHTML ="";
+    outside_container.innerHTML = `
+        <h2>Login</h2>
+        <form id="loginForm">
+            <input type="text" id="username" placeholder="Username/Email" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <button type="submit">Login</button>
+        </form>
+        <p id="errorMessage" class="error-message"></p>
+    `;
+	 document.getElementById('loginForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // add to json file
+   });
+}
+
+document.getElementById('logIn').addEventListener('click', function(event) {
+    loadLoginForm(); 
+});
+main();

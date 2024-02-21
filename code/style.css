@@ -33,6 +33,13 @@
 		background-color: rgb(44, 46, 49);
 		color:white;
 		}
+		
+		input[type = "password"]
+		{
+		box-shadow: 0 0 5px 2px white;
+		background-color: rgb(44, 46, 49);
+		color:white;
+		}
 	
 		#timerOptions,#difficultyOptions
 		{
@@ -43,6 +50,12 @@
 		{
 		background-color: rgb(44, 46, 49); 	
 		}	
+		
+		button
+		{
+		background-color:rgb(44, 46, 49);
+		color:white;
+		}
 	
 	}
 	
@@ -81,6 +94,13 @@
 		color:black;
 		}
 		
+		input[type = "password"]
+		{
+		box-shadow: 0 0 5px 2px black;
+		background-color: white;
+		color:black;
+		}
+		
 		#timerOptions,#difficultyOptions
 		{
 		color: black; 
@@ -90,6 +110,12 @@
 		{
 		background-color:white;	
 		}	
+		
+		button
+		{
+		background-color:white;
+		color:black;
+		}
 	
 	}	 	
 
@@ -111,8 +137,8 @@
 	min-height:70vh;
 	gap: 15px;
 	font-size: 25px;
-	line-height:25px;
 	font-weight:bold;
+	line-height:25px;
 	font-family: sans-serif;		
 	}
 	
@@ -120,7 +146,6 @@
 	{
 	max-width: 780px;
 	border-radius:15px;
-	font-family: sans-serif;
 	padding: 5px
 	}
 
@@ -137,6 +162,8 @@
 	input[type = "text"]
 	{
 	width: 600px;
+	height: 20px;
+	font-size:20px;
 	}
 	
 	#timerOptions,#difficultyOptions
@@ -158,4 +185,28 @@
 	p 
 	{
 	margin:3px
+	}
+	
+	input[type = "password"]
+	{
+	width: 600px;
+	height: 20px;
+	font-size:20px;
+	}
+	
+	button
+	{
+	width: 50px;
+	height: 30px;
+	border-radius:30px;
+	font-weight:bold;
+	font-size:10px;
+	}
+
+	#logInSquare
+	{
+	width:150px;
+	height:55px;
+	align-items:center;
+	justify-content:center;
 	}
