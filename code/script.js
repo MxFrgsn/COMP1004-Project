@@ -35,7 +35,7 @@ let chars_Correct = 0;
 let words_Correct = 0;
 
 
-function displayWords() {
+function displayWordBank() {
   // Displays expected inputs on website, removing previously correct input
   document.getElementById("inputBox").value = "";
   let max_height = 200;
@@ -106,7 +106,7 @@ function checkEndOfLine() {
     word_bank_span.innerHTML = "";
     words_Correct = 0;
     chars_Correct = 0;
-    displayWords();
+    displayWordBank();
   }
 }
 function randomiseArray() {
@@ -206,66 +206,101 @@ function validateTimerOptions() {
 }
 
 function validateDifficultyOptions() {
+	
   var difficulty_options = ["Punctuation", "Capitalization", "Paragraphs"];
   for (var i = 0; i < difficultyOptions.length; i++) 
   {
     if (document.getElementById(difficulty_options[i]).checked) 
 	{
-      console.log(difficulty_options[i]);
       generateDifficultyOptions(difficulty_options[i]);
+	  word_bank_span.innerHTML = "";
+	  displayWordBank();
     }
   }
 }
 
 function generateDifficultyOptions(difficulty_options) {
-  //using checkboxes, lets say i picked Punctuation, and afterwards i picked capitalisation, would it see punctuation is ticked and attempt to reapply it?
-  // DIFFICULTY OPTIONS NOT YET FINISHED
+  word_bank_span.innerHTML = "";
   if (difficulty_options == "Punctuation")
   {
-    const possible_punctuation = "-,.;:'";
-    for (var i = 0;i < word_bank.length;i++) //not working) 
-	{
-      word_bank[i].concat(Math.floor(Math.random() * possible_punctuation.length));
-    }
-  } 
+	punctuationDifficulty();
+  }
   else if (difficulty_options == "Capitalization")
   {
-    //not working
-    for (var i = 0; i < word_bank.length; i++) 
-	{
-      if (word_bank[i].length > 1) 
-	  {
-        word_bank[i] =word_bank[i].charAt(0).toUpperCase() + word_bank.slice(1);
-      }
-	  else 
-	  {
-        word_bank[i] = word_bank[i].charAt(0).toUpperCase();
-      }
-      console.log(word_bank[i]);
-    }
+    capitalizationDifficulty();
   } 
   else if (difficulty_options == "Paragraphs") 
   {
-    console.log("not finished");
+    paragraphsDifficulty()
   }
-  //use this to generate a list of words/capitalised words or paragraphs dependind on difficulty options
-  displayWords();
+ displayWordBank();
 }
-//use this to generate words and edit it??? simply an idea with the addition of difficulties, may not use.
-function makeWord(wordMax) {
-  let string = "";
-  const possible_consonants = "bcdfghjklmnpqrstvwxyz";
-  const possibleVowels = "aeiou";
-  for (let i = 0; i < wordMax; i = i + 3) 
-  {
-    string +=
-      possibleLetters[Math.floor(Math.random() * possible_consonants.length)];
-    string +=
-      possibleVowels[Math.floor(Math.random() * possible_vowels.length)];
-    string +=
-      possibleLetters[Math.floor(Math.random() * possible_consonants.length)];
-  }
-  console.log(string);
+
+function punctuationDifficulty() {
+	const possible_punctuation = "-,.;:'";
+	if (!document.getElementById("Punctuation").checked)
+	{
+		for (var i = 0;i < word_bank.length;i++)
+		{
+			var word = word_bank[i];
+			var removed_punct_word = "";
+			for (var j = 0; j < word.length; j++)
+			{
+				if (possible_punctuation.indexOf(words[j])===-1)
+				{
+					removed_punct_word+=word[j];
+				}
+			}	
+			word_bank[i] = removed_punct_word;
+			console.log(word_bank[i])
+		}	
+	}
+	else
+	{
+		for (var i = 0;i < word_bank.length;i++)
+		{
+			if (i%4 == 0 || i%7 == 0 && i%5 ==0)
+			{
+				word_bank[i]=word_bank[i]+(possible_punctuation[Math.floor(Math.random() * possible_punctuation.length)]);
+			}
+		}
+	}
+}
+
+function capitalizationDifficulty() {
+	if (!document.getElementById("Capitalization").checked) 
+	{
+	//decapitalise words
+	}
+	else
+	{
+		for (var i = 0; i < word_bank.length; i++)  //not working atm!
+		{
+			if (word_bank[i].length > 1) 
+			{
+				word_bank[i] =word_bank[i].charAt(0).toUpperCase() + word_bank.slice(1);
+			}
+			else 
+			{
+				word_bank[i] = word_bank[i].charAt(0).toUpperCase();
+			}
+		console.log(word_bank[i]);
+		}
+	}
+}
+
+function paragraphsDifficulty(){
+	if (!document.getElementById("Paragraphs").checked) 
+	{
+		//wip
+		console.log("not been checked")
+	}
+	else
+	{
+		//wip
+		console.log("been checked")
+	}
+	
 }
 
 function main() {
@@ -282,7 +317,7 @@ function main() {
   chars_Correct = 0;
   updateTimerUI();
   randomiseArray();
-  displayWords();
+  displayWordBank();
 }
 
 main();
