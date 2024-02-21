@@ -124,7 +124,7 @@ function checkEndOfLine() {
 	display_bank_p.innerHTML = "";
 	paragraph_bank[0]=paragraph_bank[0].slice(chars_Correct);
 	console.log(paragraph_bank[0]); // maybe works now????, might have to change [0] to something else, like paragraphs written count or smth
-	if(document.getElementById("Paragraphs").checked)]
+	if(document.getElementById("Paragraphs").checked)
 	{
 		displayArray(paragraph_bank);
 	}
