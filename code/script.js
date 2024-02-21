@@ -181,7 +181,6 @@ function updateTimerUI() {
 
 function calculateWPM() {
   //Calculates WPM, which is to be displayed to the user
-  console.log(written_characters);
   WPM = written_characters / 5 / (time / 60000);
   updateWpmUI();
   alert("Test finished"); //change this, but keep idea
@@ -203,90 +202,6 @@ function validateTimerOptions() {
       time = timer_options[i] * 1000;
     }
   }
-}
-
-function validateDifficultyOptions() {
-	
-  var difficulty_options = ["Punctuation", "Capitalization", "Paragraphs"];
-  for (var i = 0; i < difficultyOptions.length; i++) 
-  {
-    if (document.getElementById(difficulty_options[i]).checked) 
-	{
-      generateDifficultyOptions(difficulty_options[i]);
-	  word_bank_span.innerHTML = "";
-	  displayWordBank();
-    }
-  }
-}
-
-function generateDifficultyOptions(difficulty_options) {
-  word_bank_span.innerHTML = "";
-  if (difficulty_options == "Punctuation")
-  {
-	punctuationDifficulty();
-  }
-  else if (difficulty_options == "Capitalization")
-  {
-    capitalizationDifficulty();
-  } 
-  else if (difficulty_options == "Paragraphs") 
-  {
-    paragraphsDifficulty()
-  }
- displayWordBank();
-}
-
-function punctuationDifficulty() {
-	const possible_punctuation = "-,.;:'";
-	if (!document.getElementById("Punctuation").checked)
-	{
-		for (var i = 0;i < word_bank.length;i++)
-		{
-			var word = word_bank[i];
-			var removed_punct_word = "";
-			for (var j = 0; j < word.length; j++)
-			{
-				if (possible_punctuation.indexOf(words[j])===-1)
-				{
-					removed_punct_word+=word[j];
-				}
-			}	
-			word_bank[i] = removed_punct_word;
-			console.log(word_bank[i])
-		}	
-	}
-	else
-	{
-		for (var i = 0;i < word_bank.length;i++)
-		{
-			if (i%4 == 0 || i%7 == 0 && i%5 ==0)
-			{
-				word_bank[i]=word_bank[i]+(possible_punctuation[Math.floor(Math.random() * possible_punctuation.length)]);
-			}
-		}
-	}
-}
-
-function capitalizationDifficulty() {
-	if (!document.getElementById("Capitalization").checked) 
-	{
-	//decapitalise words
-	}
-	else
-	{
-		for (var i = 0; i < word_bank.length; i++)  //not working atm!
-		{
-			if (word_bank[i].length > 1) 
-			{
-				word_bank[i] =word_bank[i].charAt(0).toUpperCase() + word_bank.slice(1);
-			}
-			else 
-			{
-				word_bank[i] = word_bank[i].charAt(0).toUpperCase();
-			}
-		console.log(word_bank[i]);
-		}
-	}
 }
 
 function paragraphsDifficulty(){
@@ -321,3 +236,67 @@ function main() {
 }
 
 main();
+const possible_punctuation = "-,.;:'";
+document.getElementById('Punctuation').addEventListener('change', (event) => {
+	if (!event.currentTarget.checked) 
+	{
+		for (var i = 0;i < word_bank.length;i++)
+		{
+			var word = word_bank[i];
+			var removed_punct_word = "";
+			for (var j = 0; j < word.length; j++)
+			{
+				if (possible_punctuation.indexOf(word[j])===-1)
+				{
+					removed_punct_word+=word[j];
+				}
+			}	
+			word_bank[i] = removed_punct_word;
+		}	
+	}
+	else
+	{
+		for (var i = 0;i < word_bank.length;i++)
+		{
+			if (Math.random()<0.5)
+			{
+				word_bank[i]=word_bank[i]+(possible_punctuation[Math.floor(Math.random() * possible_punctuation.length)]);
+			}
+		}
+	}
+	word_bank_span.innerHTML="";
+	displayWordBank();
+});
+
+document.getElementById('Capitalization').addEventListener('change', (event) => {
+	if (!event.currentTarget.checked) 
+	{
+		for (var i = 0; i < word_bank.length; i++)
+		{
+			if (word_bank[i].length > 1) 
+			{
+				word_bank[i] =word_bank[i].charAt(0).toLowerCase() + word_bank[i].slice(1);
+			}
+			else 
+			{
+				word_bank[i] = word_bank[i].charAt(0).toLowerCase();
+			}
+		}
+	}
+	else
+	{
+		for (var i = 0; i < word_bank.length; i++)
+		{
+			if (word_bank[i].length > 1) 
+			{
+				word_bank[i] =word_bank[i].charAt(0).toUpperCase() + word_bank[i].slice(1);
+			}
+			else 
+			{
+				word_bank[i] = word_bank[i].charAt(0).toUpperCase();
+			}
+		}
+	}	
+	word_bank_span.innerHTML="";
+	displayWordBank();
+});
