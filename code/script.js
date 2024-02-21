@@ -342,7 +342,8 @@ function loadLoginForm() // does show new page but does nothing and style isnt r
         <p id="errorMessage" class="error-message"></p>
     `;
 	 document.getElementById('loginForm').addEventListener('submit', function(event) {
-        event.preventDefault(); // add to json file
+        event.preventDefault(); // create function to log in and go back to original html, 
+		// create another listener to create an account and store to json file
    });
 }
 
