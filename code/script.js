@@ -121,8 +121,6 @@ function randomiseArray() {
 }
 function styleWordBank(input_value) {
   // Styles wordbank, comparing each letter to input box value, checking if its right or wrong and displays it apporiately. 
-  //make it so the style remains after a word is submitted? allow incorrect words to be submitted and use accuracy as part of calculation?
-  //problem that at end of test, in middle of line
   document.querySelectorAll("#displayWordBank p span").forEach((span, i) => 
   {
     if (i < chars_Correct && window.matchMedia("(prefers-color-scheme: dark)").matches) 
@@ -187,6 +185,7 @@ function calculateWPM() {
 }
 
 function updateWpmUI() {
+ // Displays the WPM on the website
   let wpm_HTML = document.getElementById("WordsPerMinutes");
   let formatted_WPM = "WPM: " + WPM;
   wpm_HTML.innerHTML = formatted_WPM;
@@ -202,20 +201,6 @@ function validateTimerOptions() {
       time = timer_options[i] * 1000;
     }
   }
-}
-
-function paragraphsDifficulty(){
-	if (!document.getElementById("Paragraphs").checked) 
-	{
-		//wip
-		console.log("not been checked")
-	}
-	else
-	{
-		//wip
-		console.log("been checked")
-	}
-	
 }
 
 function main() {
@@ -236,6 +221,7 @@ function main() {
 }
 
 main();
+//Event listener for Punctuation difficulty option
 const possible_punctuation = "-,.;:'";
 document.getElementById('Punctuation').addEventListener('change', (event) => {
 	if (!event.currentTarget.checked) 
@@ -268,6 +254,7 @@ document.getElementById('Punctuation').addEventListener('change', (event) => {
 	displayWordBank();
 });
 
+//Event listener for Capitalization difficulty option
 document.getElementById('Capitalization').addEventListener('change', (event) => {
 	if (!event.currentTarget.checked) 
 	{
