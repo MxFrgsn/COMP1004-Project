@@ -32,7 +32,7 @@ var paragraph_bank = ["When we hear outlaw we think of criminals. But outlaws ar
 "Almost all 195 countries in the world have a real-life animal as their national animal, but 6 of them have mythical animals. Scotland, for example,appointed the unicorn as their national animal.",
 "There is a single plant species that a wide variety of vegetable comes from. It produces kale, brussels sprouts cauliflower, cabbage and broccoli which are all varieties of the same plants. ",
 "A parrot named Willie once saved a toddler's life. When this owner was in another room, the toddler, who was being babysat, began to choke. Willie quickly alerted his owner by screaming, 'mama, baby'.",
-"Despite media portrayal after Steve Irwin died from one, stringray attacks are almost never fatal. In fact, it is quite rare. Every rare, only one or two stingray attacks are reported worldwide.",
+"Despite media portrayal after Steve Irwin died from one, stringray attacks are almost never fatal. In fact, it is quite rare. Every year, only one or two stingray attacks are reported worldwide.",
 "The United States has won 246 gold medals in the entire Olympics history. Michael Phelps happened to have earned 23 of those gold medals. This is equal to about 10% of all the gold medals.",
 "The movie Godfather was adapted from a book written by Mario Puzo. Mario was also happened to tbe the screenwriter for the movie adaptation, even though he has not screenwriting experience or knowledge"]
 var written_characters = 0;
@@ -232,7 +232,7 @@ function validateTimerOptions() {
 
 function main() {
   // Start of typing test
-  document.getElementById("inputBox").value = "";
+  document.getElementById('inputBox').value = "";
   timer_started = false;
   var start_time = 0;
   var timer_interval;
@@ -246,6 +246,9 @@ function main() {
   randomiseArray(paragraph_bank)
   randomiseArray(word_bank);
   displayArray(word_bank);
+  document.getElementById('logIn').addEventListener('click', function(event) {
+    loadLoginForm(); 
+});
 }
 
 //Event listener for Punctuation difficulty option
@@ -269,6 +272,7 @@ document.getElementById('Punctuation').addEventListener('change', (event) => {
 	}
 	else
 	{
+		document.getElementById('Paragraphs').checked = false;
 		for (var i = 0;i < word_bank.length;i++)
 		{
 			if (Math.random()<0.5)
@@ -299,6 +303,7 @@ document.getElementById('Capitalization').addEventListener('change', (event) => 
 	}
 	else
 	{
+		document.getElementById('Paragraphs').checked = false;
 		for (var i = 0; i < word_bank.length; i++)
 		{
 			if (word_bank[i].length > 1) 
@@ -323,31 +328,26 @@ document.getElementById('Paragraphs').addEventListener('change', (event) => {
 	}	
 	else
 	{
+		document.getElementById('Capitalization').checked = false;
+		document.getElementById('Punctuation').checked = false;
 		display_bank_p.innerHTML="";
 		displayArray(paragraph_bank);
 	}
 });
-
-function loadLoginForm() // does show new page but does nothing and style isnt right yet! -> move log in position somewhere else!
-{// and cannot get back to typing test 
-	const outside_container = document.getElementById("outsideContainer");
-	outside_container.innerHTML ="";
-    outside_container.innerHTML = `
-        <h2>Login</h2>
-        <form id="loginForm">
-            <input type="text" id="username" placeholder="Username/Email" required>
-            <input type="password" id="password" placeholder="Password" required>
-            <button type="submit">Login</button>
-        </form>
-        <p id="errorMessage" class="error-message"></p>
-    `;
+function loadLoginForm() { // does show new page but does nothing and style isnt right yet! 
+	document.getElementById('outsideContainer').classList.remove('displayFlex');
+	document.getElementById('outsideContainer').classList.add('hidden');
+	document.getElementById('outsideContainerforLogIn').classList.remove('hidden');
+	
+	document.getElementById('back').addEventListener('click', (event) => {
+    document.getElementById('outsideContainer').classList.remove('hidden');
+	document.getElementById('outsideContainer').classList.add('displayFlex');
+	document.getElementById('outsideContainerforLogIn').classList.add('hidden');
+});
 	 document.getElementById('loginForm').addEventListener('submit', function(event) {
         event.preventDefault(); // create function to log in and go back to original html, 
 		// create another listener to create an account and store to json file
    });
 }
 
-document.getElementById('logIn').addEventListener('click', function(event) {
-    loadLoginForm(); 
-});
 main();

@@ -2,8 +2,8 @@
 <html lang="en-GB">
 <head>
 
-	<title>Typing Test - COMP1004 Project
-	<meta name="viewport" content="width=device-width"/></title>
+	<title>Typing Test - COMP1004 Project </title>
+	<meta name="viewport" content="width=device-width"/>
 	<meta charset="utf-8"/>
 	<meta name="author" content="Max Ferguson"/>
 	<meta name="description" content="This website is intended to be my project for the module
@@ -16,7 +16,7 @@
 
 <body>
 	
-	<div class="outsideContainer" id = "outsideContainer">
+	<div id="outsideContainer" class = "displayFlex">
 		<h1>Typing Test</h1>
 		<div id="logInSquare">
 		<nav>
@@ -47,12 +47,12 @@
 				<label for="Paragraphs">Paragraphs </label> 
 			</form>
 		</div>
-		<div class = "insideContainer">
-			<div class = "square">	
+		<div id = "insideContainer">
+			<div id = "square">	
 				<div id ="WordsPerMinutes"> </div>
 			</div>
 			<div id="displayWordBank"><p></p></div>
-			<div class = "square">	
+			<div id = "square">	
 				<div id="timer"></div>
 			</div>
 		</div>
@@ -62,6 +62,22 @@
 		</form>
 	</div>
 	
+	<div id = "outsideContainerforLogIn" class = "hidden">
+	<h1>Typing Test</h1>
+		<h2>Login</h2>
+		<nav>
+			<ul>
+				<button><a href="#" id="back">Back</a></button>
+			</ul>
+		</nav>
+        <form id="loginForm">
+            <input type="text" id="username" placeholder="Username/Email" required>
+			<br> <br>
+            <input type="password" id="password" placeholder="Password" required>
+			<br> <br>
+            <button type="submit">Login</button>
+        </form>
+	</div>
 </body>
 
 </html>
