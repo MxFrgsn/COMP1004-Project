@@ -1,4 +1,4 @@
-var word_bank= ["farm", "cheese", "apple", "character", "planet", "godfrey", "orange", "story", "animated", "user", "empty", "still", "grapes", "fill", 
+var word_bank = ["farm", "cheese", "apple", "character", "planet", "godfrey", "orange", "story", "animated", "user", "empty", "still", "grapes", "fill", 
 "worry", "sad", "pensive", "because", "intuition", "pattern", "recognition","oval", "square", "paper", "developer", "controls", "button", "listener", "string", "data", "explained",
  "error", "means", "exist", "queue", "event", "object", "exuberant", "terrified", "grief", "morning", "sunny", "rain", "vigorously",
 "rich", "abundant", "lush", "lubricant", "average", "mode", "mind", "direction", "rock", "cartoon", "stories", "protagonist", "anti-hero", "robot", "drone", "king", "history", 
@@ -35,36 +35,39 @@ var paragraph_bank = ["When we hear outlaw we think of criminals. But outlaws ar
 "Despite media portrayal after Steve Irwin died from one, stringray attacks are almost never fatal. In fact, it is quite rare. Every year, only one or two stingray attacks are reported worldwide.",
 "The United States has won 246 gold medals in the entire Olympics history. Michael Phelps happened to have earned 23 of those gold medals. This is equal to about 10% of all the gold medals.",
 "The movie Godfather was adapted from a book written by Mario Puzo. Mario was also happened to tbe the screenwriter for the movie adaptation, even though he has not screenwriting experience or knowledge"]
-var written_characters = 0;
-var timer_started = false;
+var written_characters = 0; 
+var timer_started = false; 
 var time = 60000; // 60000 milliseconds = 60 seconds
-let time_passed = 0;
-var WPM = 0;
+let time_passed = 0; 
+var WPM = 0; 
 const display_bank_p = document.querySelector("#displayWordBank p");
 let chars_Correct = 0;
-let words_Correct = 0;
+let words_Correct = 0; 
+var authenication = false; // boolean to check if user is logged in
+var  json_data = [];  // array to store json data
 
 
 function displayArray(array) {
   // Displays expected inputs on website
   document.getElementById("inputBox").value = "";
   let max_height = 200;
-  let current_height = 0;
-  var i = 0;
-  while (i < array.length && current_height < max_height) {
+  let current_height = 0; 
+  var i = 0; 
+  while (i < array.length && current_height < max_height)  
+  {
     var string = array[i];
     for (var j = 0; j < string.length; j++)
 	{
-      const span_word = document.createElement("span");
-      span_word.textContent = string[j];
+      const span_word = document.createElement("span"); 
+      span_word.textContent = string[j]; 
       display_bank_p.appendChild(span_word);
     }
-    const span_space = document.createElement("span");
+    const span_space = document.createElement("span"); 
     span_space.textContent = " ";
     display_bank_p.appendChild(span_space);
     current_height = display_bank_p.offsetHeight;
-    if (current_height >= max_height) 
-	{
+    if (current_height >= max_height)  
+	{ 
       for (var j = 0; j < string.length; j++) 
 	  {
         let last_word = display_bank_p.lastChild.previousSibling;
@@ -72,10 +75,9 @@ function displayArray(array) {
       }
     }
     i++;
+  }
 }
 
-	
-}
 function validateInputBox() {
   //Checks if input box has been written in, if so, starts time and checks if inputted value is correct
   var input_value = document.getElementById("inputBox").value;
@@ -136,6 +138,7 @@ function checkEndOfLine() {
     chars_Correct = 0;
   }
 }
+
 function randomiseArray(array) {
   // Durstenfeld shuffle, psuedo-randomises the word_bank
   for (var current_index = 0;current_index < array.length;current_index++)
@@ -146,6 +149,7 @@ function randomiseArray(array) {
 	array[random_index] = temp;
   }
 }
+
 function styleWordBank(input_value) {
   // Styles wordbank, comparing each letter to input box value, checking if its right or wrong and displays it apporiately. 
   document.querySelectorAll("#displayWordBank p span").forEach((span, i) => 
@@ -334,20 +338,58 @@ document.getElementById('Paragraphs').addEventListener('change', (event) => {
 		displayArray(paragraph_bank);
 	}
 });
+
 function loadLoginForm() { // does show new page but does nothing and style isnt right yet! 
 	document.getElementById('outsideContainer').classList.remove('displayFlex');
 	document.getElementById('outsideContainer').classList.add('hidden');
 	document.getElementById('outsideContainerforLogIn').classList.remove('hidden');
 	
 	document.getElementById('back').addEventListener('click', (event) => {
-    document.getElementById('outsideContainer').classList.remove('hidden');
+    document.getElementById('outsideContainer').classList.remove('hidden')
 	document.getElementById('outsideContainer').classList.add('displayFlex');
 	document.getElementById('outsideContainerforLogIn').classList.add('hidden');
 });
 	 document.getElementById('loginForm').addEventListener('submit', function(event) {
-        event.preventDefault(); // create function to log in and go back to original html, 
+    validateLogIn();
+    // create function to log in and go back to original html, 
 		// create another listener to create an account and store to json file
-   });
+   });	
 }
+
+function validateLogIn()
+{  
+  getUserInformation();
+	const user_name = document.getElementById('username').value;
+	const pass_word = document.getElementById('password').value;	
+  for (var i = 0; i < json_data.length; i++)
+  {
+    if (json_data[i].username === user_name && json_data[i].password === pass_word)
+    {
+      authenication = true;
+      break;
+    }
+  }
+  if (authenication)
+  {
+    alert("Logged in successfully");
+  }
+  else
+  {
+    alert("Incorrect username or password");
+  }
+}
+
+
+async function getUserInformation()
+{  
+  console.log(user_name, pass_word);
+  try {
+    const response = await fetch('data.json');
+    json_data = await response.json();
+} catch (error) {
+    console.error('Error fetching data:', error);
+}
+}
+
 
 main();

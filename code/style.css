@@ -174,8 +174,7 @@
 	#squareOptions
 	{
 	display:flex;
-	align-items: center;
-	justify-content: between;
+	align-items: center;	
 	gap: 100px;
 	width: 800px;
 	border-radius:15px;

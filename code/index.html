@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-GB">
 <head>
-
 	<title>Typing Test - COMP1004 Project </title>
 	<meta name="viewport" content="width=device-width"/>
 	<meta charset="utf-8"/>
@@ -11,6 +10,7 @@
     your typing abilities and offers repeatable exercises to try and improve it."/>	
 	<link rel="stylesheet" href="style.css" />
 	<script src="script.js" defer></script>
+	<script src="app.js" defer></script>
 
 </head>
 
@@ -20,9 +20,7 @@
 		<h1>Typing Test</h1>
 		<div id="logInSquare">
 		<nav>
-			<ul>
-				<button><a href="#" id="logIn">Log in</a></button>
-			</ul>
+			<button><a href="#" id="logIn">Log in</a></button>
 		</nav>
 		</div>
 		<div id = "squareOptions"> 
@@ -66,16 +64,16 @@
 	<h1>Typing Test</h1>
 		<h2>Login</h2>
 		<nav>
-			<ul>
-				<button><a href="#" id="back">Back</a></button>
-			</ul>
+			<button><a href="#" id="back">Back</a></button>
 		</nav>
         <form id="loginForm">
-            <input type="text" id="username" placeholder="Username/Email" required>
+            <input type="text" id="username" placeholder="Username" required>
 			<br> <br>
             <input type="password" id="password" placeholder="Password" required>
 			<br> <br>
-            <button type="submit">Login</button>
+			<nav>
+            	<button> <a href="#" id="logIn">Login</a></button>
+			</nav>
         </form>
 	</div>
 </body>
