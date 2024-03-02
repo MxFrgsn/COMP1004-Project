@@ -44,8 +44,7 @@ const display_bank_p = document.querySelector("#displayWordBank p");
 let chars_Correct = 0;
 let words_Correct = 0; 
 var authenication = false; // boolean to check if user is logged in
-var  json_data = [];  // array to store json data
-
+let json_data = []; // array to store json data
 
 function displayArray(array) {
   // Displays expected inputs on website
@@ -225,7 +224,7 @@ function updateWpmUI() {
 function validateTimerOptions() {
   // Enables changing of length of typing test (by default its 60s long)
   var timer_options = [30, 60, 90, 120];
-  for (var i = 0; i < timerOptions.length; i++) 
+  for (var i = 0; i < timer_options.length; i++) 
   {
     if (document.getElementById(timer_options[i]).checked)
 	{
@@ -238,8 +237,6 @@ function main() {
   // Start of typing test
   document.getElementById('inputBox').value = "";
   timer_started = false;
-  var start_time = 0;
-  var timer_interval;
   updateWpmUI();
   written_characters = 0;
   time_passed = 0;
@@ -349,29 +346,29 @@ function loadLoginForm() { // does show new page but does nothing and style isnt
 	document.getElementById('outsideContainer').classList.add('displayFlex');
 	document.getElementById('outsideContainerforLogIn').classList.add('hidden');
 });
-	 document.getElementById('loginForm').addEventListener('submit', function(event) {
+	 document.getElementById('logIn').addEventListener('submit', function(event) {
     validateLogIn();
-    // create function to log in and go back to original html, 
-		// create another listener to create an account and store to json file
    });	
+   // create function to log in and go back to original html, 
+	 // create another listener to create an account and store to json file
 }
 
-function validateLogIn()
+async function validateLogIn()
 {  
-  getUserInformation();
 	const user_name = document.getElementById('username').value;
 	const pass_word = document.getElementById('password').value;	
   for (var i = 0; i < json_data.length; i++)
   {
     if (json_data[i].username === user_name && json_data[i].password === pass_word)
-    {
+    { //NOT WORKING, NO IDEA WHAT IM SUPPOSEED TO DO  SEND HLEP I JUST WANNA ACCESS A JSON FILE 
       authenication = true;
       break;
-    }
   }
-  if (authenication)
+  }
+  if (authenication == true)
   {
-    alert("Logged in successfully");
+    document.getElementById('outsideContainer').classList.remove('hidden');
+    document.getElementById('outsideContainer').classList.add('displayFlex');
   }
   else
   {
@@ -379,17 +376,15 @@ function validateLogIn()
   }
 }
 
-
-async function getUserInformation()
-{  
-  console.log(user_name, pass_word);
-  try {
-    const response = await fetch('data.json');
-    json_data = await response.json();
-} catch (error) {
-    console.error('Error fetching data:', error);
-}
+function getUserInformation() {  
+  fetch('./data.json')
+    .then(response => response.json())
+    .then(data => {
+      json_data = data;
+	  console.log("json_data: ", json_data);
+    })
+    .catch(error => console.error('Error, json file not found', error));
 }
 
-
+getUserInformation();
 main();

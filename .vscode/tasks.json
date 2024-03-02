@@ -1,0 +1,13 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "Live Preview",
+			"workspacePath": "c:\\Users\\maxth\\Documents\\GitHub\\COMP1004-Project",
+			"problemMatcher": [
+				"$msCompile"
+			],
+			"label": "Live Preview: Run Server"
+		}
+	]
+}
