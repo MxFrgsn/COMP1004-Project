@@ -3,11 +3,11 @@
 "users":
   [
     {
-      "username": "user1",
+      "username": "a",
       "password": "a"
     },
 	{
-		  "username": "user2",
+		  "username": "b",
 		  "password": "b"
 	}
   ]

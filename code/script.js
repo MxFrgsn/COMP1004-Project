@@ -43,7 +43,7 @@ var WPM = 0;
 const display_bank_p = document.querySelector("#displayWordBank p");
 let chars_Correct = 0;
 let words_Correct = 0; 
-var authenication = false; // boolean to check if user is logged in
+let authenication = false; // boolean to check if user is logged in
 let json_data = []; // array to store json data
 
 function displayArray(array) {
@@ -145,7 +145,7 @@ function randomiseArray(array) {
     var random_index = Math.floor(Math.random() * (current_index + 1));
     var temp = array[current_index];
     array[current_index] = array[random_index];
-	array[random_index] = temp;
+	  array[random_index] = temp;
   }
 }
 
@@ -320,7 +320,7 @@ document.getElementById('Capitalization').addEventListener('change', (event) => 
 	display_bank_p.innerHTML="";
 	displayArray(word_bank);
 });
-
+// event listener for Paragraphs difficulty option
 document.getElementById('Paragraphs').addEventListener('change', (event) => {
 	if (!event.currentTarget.checked) 
 	{
@@ -336,43 +336,48 @@ document.getElementById('Paragraphs').addEventListener('change', (event) => {
 	}
 });
 
-function loadLoginForm() { // does show new page but does nothing and style isnt right yet! 
+function loadLoginForm() { // not styled properly 
 	document.getElementById('outsideContainer').classList.remove('displayFlex');
 	document.getElementById('outsideContainer').classList.add('hidden');
 	document.getElementById('outsideContainerforLogIn').classList.remove('hidden');
 	
 	document.getElementById('back').addEventListener('click', (event) => {
     document.getElementById('outsideContainer').classList.remove('hidden')
-	document.getElementById('outsideContainer').classList.add('displayFlex');
-	document.getElementById('outsideContainerforLogIn').classList.add('hidden');
-});
-	 document.getElementById('logIn').addEventListener('submit', function(event) {
+	  document.getElementById('outsideContainer').classList.add('displayFlex');
+	  document.getElementById('outsideContainerforLogIn').classList.add('hidden');
+  }); 
+	document.getElementById('signIn').addEventListener('click', function(event) { 
     validateLogIn();
    });	
    // create function to log in and go back to original html, 
 	 // create another listener to create an account and store to json file
 }
 
-async function validateLogIn()
-{  
-	const user_name = document.getElementById('username').value;
-	const pass_word = document.getElementById('password').value;	
-  for (var i = 0; i < json_data.length; i++)
+function validateLogIn() {  
+	const inputted_username = document.getElementById('username').value;
+	const inputted_password = document.getElementById('password').value;	
+  console.log(json_data.users.length);
+  for (var i = 0; i < json_data.users.length; i++)
   {
-    if (json_data[i].username === user_name && json_data[i].password === pass_word)
-    { //NOT WORKING, NO IDEA WHAT IM SUPPOSEED TO DO  SEND HLEP I JUST WANNA ACCESS A JSON FILE 
+    if (json_data.users[i].username === inputted_username && json_data.users[i].password === inputted_password)
+    {
       authenication = true;
       break;
+    }
   }
-  }
-  if (authenication == true)
+  if (authenication)
   {
-    document.getElementById('outsideContainer').classList.remove('hidden');
+    document.getElementById('outsideContainerforLogIn').classList.remove('displayFlex');
+    document.getElementById('outsideContainerforLogIn').classList.add('hidden');
+    document.getElementById('logInSquare').classList.add('hidden');
+    document.getElementById('signedIn').classList.remove('hidden');
+    document.getElementById('signedIn').classList.add('displayFlex');
+    document.getElementById('outsideContainer').classList.remove('hidden'); // it is now working, but need to change styling and ensure actually signed in.
     document.getElementById('outsideContainer').classList.add('displayFlex');
   }
   else
   {
-    alert("Incorrect username or password");
+    alert("Incorrect username or password"); // keep idea but make it look better
   }
 }
 
@@ -381,7 +386,6 @@ function getUserInformation() {
     .then(response => response.json())
     .then(data => {
       json_data = data;
-	  console.log("json_data: ", json_data);
     })
     .catch(error => console.error('Error, json file not found', error));
 }

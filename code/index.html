@@ -15,7 +15,12 @@
 </head>
 
 <body>
-	
+	<div id = signedIn class = "hidden">
+		<p> store username here.</p>
+		<nav>
+			<button><a href="#" id="logOut">Log out</a></button>
+		</nav>
+	</div>	
 	<div id="outsideContainer" class = "displayFlex">
 		<h1>Typing Test</h1>
 		<div id="logInSquare">
@@ -72,7 +77,7 @@
             <input type="password" id="password" placeholder="Password" required>
 			<br> <br>
 			<nav>
-            	<button> <a href="#" id="logIn">Login</a></button>
+            	<button> <a href="#" id="signIn">Sign In</a></button>
 			</nav>
         </form>
 	</div>
