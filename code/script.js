@@ -121,7 +121,7 @@ function checkEndOfLine() {
 		{
 			word_bank.shift();
 		}	
-    }
+  }
 	display_bank_p.innerHTML = "";
 	paragraph_bank[0]=paragraph_bank[0].slice(chars_Correct);
 	console.log(paragraph_bank[0]); // maybe works now????, might have to change [0] to something else, like paragraphs written count or smth
@@ -349,14 +349,12 @@ function loadLoginForm() { // not styled properly
 	document.getElementById('signIn').addEventListener('click', function(event) { 
     validateLogIn();
    });	
-   // create function to log in and go back to original html, 
 	 // create another listener to create an account and store to json file
 }
 
 function validateLogIn() {  
 	const inputted_username = document.getElementById('username').value;
 	const inputted_password = document.getElementById('password').value;	
-  console.log(json_data.users.length);
   for (var i = 0; i < json_data.users.length; i++)
   {
     if (json_data.users[i].username === inputted_username && json_data.users[i].password === inputted_password)
