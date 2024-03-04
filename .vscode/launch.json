@@ -1,20 +1,11 @@
 {
     "version": "0.2.0",
     "configurations": [
-    
-        {
-            "type": "bashdb",
-            "request": "launch",
-            "name": "Bash-Debug (select script from list of sh files)",
-            "cwd": "${workspaceRoot}",
-            "program": "${command:local_web_server.bat}",
-            "args": []
-        },
         {
             "type": "chrome",
-            "name": "http://localhost:8000/",
+            "name": "http://localhost:8000/code.index.html",
             "request": "launch",
-            "url": "http://localhost:8000/"
+            "url": "http://localhost:8000/code/index.html",
         },
     ]
 }
