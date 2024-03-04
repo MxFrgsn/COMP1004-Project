@@ -41,8 +41,8 @@ var time = 60000; // 60000 milliseconds = 60 seconds
 let time_passed = 0; 
 var WPM = 0; 
 const display_bank_p = document.querySelector("#displayWordBank p");
-let chars_Correct = 0;
-let words_Correct = 0; 
+let chars_correct = 0;
+let words_correct = 0; 
 let authenication = false; // boolean to check if user is logged in
 let json_data = []; // array to store json data
 
@@ -91,13 +91,13 @@ function validateInputBox() {
   if (last_letter_typed == " ")
   {
     const word = input_value.split(" ")[0];
-    if (word == display_bank_p.textContent.split(" ")[words_Correct]) 
+    if (word == display_bank_p.textContent.split(" ")[words_correct]) 
 	{
-      chars_Correct += input_value.length;
-      words_Correct++;
+      chars_correct += input_value.length;
+      words_correct++;
       checkEndOfLine();
       document.getElementById("inputBox").value = "";
-      written_characters += word_bank[words_Correct].length+1; // Add one to include spaces
+      written_characters += word_bank[words_correct].length+1; // Add one to include spaces
     }
   }
 }
@@ -107,11 +107,11 @@ function checkEndOfLine() {
   const first_Span = document.querySelector(`#displayWordBank p span:nth-child(1)`);
 	
   /** @type {HTMLSpanElement} */
-  const next_Span = document.querySelector(`#displayWordBank p span:nth-child(${chars_Correct + 1})`);
+  const next_Span = document.querySelector(`#displayWordBank p span:nth-child(${chars_correct + 1})`);
 	
   if (next_Span.offsetTop > first_Span.offsetTop) 
   {
-    for (var i = 0; i < words_Correct; i++)
+    for (var i = 0; i < words_correct; i++)
 	{
 		if(document.getElementById("Paragraphs").checked)
 		{
@@ -123,7 +123,7 @@ function checkEndOfLine() {
 		}	
   }
 	display_bank_p.innerHTML = "";
-	paragraph_bank[0]=paragraph_bank[0].slice(chars_Correct);
+	paragraph_bank[0]=paragraph_bank[0].slice(chars_correct);
 	console.log(paragraph_bank[0]); // maybe works now????, might have to change [0] to something else, like paragraphs written count or smth
 	if(document.getElementById("Paragraphs").checked)
 	{
@@ -133,8 +133,8 @@ function checkEndOfLine() {
 	{
 		displayArray(word_bank);
 	}
-    words_Correct = 0;
-    chars_Correct = 0;
+    words_correct = 0;
+    chars_correct = 0;
   }
 }
 
@@ -153,7 +153,7 @@ function styleWordBank(input_value) {
   // Styles wordbank, comparing each letter to input box value, checking if its right or wrong and displays it apporiately. 
   document.querySelectorAll("#displayWordBank p span").forEach((span, i) => 
   {
-    if (i < chars_Correct && window.matchMedia("(prefers-color-scheme: dark)").matches) 
+    if (i < chars_correct && window.matchMedia("(prefers-color-scheme: dark)").matches) 
 	{
 		span.style.color = "white";
 	}
@@ -164,16 +164,16 @@ function styleWordBank(input_value) {
   });
   for (var i = 0; i < input_value.length; i++) 
   {
-    if (input_value[i] == display_bank_p.textContent[i + chars_Correct])
+    if (input_value[i] == display_bank_p.textContent[i + chars_correct])
 	{
       var current_letter = document.querySelector(
-      "#displayWordBank p span:nth-child(" + (i + 1 + chars_Correct) + ")");
+      "#displayWordBank p span:nth-child(" + (i + 1 + chars_correct) + ")");
       current_letter.style.color = "green";
     } 
 	else 
 	{
       var current_letter = document.querySelector(
-      "#displayWordBank p span:nth-child(" + (i + 1 + chars_Correct) + ")" );
+      "#displayWordBank p span:nth-child(" + (i + 1 + chars_correct) + ")" );
       current_letter.style.color = "red";
     }
   }
@@ -187,7 +187,7 @@ function timer() {
   {
     clearInterval(timer_interval);
     calculateWPM(); // create an alert when test is over!!!
-	for (let i = 0; i < words_Correct; i++)
+	for (let i = 0; i < words_correct; i++)
 	{
       word_bank.shift();
     }
@@ -241,8 +241,8 @@ function main() {
   written_characters = 0;
   time_passed = 0;
   WPM = 0;
-  words_Correct = 0;
-  chars_Correct = 0;
+  words_correct = 0;
+  chars_correct = 0;
   updateTimerUI();
   randomiseArray(paragraph_bank)
   randomiseArray(word_bank);
@@ -253,8 +253,8 @@ function main() {
 }
 
 //Event listener for Punctuation difficulty option
-const possible_punctuation = "-,.;:'";
 document.getElementById('Punctuation').addEventListener('change', (event) => {
+  const possible_punctuation = "-,.;:'";
 	if (!event.currentTarget.checked) 
 	{
 		for (var i = 0;i < word_bank.length;i++)
@@ -337,13 +337,13 @@ document.getElementById('Paragraphs').addEventListener('change', (event) => {
 });
 
 function loadLoginForm() { // not styled properly 
-	document.getElementById('outsideContainer').classList.remove('displayFlex');
+	document.getElementById('outsideContainer').classList.remove('show');
 	document.getElementById('outsideContainer').classList.add('hidden');
 	document.getElementById('outsideContainerforLogIn').classList.remove('hidden');
 	
 	document.getElementById('back').addEventListener('click', (event) => {
     document.getElementById('outsideContainer').classList.remove('hidden')
-	  document.getElementById('outsideContainer').classList.add('displayFlex');
+	  document.getElementById('outsideContainer').classList.add('show');
 	  document.getElementById('outsideContainerforLogIn').classList.add('hidden');
   }); 
 	document.getElementById('signIn').addEventListener('click', function(event) { 
@@ -365,13 +365,13 @@ function validateLogIn() {
   }
   if (authenication)
   {
-    document.getElementById('outsideContainerforLogIn').classList.remove('displayFlex');
+    document.getElementById('outsideContainerforLogIn').classList.remove('show');
     document.getElementById('outsideContainerforLogIn').classList.add('hidden');
     document.getElementById('logInSquare').classList.add('hidden');
     document.getElementById('signedIn').classList.remove('hidden');
-    document.getElementById('signedIn').classList.add('displayFlex');
+    document.getElementById('signedIn').classList.add('show');
     document.getElementById('outsideContainer').classList.remove('hidden'); // it is now working, but need to change styling and ensure actually signed in.
-    document.getElementById('outsideContainer').classList.add('displayFlex');
+    document.getElementById('outsideContainer').classList.add('show');
   }
   else
   {
