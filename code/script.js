@@ -349,7 +349,7 @@ function loadLoginForm() { // not styled properly
 	  document.getElementById('outsideContainer').classList.add('show');
 	  document.getElementById('outsideContainerforLogIn').classList.add('hidden');
   }); 
-	document.getElementById('signIn').addEventListener('click', function(event) { 
+	document.getElementById('LoggedIn').addEventListener('click', function(event) { 
     validateLogIn();
    });	
 	 // create another listener to create an account and store to json file
@@ -363,7 +363,7 @@ function loadSignupForm() {
     document.getElementById('outsideContainer').classList.add('show');
     document.getElementById('outsideContainerforSignUp').classList.add('hidden');
   }); 
-  document.getElementById('signUp').addEventListener('click', function(event) { 
+  document.getElementById('signedUp').addEventListener('click', function(event) { 
     validateSignUp();
    });
 
@@ -373,7 +373,7 @@ function validateLogIn() {
 	const inputted_password = document.getElementById('passwordLogIn').value;	
   for (var i = 0; i < json_data.users.length; i++)
   {
-    if (json_data.users[i].username === inputted_username && json_data.users[i].password === inputted_password)
+    if (json_data.users[i].username == inputted_username && json_data.users[i].password == inputted_password)
     {
       authenication = true;
       break;
@@ -381,22 +381,74 @@ function validateLogIn() {
   }
   if (authenication)
   {
-    const display_username = document.querySelector("#signedIn p");
-    const span_word = document.createElement("span"); 
-    span_word.textContent = inputted_username; 
-    display_username.appendChild(span_word); 
+    displayHTMLafterLogIn(inputted_username);
     document.getElementById('outsideContainerforLogIn').classList.remove('show');
     document.getElementById('outsideContainerforLogIn').classList.add('hidden');
     document.getElementById('logInSquare').classList.add('hidden');
     document.getElementById('signedIn').classList.remove('hidden');
     document.getElementById('signedIn').classList.add('show');
-    document.getElementById('outsideContainer').classList.remove('hidden'); // it is now working, but need to change styling and ensure actually signed in.
-    document.getElementById('outsideContainer').classList.add('show');
   }
   else
   {
     alert("Incorrect username or password"); // keep idea but make it look better
   }
+}
+async function validateSignUp() {  
+  var inputted_username = document.getElementById('usernameSignUp').value;
+  var inputted_password = document.getElementById('passwordSignUp').value;
+  let user_exists = false;
+  for (var i = 0; i < json_data.users.length; i++)
+  {
+    if (json_data.users[i].username == inputted_username)
+    {
+      user_exists = true;
+      break;
+    }
+  }
+  if (user_exists)
+  {
+    alert("Username already exists");
+    user_exists = false;
+  }
+  else
+  {
+    console.log("password",inputted_password);
+    inputted_password = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(inputted_password));
+    inputted_password = Array.from(new Uint8Array(inputted_password)).map(b => b.toString(16).padStart(2, '0')).join('');
+    const new_user = 
+    {
+      "username": inputted_username,
+      "password": inputted_password
+    }
+    json_data.users.push(new_user); 
+    //console.log(json_data);//store to a json file 
+    var json_object = JSON.stringify(json_data.users);
+    const blob = new Blob([json_object], {type: 'application/json'});
+    //contine here
+    var anchor = document.createElement('a');
+    anchor.download = "user.json";
+    anchor.href = window.URL.createObjectURL(blob);
+    anchor.innerHTML = "download"
+    anchor.click();
+    console.log(anchor);
+    // <<>>>
+    displayHTMLafterLogIn(inputted_username);
+    document.getElementById('outsideContainerforSignUp').classList.remove('show');
+    document.getElementById('outsideContainerforSignUp').classList.add('hidden');
+    document.getElementById('signUpSquare').classList.add('hidden');
+    document.getElementById('signedIn').classList.remove('hidden');
+    document.getElementById('signedIn').classList.add('show');
+    
+  }
+}
+
+function displayHTMLafterLogIn(inputted_username,container) {
+  const display_username = document.querySelector("#signedIn p");
+  const span_word = document.createElement("span"); 
+  span_word.textContent = inputted_username; 
+  display_username.appendChild(span_word); 
+  document.getElementById('outsideContainer').classList.remove('hidden'); // it is now working, but need to change styling and ensure actually signed in.
+  document.getElementById('outsideContainer').classList.add('show');
 }
 
 function getUserInformation() {  
