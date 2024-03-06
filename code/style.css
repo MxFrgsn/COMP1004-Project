@@ -199,14 +199,25 @@
 	border-radius:30px;
 	font-weight:bold;
 	font-size:10px;
+	cursor: pointer;
+	align-items:center;
+	}
+	#signUpSquare
+	{
+		margin-left: 100px;
 	}
 
 	#logInSquare
 	{
-	width:150px;
-	height:55px;
-	align-items:center;
-	justify-content:center; 
+		margin-right: 100px;
+		position: relative;
+		top:52px;
+	}
+
+	.back
+	{
+	position: relative;
+	bottom: 7px;	
 	}
 	
 	.hidden

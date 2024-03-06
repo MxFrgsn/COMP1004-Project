@@ -362,7 +362,10 @@ function validateLogIn() {
 	const inputted_password = document.getElementById('passwordLogIn').value;	
   for (var i = 0; i < json_data.users.length; i++)
   {
-    if (json_data.users[i].username == inputted_username && json_data.users[i].password == inputted_password)
+    if (json_data.users[i].username == inputted_username && json_data.users[i].password == hashedPassword(inputted_password)) 
+    // change to hashed password and get from local storage instead of json-> but then whats the point of json as i only need to get the 
+  // information from the json file once, and its stored forever on local storage until the user clears it
+  // also i need to check if user has cleared cache if possible????????????????
     {
       authenication = true;
       break;
@@ -382,7 +385,7 @@ async function validateSignUp() {
   var inputted_username = document.getElementById('usernameSignUp').value;
   var inputted_password = document.getElementById('passwordSignUp').value;
   let user_exists = false;
-  for (var i = 0; i < json_data.users.length; i++)
+  for (var i = 0; i <  json_data.users.length; i++) // change this and similar things to getlocalstoragejson.length????????
   {
     if (json_data.users[i].username == inputted_username)
     {
@@ -403,7 +406,9 @@ async function validateSignUp() {
       "username": inputted_username,
       "password": inputted_password
     }
-    json_data.users.push(new_user); 
+    //json_data.users.push(new_user); 
+    local_storage_data.push(new_user);
+    setLocalStorageJSON(temp);
     displayHTMLafterLogIn(inputted_username,'outsideContainerforSignUp','signUpSquare');
   }
 }
@@ -415,17 +420,14 @@ async function hashedPassword(password) {
 }
 
 // Setting user data in local storage so it can be saved without using node.js
-function setLocalStorage() {
-  localStorage.setItem("users", JSON.stringify(json_data.users));
-  JSON.parse(localStorage.getItem("users"));
+function setLocalStorageJSON(input) {
+  localStorage.setItem("users", JSON.stringify(input));
 }
-
 // Accessing the information stored in local storage
-function getLocalStorage() {
-return JSON.parse(localStorage.getItem("users"));
+function getLocalStorageJSON(output) {
+return JSON.parse(localStorage.getItem(output));
 }
-
-
+// Displays the username on the website after the user has logged in and goes back to typing test.
 function displayHTMLafterLogIn(inputted_username,container,square) { // need to do styling for login/signin/logout buttons
   const display_username = document.querySelector("#signedIn p");
   const span_word = document.createElement("span"); 
