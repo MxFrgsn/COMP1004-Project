@@ -1,3 +1,4 @@
+// Array of sentences and words to be displayed to user to be written during the typing test
 var word_bank = ["farm", "cheese", "apple", "character", "planet", "godfrey", "orange", "story", "animated", "user", "empty", "still", "grapes", "fill", 
 "worry", "sad", "pensive", "because", "intuition", "pattern", "recognition","oval", "square", "paper", "developer", "controls", "button", "listener", "string", "data", "explained",
  "error", "means", "exist", "queue", "event", "object", "exuberant", "terrified", "grief", "morning", "sunny", "rain", "vigorously",
@@ -41,8 +42,8 @@ var time = 60000; // 60000 milliseconds = 60 seconds
 let time_passed = 0; 
 var WPM = 0; 
 const display_bank_p = document.querySelector("#displayWordBank p");
-let chars_correct = 0;
-let words_correct = 0; 
+let chars_correct = 0; // number of characters correctly typed, used to check if we are at the end of the word
+let words_correct = 0; // number of words correctly typed, used to check if we are at the end of the line
 let authenication = false; // boolean to check if user is logged in
 let json_data = []; // array to store json data
 
@@ -57,6 +58,7 @@ function displayArray(array) {
     var string = array[i];
     for (var j = 0; j < string.length; j++)
 	{
+    // Create a span element for each letter in the word, allowing for individual styling
       const span_word = document.createElement("span"); 
       span_word.textContent = string[j]; 
       display_bank_p.appendChild(span_word);
@@ -69,6 +71,7 @@ function displayArray(array) {
 	{ 
       for (var j = 0; j < string.length; j++) 
 	  {
+      // Remove the last word if it exceeds the max height as current height value is based on the height of the last word
         let last_word = display_bank_p.lastChild.previousSibling;
         last_word.remove();
       }
@@ -86,6 +89,7 @@ function validateInputBox() {
     start_time = new Date();
     timer_interval = setInterval(timer, 950);
   }
+  // Checks if the last letter typed is a space, if so, checks if the word is correct and updates the word bank
   styleWordBank(input_value);
   const last_letter_typed = input_value[input_value.length - 1];
   if (last_letter_typed == " ")
@@ -93,15 +97,16 @@ function validateInputBox() {
     const word = input_value.split(" ")[0];
     if (word == display_bank_p.textContent.split(" ")[words_correct]) 
 	{
+    // If the word is correct, update the word bank and reset the input box
       chars_correct += input_value.length;
       words_correct++;
-      checkEndOfLine();
+      checkEndOfLine(); 
       document.getElementById("inputBox").value = "";
       written_characters += word_bank[words_correct].length+1; // Add one to include spaces
     }
   }
 }
-//Checks whether we are at the end of the line, if so, removes the line and redisplays words
+//Checks whether we are at the end of the first line, if so, removes the line and redisplays words, moving the words up
 function checkEndOfLine() {
   /** @type {HTMLSpanElement} */
   const first_Span = document.querySelector(`#displayWordBank p span:nth-child(1)`);
@@ -124,7 +129,7 @@ function checkEndOfLine() {
   }
 	display_bank_p.innerHTML = "";
 	paragraph_bank[0]=paragraph_bank[0].slice(chars_correct);
-	console.log(paragraph_bank[0]); // maybe works now????, might have to change [0] to something else, like paragraphs written count or smth
+	console.log(paragraph_bank[0]); // retest this.
 	if(document.getElementById("Paragraphs").checked)
 	{
 		displayArray(paragraph_bank);
@@ -186,7 +191,7 @@ function timer() {
   if (time_passed >= time) 
   {
     clearInterval(timer_interval);
-    calculateWPM(); // create an alert when test is over!!!
+    calculateWPM();
 	for (let i = 0; i < words_correct; i++)
 	{
       word_bank.shift();
@@ -208,10 +213,10 @@ function updateTimerUI() {
 }
 
 function calculateWPM() {
-  //Calculates WPM, which is to be displayed to the user
+  //Calculates WPM, which is to be displayed to the user and alerts the user that the test is finished
   WPM = written_characters / 5 / (time / 60000);
   updateWpmUI();
-  alert("Test finished"); //change this, but keep idea
+  alert("Test finished"); //keep idea but change this
 }
 
 function updateWpmUI() {
@@ -317,7 +322,7 @@ document.getElementById('Capitalization').addEventListener('change', (event) => 
 	display_bank_p.innerHTML="";
 	displayArray(word_bank);
 });
-// event listener for Paragraphs difficulty option
+// Event listener for Paragraphs difficulty option
 document.getElementById('Paragraphs').addEventListener('change', (event) => {
 	if (!event.currentTarget.checked) 
 	{
@@ -332,24 +337,25 @@ document.getElementById('Paragraphs').addEventListener('change', (event) => {
 		displayArray(paragraph_bank);
 	}
 });
-
+// Changes class of the outside container to show the login form
 function loadLoginForm() { // not styled properly 
 	document.getElementById('outsideContainer').classList.remove('show');
 	document.getElementById('outsideContainer').classList.add('hidden');
 	document.getElementById('outsideContainerforLogIn').classList.remove('hidden');
 }
+ // changes class of the outside container to show the signup form
 function loadSignupForm() {
   document.getElementById('outsideContainer').classList.remove('show');
   document.getElementById('outsideContainer').classList.add('hidden');
   document.getElementById('outsideContainerforSignUp').classList.remove('hidden');
 }
-
+// changes class of the outside container to show the typing test
 function backButton(backLocation) {
   document.getElementById('outsideContainer').classList.remove('hidden');
   document.getElementById('outsideContainer').classList.add('show');
   document.getElementById(backLocation).classList.add('hidden');
 }
-
+ // Ensures user information is correct when attempting to log in
 function validateLogIn() {  
 	const inputted_username = document.getElementById('usernameLogIn').value;
 	const inputted_password = document.getElementById('passwordLogIn').value;	
@@ -370,6 +376,7 @@ function validateLogIn() {
     alert("Incorrect username or password"); // keep idea but make it look better
   }
 }
+// Checks whether username already exists, if not, adds user to the json file
 async function validateSignUp() {  
   var inputted_username = document.getElementById('usernameSignUp').value;
   var inputted_password = document.getElementById('passwordSignUp').value;
@@ -384,7 +391,7 @@ async function validateSignUp() {
   }
   if (user_exists)
   {
-    alert("Username already exists");
+    alert("Username already exists"); // keep idea but make it look better
     user_exists = false;
   }
   else
@@ -399,9 +406,9 @@ async function validateSignUp() {
     displayHTMLafterLogIn(inputted_username,'outsideContainerforSignUp','signUpSquare');
   }
 }
-
+// Hashes the password using SHA-256, ensuring a degree of security
 async function hashedPassword(password) {
-    password  = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(password ));
+    password  = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(password));
     password  = Array.from(new Uint8Array(password )).map(b => b.toString(16).padStart(2, '0')).join('');
     return password;
 }
@@ -417,12 +424,13 @@ function getLocalStorage() {
 return JSON.parse(localStorage.getItem("users"));
 }
 
+// need to do styling for login/signin/logout buttons
 function displayHTMLafterLogIn(inputted_username,container,square) {
   const display_username = document.querySelector("#signedIn p");
   const span_word = document.createElement("span"); 
   span_word.textContent = inputted_username; 
   display_username.appendChild(span_word); 
-  document.getElementById('outsideContainer').classList.remove('hidden'); // it is now working, but need to change styling and ensure actually signed in.
+  document.getElementById('outsideContainer').classList.remove('hidden'); 
   document.getElementById('outsideContainer').classList.add('show');
   document.getElementById(container).classList.remove('show');
   document.getElementById(container).classList.add('hidden');
@@ -430,7 +438,7 @@ function displayHTMLafterLogIn(inputted_username,container,square) {
   document.getElementById('signedIn').classList.remove('hidden');
   document.getElementById('signedIn').classList.add('show');
 }
-
+// reads the json file and stores it in the json_data array
 async function getUserInformation() {  
   fetch('./data.json')
     .then(response => response.json())
@@ -439,11 +447,10 @@ async function getUserInformation() {
     })
     .catch(error => console.error('Error, json file not found', error));
 }
-
+// Main function, calls all the other functions
 async function init() {
 await getUserInformation();
 beginTypingTest();
-console.log(json_data);
 }
 
 init();
