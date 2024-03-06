@@ -250,6 +250,9 @@ function main() {
   document.getElementById('logIn').addEventListener('click', function(event) {
     loadLoginForm(); 
 });
+document.getElementById('signUp').addEventListener('click', function(event) {
+  loadSignupForm();
+});
 }
 
 //Event listener for Punctuation difficulty option
@@ -341,7 +344,7 @@ function loadLoginForm() { // not styled properly
 	document.getElementById('outsideContainer').classList.add('hidden');
 	document.getElementById('outsideContainerforLogIn').classList.remove('hidden');
 	
-	document.getElementById('back').addEventListener('click', (event) => {
+	document.getElementById('backLogIn').addEventListener('click', (event) => {
     document.getElementById('outsideContainer').classList.remove('hidden')
 	  document.getElementById('outsideContainer').classList.add('show');
 	  document.getElementById('outsideContainerforLogIn').classList.add('hidden');
@@ -351,10 +354,23 @@ function loadLoginForm() { // not styled properly
    });	
 	 // create another listener to create an account and store to json file
 }
+function loadSignupForm() {
+  document.getElementById('outsideContainer').classList.remove('show');
+  document.getElementById('outsideContainer').classList.add('hidden');
+  document.getElementById('outsideContainerforSignUp').classList.remove('hidden');
+  document.getElementById('backSignUp').addEventListener('click', (event) => {
+    document.getElementById('outsideContainer').classList.remove('hidden')
+    document.getElementById('outsideContainer').classList.add('show');
+    document.getElementById('outsideContainerforSignUp').classList.add('hidden');
+  }); 
+  document.getElementById('signUp').addEventListener('click', function(event) { 
+    validateSignUp();
+   });
 
+}
 function validateLogIn() {  
-	const inputted_username = document.getElementById('username').value;
-	const inputted_password = document.getElementById('password').value;	
+	const inputted_username = document.getElementById('usernameLogIn').value;
+	const inputted_password = document.getElementById('passwordLogIn').value;	
   for (var i = 0; i < json_data.users.length; i++)
   {
     if (json_data.users[i].username === inputted_username && json_data.users[i].password === inputted_password)
@@ -365,6 +381,10 @@ function validateLogIn() {
   }
   if (authenication)
   {
+    const display_username = document.querySelector("#signedIn p");
+    const span_word = document.createElement("span"); 
+    span_word.textContent = inputted_username; 
+    display_username.appendChild(span_word); 
     document.getElementById('outsideContainerforLogIn').classList.remove('show');
     document.getElementById('outsideContainerforLogIn').classList.add('hidden');
     document.getElementById('logInSquare').classList.add('hidden');
