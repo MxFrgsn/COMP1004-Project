@@ -424,8 +424,8 @@ function getLocalStorage() {
 return JSON.parse(localStorage.getItem("users"));
 }
 
-// need to do styling for login/signin/logout buttons
-function displayHTMLafterLogIn(inputted_username,container,square) {
+
+function displayHTMLafterLogIn(inputted_username,container,square) { // need to do styling for login/signin/logout buttons
   const display_username = document.querySelector("#signedIn p");
   const span_word = document.createElement("span"); 
   span_word.textContent = inputted_username; 
@@ -438,7 +438,7 @@ function displayHTMLafterLogIn(inputted_username,container,square) {
   document.getElementById('signedIn').classList.remove('hidden');
   document.getElementById('signedIn').classList.add('show');
 }
-// reads the json file and stores it in the json_data array
+// Reads the json file and stores it in the json_data array
 async function getUserInformation() {  
   fetch('./data.json')
     .then(response => response.json())
