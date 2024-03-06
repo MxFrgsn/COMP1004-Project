@@ -389,27 +389,13 @@ async function validateSignUp() {
   }
   else
   {
-    var hashed_password = hashPassword()
-    console.log("password",inputted_password);
-    inputted_password = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(inputted_password));
-    inputted_password = Array.from(new Uint8Array(inputted_password)).map(b => b.toString(16).padStart(2, '0')).join('');
+    var inputted_password = hashPassword(inputted_password)
     const new_user = 
     {
       "username": inputted_username,
       "password": inputted_password
     }
     json_data.users.push(new_user); 
-    //console.log(json_data);//store to a json file 
-    var json_object = JSON.stringify(json_data.users);
-    const blob = new Blob([json_object], {type: 'application/json'});
-    //contine here
-    var anchor = document.createElement('a');
-    anchor.download = "data.json";
-    anchor.href = window.URL.createObjectURL(blob);
-    anchor.innerHTML = "download"
-    anchor.click();
-    console.log(anchor);
-    // <<>>>
     displayHTMLafterLogIn(inputted_username,'outsideContainerforSignUp','signUpSquare');
   }
 }
@@ -417,6 +403,18 @@ async function validateSignUp() {
 async function hashedPassword(password) {
     password  = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(password ));
     password  = Array.from(new Uint8Array(password )).map(b => b.toString(16).padStart(2, '0')).join('');
+    return password;
+}
+
+// Setting user data in local storage so it can be saved without using node.js
+function setLocalStorage() {
+  localStorage.setItem("users", JSON.stringify(json_data.users));
+  JSON.parse(localStorage.getItem("users"));
+}
+
+// Accessing the information stored in local storage
+function getLocalStorage() {
+return JSON.parse(localStorage.getItem("users"));
 }
 
 function displayHTMLafterLogIn(inputted_username,container,square) {
@@ -438,7 +436,6 @@ async function getUserInformation() {
     .then(response => response.json())
     .then(data => {
       json_data = data;
-      // console.log(json_data,"json data");
     })
     .catch(error => console.error('Error, json file not found', error));
 }
