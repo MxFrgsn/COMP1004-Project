@@ -196,7 +196,7 @@ function timer() {
 	{
       word_bank.shift();
     }
-    main();
+    beginTypingTest();
   }
   updateTimerUI();
 }
@@ -370,7 +370,7 @@ function validateLogIn() {
   }
   if (authenication)
   {
-    displayHTMLafterLogIn(inputted_username,'outsideContainerforLogIn','logInSquare');
+    displayHTMLafterLogIn(inputted_username,'outsideContainerforLogIn','logInSquare'); // should i set authenication to false here?
   }
   else
   {
