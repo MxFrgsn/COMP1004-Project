@@ -233,7 +233,7 @@ function validateTimerOptions() {
   }
 }
 
-function main() {
+function beginTypingTest() {
   // Start of typing test
   document.getElementById('inputBox').value = "";
   timer_started = false;
@@ -247,12 +247,6 @@ function main() {
   randomiseArray(paragraph_bank)
   randomiseArray(word_bank);
   displayArray(word_bank);
-  document.getElementById('logIn').addEventListener('click', function(event) {
-    loadLoginForm(); 
-});
-document.getElementById('signUp').addEventListener('click', function(event) {
-  loadSignupForm();
-});
 }
 
 //Event listener for Punctuation difficulty option
@@ -343,31 +337,19 @@ function loadLoginForm() { // not styled properly
 	document.getElementById('outsideContainer').classList.remove('show');
 	document.getElementById('outsideContainer').classList.add('hidden');
 	document.getElementById('outsideContainerforLogIn').classList.remove('hidden');
-	
-	document.getElementById('backLogIn').addEventListener('click', (event) => {
-    document.getElementById('outsideContainer').classList.remove('hidden')
-	  document.getElementById('outsideContainer').classList.add('show');
-	  document.getElementById('outsideContainerforLogIn').classList.add('hidden');
-  }); 
-	document.getElementById('LoggedIn').addEventListener('click', function(event) { 
-    validateLogIn();
-   });	
-	 // create another listener to create an account and store to json file
 }
 function loadSignupForm() {
   document.getElementById('outsideContainer').classList.remove('show');
   document.getElementById('outsideContainer').classList.add('hidden');
   document.getElementById('outsideContainerforSignUp').classList.remove('hidden');
-  document.getElementById('backSignUp').addEventListener('click', (event) => {
-    document.getElementById('outsideContainer').classList.remove('hidden')
-    document.getElementById('outsideContainer').classList.add('show');
-    document.getElementById('outsideContainerforSignUp').classList.add('hidden');
-  }); 
-  document.getElementById('signedUp').addEventListener('click', function(event) { 
-    validateSignUp();
-   });
-
 }
+
+function backButton(backLocation) {
+  document.getElementById('outsideContainer').classList.remove('hidden');
+  document.getElementById('outsideContainer').classList.add('show');
+  document.getElementById(backLocation).classList.add('hidden');
+}
+
 function validateLogIn() {  
 	const inputted_username = document.getElementById('usernameLogIn').value;
 	const inputted_password = document.getElementById('passwordLogIn').value;	
@@ -381,12 +363,7 @@ function validateLogIn() {
   }
   if (authenication)
   {
-    displayHTMLafterLogIn(inputted_username);
-    document.getElementById('outsideContainerforLogIn').classList.remove('show');
-    document.getElementById('outsideContainerforLogIn').classList.add('hidden');
-    document.getElementById('logInSquare').classList.add('hidden');
-    document.getElementById('signedIn').classList.remove('hidden');
-    document.getElementById('signedIn').classList.add('show');
+    displayHTMLafterLogIn(inputted_username,'outsideContainerforLogIn','logInSquare');
   }
   else
   {
@@ -412,6 +389,7 @@ async function validateSignUp() {
   }
   else
   {
+    var hashed_password = hashPassword()
     console.log("password",inputted_password);
     inputted_password = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(inputted_password));
     inputted_password = Array.from(new Uint8Array(inputted_password)).map(b => b.toString(16).padStart(2, '0')).join('');
@@ -426,39 +404,49 @@ async function validateSignUp() {
     const blob = new Blob([json_object], {type: 'application/json'});
     //contine here
     var anchor = document.createElement('a');
-    anchor.download = "user.json";
+    anchor.download = "data.json";
     anchor.href = window.URL.createObjectURL(blob);
     anchor.innerHTML = "download"
     anchor.click();
     console.log(anchor);
     // <<>>>
-    displayHTMLafterLogIn(inputted_username);
-    document.getElementById('outsideContainerforSignUp').classList.remove('show');
-    document.getElementById('outsideContainerforSignUp').classList.add('hidden');
-    document.getElementById('signUpSquare').classList.add('hidden');
-    document.getElementById('signedIn').classList.remove('hidden');
-    document.getElementById('signedIn').classList.add('show');
-    
+    displayHTMLafterLogIn(inputted_username,'outsideContainerforSignUp','signUpSquare');
   }
 }
 
-function displayHTMLafterLogIn(inputted_username,container) {
+async function hashedPassword(password) {
+    password  = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(password ));
+    password  = Array.from(new Uint8Array(password )).map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+function displayHTMLafterLogIn(inputted_username,container,square) {
   const display_username = document.querySelector("#signedIn p");
   const span_word = document.createElement("span"); 
   span_word.textContent = inputted_username; 
   display_username.appendChild(span_word); 
   document.getElementById('outsideContainer').classList.remove('hidden'); // it is now working, but need to change styling and ensure actually signed in.
   document.getElementById('outsideContainer').classList.add('show');
+  document.getElementById(container).classList.remove('show');
+  document.getElementById(container).classList.add('hidden');
+  document.getElementById(square).classList.add('hidden');
+  document.getElementById('signedIn').classList.remove('hidden');
+  document.getElementById('signedIn').classList.add('show');
 }
 
-function getUserInformation() {  
+async function getUserInformation() {  
   fetch('./data.json')
     .then(response => response.json())
     .then(data => {
       json_data = data;
+      // console.log(json_data,"json data");
     })
     .catch(error => console.error('Error, json file not found', error));
 }
 
-getUserInformation();
-main();
+async function init() {
+await getUserInformation();
+beginTypingTest();
+console.log(json_data);
+}
+
+init();
