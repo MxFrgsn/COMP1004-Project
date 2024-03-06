@@ -331,6 +331,7 @@ document.getElementById('Paragraphs').addEventListener('change', (event) => {
 	}	
 	else
 	{
+    //Ensures that the other difficulty options are unchecked, as they are not compatible with the paragraph difficulty option
 		document.getElementById('Capitalization').checked = false;
 		document.getElementById('Punctuation').checked = false;
 		display_bank_p.innerHTML="";
@@ -343,13 +344,13 @@ function loadLoginForm() { // not styled properly
 	document.getElementById('outsideContainer').classList.add('hidden');
 	document.getElementById('outsideContainerforLogIn').classList.remove('hidden');
 }
- // changes class of the outside container to show the signup form
+ // Changes class of the outside container to show the signup form
 function loadSignupForm() {
   document.getElementById('outsideContainer').classList.remove('show');
   document.getElementById('outsideContainer').classList.add('hidden');
   document.getElementById('outsideContainerforSignUp').classList.remove('hidden');
 }
-// changes class of the outside container to show the typing test
+// Changes class of the outside container to show the typing test
 function backButton(backLocation) {
   document.getElementById('outsideContainer').classList.remove('hidden');
   document.getElementById('outsideContainer').classList.add('show');
