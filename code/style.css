@@ -202,6 +202,7 @@
 	cursor: pointer;
 	align-items:center;
 	}
+	
 	#signUpSquare
 	{
 		margin-left: 100px;
@@ -219,7 +220,7 @@
 	position: relative;
 	bottom: 7px;	
 	}
-	
+
 	.hidden
 	{
 	display:none;
