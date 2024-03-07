@@ -339,7 +339,7 @@ document.getElementById('Paragraphs').addEventListener('change', (event) => {
 	}
 });
 // Changes class of the outside container to show the login form
-function loadLoginForm() { // not styled properly 
+function loadLoginForm() { // not styled properly (almost done)
 	document.getElementById('outsideContainer').classList.remove('show');
 	document.getElementById('outsideContainer').classList.add('hidden');
 	document.getElementById('outsideContainerforLogIn').classList.remove('hidden');
@@ -362,7 +362,7 @@ function validateLogIn() {
 	const inputted_password = document.getElementById('passwordLogIn').value;	
   for (var i = 0; i < json_data.users.length; i++)
   {
-    if (json_data.users[i].username == inputted_username && json_data.users[i].password == hashedPassword(inputted_password)) 
+    if (json_data.users[i].username == inputted_username && hashedPassword(json_data.users[i].password) == hashedPassword(inputted_password)) 
     // change to hashed password and get from local storage instead of json-> but then whats the point of json as i only need to get the 
   // information from the json file once, and its stored forever on local storage until the user clears it
   // also i need to check if user has cleared cache if possible????????????????
@@ -381,7 +381,7 @@ function validateLogIn() {
   }
 }
 // Checks whether username already exists, if not, adds user to the json file
-async function validateSignUp() {  
+function validateSignUp() {  
   var inputted_username = document.getElementById('usernameSignUp').value;
   var inputted_password = document.getElementById('passwordSignUp').value;
   let user_exists = false;
