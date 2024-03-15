@@ -50,14 +50,14 @@ let json_data = []; // array to store json data
 function displayArray(array) {
   // Displays expected inputs on website
   document.getElementById("inputBox").value = "";
-  let max_height = 200;
+  let max_height = 200; // max height of the word bank
   let current_height = 0; 
   var i = 0; 
   while (i < array.length && current_height < max_height)  
   {
     var string = array[i];
     for (var j = 0; j < string.length; j++)
-	{
+	  {
     // Create a span element for each letter in the word, allowing for individual styling
       const span_word = document.createElement("span"); 
       span_word.textContent = string[j]; 
@@ -68,9 +68,9 @@ function displayArray(array) {
     display_bank_p.appendChild(span_space);
     current_height = display_bank_p.offsetHeight;
     if (current_height >= max_height)  
-	{ 
-      for (var j = 0; j < string.length; j++) 
-	  {
+	  { 
+      for (var j = 0; j < string.length; j++)  
+	    {
       // Remove the last word if it exceeds the max height as current height value is based on the height of the last word
         let last_word = display_bank_p.lastChild.previousSibling;
         last_word.remove();
@@ -96,7 +96,7 @@ function validateInputBox() {
   {
     const word = input_value.split(" ")[0];
     if (word == display_bank_p.textContent.split(" ")[words_correct]) 
-	{
+  	{
     // If the word is correct, update the word bank and reset the input box
       chars_correct += input_value.length;
       words_correct++;
@@ -120,7 +120,7 @@ function checkEndOfLine() {
 	{
 		if(document.getElementById("Paragraphs").checked)
 		{
-			break;
+			break; // edit this so more paragraphs are added when finished with line. 
 		}	
 		else
 		{
@@ -322,6 +322,7 @@ document.getElementById('Capitalization').addEventListener('change', (event) => 
 	display_bank_p.innerHTML="";
 	displayArray(word_bank);
 });
+
 // Event listener for Paragraphs difficulty option
 document.getElementById('Paragraphs').addEventListener('change', (event) => {
 	if (!event.currentTarget.checked) 
@@ -338,24 +339,28 @@ document.getElementById('Paragraphs').addEventListener('change', (event) => {
 		displayArray(paragraph_bank);
 	}
 });
+
 // Changes class of the outside container to show the login form
 function loadLoginForm() { // not styled properly (almost done)
 	document.getElementById('outsideContainer').classList.remove('show');
 	document.getElementById('outsideContainer').classList.add('hidden');
 	document.getElementById('outsideContainerforLogIn').classList.remove('hidden');
 }
+
  // Changes class of the outside container to show the signup form
 function loadSignupForm() {
   document.getElementById('outsideContainer').classList.remove('show');
   document.getElementById('outsideContainer').classList.add('hidden');
   document.getElementById('outsideContainerforSignUp').classList.remove('hidden');
 }
+
 // Changes class of the outside container to show the typing test
 function backButton(backLocation) {
   document.getElementById('outsideContainer').classList.remove('hidden');
   document.getElementById('outsideContainer').classList.add('show');
   document.getElementById(backLocation).classList.add('hidden');
 }
+
  // Ensures user information is correct when attempting to log in
 function validateLogIn() {  
 	const inputted_username = document.getElementById('usernameLogIn').value;
@@ -380,6 +385,7 @@ function validateLogIn() {
     alert("Incorrect username or password"); // keep idea but make it look better
   }
 }
+
 // Checks whether username already exists, if not, adds user to the json file
 function validateSignUp() {  
   var inputted_username = document.getElementById('usernameSignUp').value;
@@ -412,10 +418,11 @@ function validateSignUp() {
     displayHTMLafterLogIn(inputted_username,'outsideContainerforSignUp','signUpSquare');
   }
 }
+
 // Hashes the password using SHA-256, ensuring a degree of security
 async function hashedPassword(password) {
     password  = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(password));
-    password  = Array.from(new Uint8Array(password )).map(b => b.toString(16).padStart(2, '0')).join('');
+    password  = Array.from(new Uint8Array(password)).map(b => b.toString(16).padStart(2, '0')).join('');
     return password;
 }
 
@@ -423,12 +430,14 @@ async function hashedPassword(password) {
 function setLocalStorageJSON(input) {
   localStorage.setItem("users", JSON.stringify(input));
 }
+
 // Accessing the information stored in local storage
 function getLocalStorageJSON(output) {
 return JSON.parse(localStorage.getItem(output));
 }
+
 // Displays the username on the website after the user has logged in and goes back to typing test.
-function displayHTMLafterLogIn(inputted_username,container,square) { // need to do styling for login/signin/logout buttons
+function displayHTMLafterLogIn(inputted_username,container,square) { 
   const display_username = document.querySelector("#signedIn p");
   const span_word = document.createElement("span"); 
   span_word.textContent = inputted_username; 
@@ -441,6 +450,7 @@ function displayHTMLafterLogIn(inputted_username,container,square) { // need to 
   document.getElementById('signedIn').classList.remove('hidden');
   document.getElementById('signedIn').classList.add('show');
 }
+
 // Reads the json file and stores it in the json_data array
 async function getUserInformation() {  
   fetch('./data.json')
@@ -450,6 +460,7 @@ async function getUserInformation() {
     })
     .catch(error => console.error('Error, json file not found', error));
 }
+
 // Main function, calls all the other functions
 async function init() {
 await getUserInformation();

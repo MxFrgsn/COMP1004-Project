@@ -8,31 +8,29 @@
 	<meta name="description" content="This website is intended to be my project for the module
 	comp1004 using HTML, CSS and Javascript. The intention of this website is to be a typing test which measures
     your typing abilities and offers repeatable exercises to try and improve it."/>	
-	<link rel="stylesheet" href="style.css"/>
-	<script src="script.js" defer></script>
+	<link rel="stylesheet" href="style.css" />
+	<script src="main.js" defer></script>
 	<link rel="icon" href="favicon.ico" type="image/x-icon">
 </head>
 
-<body>	
+<body>
+	<div id = signedIn class = "hidden">
+		<p></p>
+		<nav>
+			<button><a href="#" id="logOut">Log out</a></button>
+		</nav>
+	</div>	
 	<div id="outsideContainer" class = "show">
 		<h1>Typing Test</h1>
-		<div id = "logInAndSignUpButtons">
-			<div id="logInSquare">
-				<nav>
-					<button onclick = "loadLoginForm(); ">Log in</button>
-				</nav>
-			</div>
-			<div id="signUpSquare">
-				<nav>
-					<button onclick = "loadSignupForm()">Sign up</a></button> 
-				</nav>
-			</div>
-			<div id = signedIn class = "hidden">
-				<p></p>
+		<div id="logInSquare">
 			<nav>
-				<button><a href="#" id="logOut">Log out</a></button>
+				<button onclick = "loadLoginForm(); ">Log in</button>
 			</nav>
-			</div>
+		</div>
+		<div id="signUpSquare">
+			<nav>
+				<button onclick = "loadSignupForm()">Sign up</a></button> 
+			</nav>
 		</div>
 		<div id = "squareOptions"> 
 			<form id = "timerOptions" >
@@ -70,6 +68,7 @@
 			<input type="text" id="inputBox" placeholder = "Enter text here..." oninput="validateInputBox()"><br>
 		</form>
 	</div>
+	
 	<div id = "outsideContainerforLogIn" class = "hidden">
 	<h1>Typing Test</h1>
 		<h2>Login</h2>

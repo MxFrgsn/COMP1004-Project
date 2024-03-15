@@ -1,0 +1,232 @@
+	@media (prefers-color-scheme: dark)
+	{
+		
+		body
+		{
+		background-color: rgb(37, 37, 37);
+		}
+		
+		#insideContainer
+		{
+		color: white;
+		}
+		
+		h1 
+		{
+		color: white;
+		font-weight:bold;
+		}
+	
+		#displayWordBank 
+		{
+		background-color: rgb(44, 46, 49);
+		}
+	
+		#square
+		{
+		background-color: rgb(44, 46, 49);
+		}
+	
+		input[type = "text"]
+		{
+		box-shadow: 0 0 5px 2px white;
+		background-color: rgb(44, 46, 49);
+		color:white;
+		}
+		
+		input[type = "password"]
+		{
+		box-shadow: 0 0 5px 2px white;
+		background-color: rgb(44, 46, 49);
+		color:white;
+		}
+	
+		#timerOptions,#difficultyOptions
+		{
+		color: white; 
+		}
+	
+		#squareOptions
+		{
+		background-color: rgb(44, 46, 49); 	
+		}	
+		
+		button
+		{
+		background-color:rgb(44, 46, 49);
+		color:white;
+		}
+	
+	}
+	
+	@media (prefers-color-scheme: light)
+	{
+		body
+		{
+		background-color: rgb(220, 220, 220);
+		}
+		
+		#insideContainer
+		{
+		color: black;
+		}
+	
+		h1 
+		{
+		color: black;
+		font-weight:bold;
+		}
+		
+		#displayWordBank 
+		{
+		background-color: white;
+		}
+		
+		#square
+		{
+		background-color:white;
+		}
+		
+		input[type = "text"]
+		{
+		box-shadow: 0 0 5px 2px black;
+		background-color: white;
+		color:black;
+		}
+		
+		input[type = "password"]
+		{
+		box-shadow: 0 0 5px 2px black;
+		background-color: white;
+		color:black;
+		}
+		
+		#timerOptions,#difficultyOptions
+		{
+		color: black; 
+		}
+		
+		#squareOptions
+		{
+		background-color:white;	
+		}	
+		
+		button
+		{
+		background-color:white;
+		color:black;
+		}
+	
+	}	 	
+
+	#insideContainer
+	{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 15px;
+	font-family: sans-serif;
+	}
+
+	#outsideContainer
+	{
+	flex-direction:column;
+	align-items:center;
+	justify-content:center;
+	min-height:70vh;
+	gap: 15px;
+	font-size: 25px;
+	font-weight:bold;
+	line-height:25px;
+	font-family: sans-serif;		
+	}
+	
+	#displayWordBank
+	{
+	max-width: 780px;
+	border-radius:15px;
+	padding: 5px
+	}
+
+	#square
+	{
+	height: 100px;
+	width: 110px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius:15px;
+	}
+
+	input[type = "text"]
+	{
+	width: 600px;
+	height: 20px;
+	font-size:20px;
+	}
+	
+	#timerOptions,#difficultyOptions
+	{
+	font-size: 14px;
+	height:35px;
+	}
+
+	#squareOptions
+	{
+	display:flex;
+	align-items: center;	
+	gap: 100px;
+	width: 800px;
+	border-radius:15px;
+	}
+
+	p 
+	{
+	margin:3px
+	}
+	
+	input[type = "password"]
+	{
+	width: 600px;
+	height: 20px;
+	font-size:20px;
+	}
+	
+	button
+	{
+	width: 50px;
+	height: 30px;
+	border-radius:30px;
+	font-weight:bold;
+	font-size:10px;
+	cursor: pointer;
+	align-items:center;
+	}
+	
+	#signUpSquare
+	{
+		margin-left: 100px;
+	}
+
+	#logInSquare
+	{
+		margin-right: 100px;
+		position: relative;
+		top:52px;
+	}
+
+	.back
+	{
+	position: relative;
+	bottom: 7px;	
+	}
+
+	.hidden
+	{
+	display:none;
+	}
+	
+	.show
+	{
+	display:flex;
+	}
