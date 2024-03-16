@@ -42,7 +42,8 @@ __Prerequistes__
     - Visual Studio Code would require Live Preview/Live Server or a similar extension for this to work. 
 
     This is needed to allow the function 'getUserInformation()' to fetch data from the JSON file.
-    Without this setup, server-side scripting through Node.js would be required to fetch the data, which as far as I'm aware, we're not supposed to use.
+    Without this setup, server-side scripting through Node.js would be required to fetch the data, 
+    which as far as I'm aware, we're not supposed to use.
 
 __Getting Started__
 
