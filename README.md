@@ -1,12 +1,16 @@
 ## Typing Test - COMP1004-Project
 __Description:__
 
-This project is a typing test web application developed as a project for the COMP1004 module. It is built using HTML, CSS, and JavaScript. The purpose of this application is to measure typing abilities and offer repeatable exercises to improve typing speed and give data to view progress.
+This project is a typing test web application developed as a project for the COMP1004 module.
+It is built using HTML, CSS, and JavaScript. 
+The purpose of this application is to measure typing abilities and offer repeatable exercises to improve typing speed and give data to view progress.
 
 __Features:__
 
     Typing Test: 
-    Users can take a timed typing test and have a result returned. The average difficulty is higher due to the complexity of the words in the tests. This is important to be effective practise, helping with spelling and musucle memory with less familiar words.
+    Users can take a timed typing test and have a result returned.
+    The average difficulty is higher due to the complexity of the words in the tests. 
+    This is important to be effective practise, helping with spelling and musucle memory with less familiar words.
 
     Timer:
     Users can decide the length of their typing test in segements of 30s, up to 120s. 
@@ -35,7 +39,8 @@ __Prerequistes__
     - Visual Studio Code to run the task ">Live Prievew: Start Server" 
     - Visual Studio Code would require Live Preview/Live Server or a similar extension for this to work. 
 
-    This is needed to allow the function 'getUserInformation()' to fetch data from the JSON file. Without this setup, server-side scripting through Node.js would be required to fetch the data, which as far as I'm aware, we're not supposed to use.
+    This is needed to allow the function 'getUserInformation()' to fetch data from the JSON file.
+    Without this setup, server-side scripting through Node.js would be required to fetch the data, which as far as I'm aware, we're not supposed to use.
 
 __Getting Started__
 
