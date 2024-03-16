@@ -17,14 +17,16 @@ __Features:__
 
     Difficulty Options:
     Users can customize the typing test by selecting difficulty options such as punctuation, capitalization, and paragraphs. 
-    Important to note paragraphs contain capitalization and puncutation, however they are in a more natural placement, making paragraphs a non-exclusive option to the other two. 
+    Important to note paragraphs contain capitalization and puncutation, 
+    however they are in a more natural placement, making paragraphs a non-exclusive option to the other two. 
     
     User Authentication:  
     Users can log in or sign up to access the typing test.
 
     Responsive Design:
-    Your inputted words are shown to be corrected/incorrect live on the words you're expected to input, shown by css styling.
-    Due to the nature of the css, while timer/difficulty options may be difficult to use, in many resolutions, the primary function is still very possible.
+    Your inputted words are shown to be corrected/incorrectlive on the words you're expected to input,shown by css styling.
+    Due to the nature of the css, while timer/difficulty options may be difficult to use, 
+    in many resolutions, the primary function is still very possible.
     
     Dark Mode & Light Mode:
     The application supports both based on the user's system settings.
