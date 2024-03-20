@@ -26,7 +26,8 @@ __Features:__
     Users can log in or sign up to access the typing test.
 
     Responsive Design:
-    Your inputted words are shown to be corrected/incorrectlive on the words you're expected to input,shown by css styling.
+    Your inputted words are shown to be corrected/incorrectlive on the words you're 
+    expected to input,shown by css styling.
     
     Dark Mode & Light Mode:
     The application supports both based on the user's system settings.
