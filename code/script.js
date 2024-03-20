@@ -557,3 +557,4 @@ beginTypingTest();
 init();
 
 // next is stats + ensuring options cant be changed mid test + making it look better
+// do second DOM of html 

@@ -25,18 +25,16 @@ __Features:__
 
     Responsive Design:
     Your inputted words are shown to be corrected/incorrectlive on the words you're expected to input,shown by css styling.
-    Due to the nature of the css, while timer/difficulty options may be difficult to use, 
-    in many resolutions, the primary function is still very possible.
     
     Dark Mode & Light Mode:
     The application supports both based on the user's system settings.
 
     Viewable Performance Metrics:
-    Your WPM is stored, shown as a graph/stats screen or to be exported as a json file.
+    Your WPM is stored, shown as a graph/stats screen or to be exported and downloaded as a json file.
 
 __Prerequistes__
 
-    - Python or Visual Studio Code
+    - Latest version of Python OR Visual Studio Code
     - Python used to allow the bat file to function
     - Visual Studio Code to run the task ">Live Prievew: Start Server" 
     - Visual Studio Code would require Live Preview/Live Server or a similar extension for this to work. 
@@ -51,11 +49,12 @@ To run this project locally, follow these steps:
 
     1. Clone this repository to your local machine.
     2. Ensure python is installed on your device. 
+    -   Visual Studio Code is an alternative.
     3. Run the bat file to start a local web server, allowing the JSON file to be accessed. 
     -   Alternatively, Run the task '> Live Preview: Start Server' within Visual Studio Code.
     4. Open the index.html file in your web browser.
     5. Log in with existing credentials from the json file or sign up for a new account.
-    6. Customize the test options and start the typing test.
+    6. Customize the test options and start the typing test by typing in the input field. 
 
 __Credits__
 
