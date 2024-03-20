@@ -129,7 +129,8 @@ function checkEndOfLine() {
   }
 	display_bank_p.innerHTML = "";
 	paragraph_bank[0]=paragraph_bank[0].slice(chars_correct);
-	console.log(paragraph_bank[0]); // retest this.
+	console.log(paragraph_bank[0]); // retest this, place this within the if statement?
+  
 	if(document.getElementById("Paragraphs").checked)
 	{
 		displayArray(paragraph_bank);
@@ -426,14 +427,11 @@ async function hashedPassword(password) {
     return password;
 }
 
-// Setting user data in local storage so it can be saved without using node.js
 function setLocalStorageJSON(input) {
+  var array = []
+  array.push(JSON.parse(localStorage.getItem("users")));
+  array.push(input);
   localStorage.setItem("users", JSON.stringify(input));
-}
-
-// Accessing the information stored in local storage
-function getLocalStorageJSON(output) {
-return JSON.parse(localStorage.getItem(output));
 }
 
 // Displays the username on the website after the user has logged in and goes back to typing test.
