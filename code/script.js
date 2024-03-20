@@ -46,7 +46,8 @@ const display_bank_p = document.querySelector("#displayWordBank p");
 let chars_correct = 0; // number of characters correctly typed, used to check if we are at the end of the word
 let words_correct = 0; // number of words correctly typed, used to check if we are at the end of the line
 let authenication = false; // boolean to check if user is logged in
-let json_data = []; // array to store json data
+let user_data = []; // array to store json data
+let current_user = {};// string to store current user
 
 function displayArray(array) {
   // Displays expected inputs on website
@@ -363,7 +364,7 @@ function backButton(backLocation) {
   document.getElementById(backLocation).classList.add('hidden');
 }
 
- // Ensures user information is correct when attempting to log in
+// Ensures user information is correct when attempting to log in
 async function validateLogIn(e) {  
   e.preventDefault();
 	const inputted_username = document.getElementById('usernameLogIn').value;
@@ -373,67 +374,71 @@ async function validateLogIn(e) {
   {
     for (var i = 0; i < getLocalStorageJson.users.length; i++)
     {
-    if (getLocalStorageJson.users[i].username == inputted_username && getLocalStorageJson.users[i].password == inputted_password) 
-    // no longer working, need to fix this
-    {
-      authenication = true;
-      break;
-    }
+      if (getLocalStorageJson.users[i].username == inputted_username && getLocalStorageJson.users[i].password == inputted_password) 
+      {
+        authenication = true;
+        break;
+      }
     }
     if (authenication)
     {
+      current_user = 
+      {
+        "username": inputted_username,
+        "password": inputted_password
+      }
       displayHTMLafterLogIn(inputted_username,'outsideContainerforLogIn');
-
-      authenication = false;
     }
     else
     {
       e.preventDefault();
       alert("Incorrect username or password"); // keep idea but make it look better
     }
- }
- catch (error)
+  }
+  catch (error)
   {
     console.error('Error during SignUp, please try again.', error);
   }
 }
 
 // Checks whether username already exists, if not, adds user to the json file
-function validateSignUp(e) {  
+async function validateSignUp(e) {  
   e.preventDefault();
   var inputted_username = document.getElementById('usernameSignUp').value;
   var inputted_password = document.getElementById('passwordSignUp').value;
   const getLocalStorageJson = JSON.parse(localStorage.getItem("users"));
   let user_exists = false;
-  try {
-  for (var i = 0; i <  getLocalStorageJson.users.length; i++) // change this and similar things to getlocalstoragejson.length????????
+  try 
   {
-    if (getLocalStorageJson.users[i].username == inputted_username)
+    for (var i = 0; i <  getLocalStorageJson.users.length; i++) // change this and similar things to getlocalstoragejson.length????????
     {
-      user_exists = true;
-      break;
+      if (getLocalStorageJson.users[i].username == inputted_username)
+      {
+        user_exists = true;
+        break;
+      }
     }
-  }
-  if (user_exists)
-  {
-    alert("Username already exists"); // keep idea but make it look better
-    user_exists = false;
-  }
-  else
-  {
-    var inputted_password = hashedPassword(inputted_password)
-    const new_user = 
+    if (user_exists)
     {
+      alert("Username already exists"); // keep idea but make it look better
+      user_exists = false;
+    }
+    else
+    {
+      var inputted_password = await hashedPassword(inputted_password)
+      current_user = 
+      {
       "username": inputted_username,
       "password": inputted_password
+      }
+      setLocalStorageJSON(current_user);
+      displayHTMLafterLogIn(inputted_username,'outsideContainerforSignUp');
     }
-    setLocalStorageJSON(new_user);
-    displayHTMLafterLogIn(inputted_username,'outsideContainerforSignUp');
   }
-}
-catch (error) {
+  catch (error)
+  {
   console.error('Error during SignUp, please try again.', error);
-}
+  }
 }
 
 // Hashes the password using SHA-256, ensuring a degree of security
@@ -443,10 +448,11 @@ async function hashedPassword(password) {
   return password;
 }
 
+// Adds the user to the local storage
 function setLocalStorageJSON(input) {
   var array = []
-  array.push(JSON.parse(localStorage.getItem("users")));
-  array.push(input);
+  array= JSON.parse(localStorage.getItem("users"));
+  array.users.push(input);
   localStorage.setItem("users", JSON.stringify(array));
 }
 
@@ -466,68 +472,72 @@ function displayHTMLafterLogIn(inputted_username,container) {
   document.getElementById('signedIn').classList.add('show');
 }
 
-// Reads the json file and stores it in the json_data array
+// Reads the json file and stores it in the user_data array
 async function getUserInformation() {  
- let storedData = localStorage.getItem('users');
- if (storedData) 
+ let stored_data = localStorage.getItem('users'); // Checks if the json file is already stored in local storage
+ if (stored_data) 
  { 
   try 
   {
-    json_data = JSON.parse(storedData);
-  } catch (error)
+    user_data = JSON.parse(stored_data); // This is causing an unexpected error within vscode live preview but works within the browser environment
+    //Thus try and catch is used to catch the error and fetch the json file if it is not found
+  } 
+  catch (error)
   {
    fetch('./data.json')
    .then(response => response.json())
-  .then(data => 
-  {
-    json_data = data;
-    localStorage.setItem('users', JSON.stringify(json_data));
-  })
-  .catch(error => console.error('Error, json file not found', error));
- }
+   .then(data => 
+   {
+     user_data = data;
+     localStorage.setItem('users', JSON.stringify(user_data));
+   })
+   .catch(error => console.error('Error, json file not found', error));
+  }
 }
  else 
  {
-  fetch('./data.json')
-  .then(response => response.json())
-  .then(data => {
-    json_data = data;
-    localStorage.setItem('users', JSON.stringify(json_data));
+   fetch('./data.json')
+   .then(response => response.json())
+   .then(data => {
+    user_data = data;
+    localStorage.setItem('users', JSON.stringify(user_data));
   })
-  .catch(error => console.error('Error, json file not found', error));
+   .catch(error => console.error('Error, json file not found', error));
  }
 }
 
-function showPasswordSignUp() {
-  let password = document.getElementById("passwordSignUp");
-  if (password.type === "password") 
+// Shows the password when the user is typing it in
+function showPassword(containerID) {
+  let container = document.getElementById(containerID);
+  if (container.type === "password") 
   {
-    password.type = "text";
+    container.type = "text";
   }
   else
   {
-    password.type = "password";
+    container.type = "password";
   }
 }
 
- // show password works but it refreshes the page, need to fix this
-function showPasswordLogIn() {
-  let password = document.getElementById("passwordLogIn");
-  if (password.type === "password") 
-  {
-    password.type = "text";
-  }
-  else
-  {
-    password.type = "password";
-  }
+// Logs out the user, removing the username from the website and displaying the login/sign up buttons
+function logOut() {
+  current_user = {};
+  authenication = false;
+  //delete span with username and display login/sign up buttons
+  //style this button a bit!
+  const display_username = document.querySelector("#signedIn p");
+  display_username.lastChild.remove();
+  document.getElementById("logInAndSignUpButtons").classList.remove('hidden'); 
+  document.getElementById("logInAndSignUpButtons").classList.add('show');   
+  document.getElementById('signedIn').classList.remove('show');
+  document.getElementById('signedIn').classList.add('hidden');
 }
 
 // Main function, calls all the other functions
 async function init() {
 await getUserInformation();
 beginTypingTest();
-console.log(json_data);
+console.log(user_data);
 }
 
 init();

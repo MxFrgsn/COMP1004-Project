@@ -230,3 +230,9 @@ display:none;
 {
 display:flex;
 }
+
+.showPassword
+{
+	width: 65px;
+	margin: 6px;
+}
