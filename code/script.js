@@ -1,3 +1,4 @@
+
 // Array of sentences and words to be displayed to user to be written during the typing test
 var word_bank = ["farm", "cheese", "apple", "character", "planet", "godfrey", "orange", "story", "animated", "user", "empty", "still", "grapes", "fill", 
 "worry", "sad", "pensive", "because", "intuition", "pattern", "recognition","oval", "square", "paper", "developer", "controls", "button", "listener", "string", "data", "explained",
@@ -363,38 +364,51 @@ function backButton(backLocation) {
 }
 
  // Ensures user information is correct when attempting to log in
-function validateLogIn() {  
+async function validateLogIn(e) {  
+  e.preventDefault();
 	const inputted_username = document.getElementById('usernameLogIn').value;
-	const inputted_password = document.getElementById('passwordLogIn').value;	
-  for (var i = 0; i < json_data.users.length; i++)
+	const inputted_password = await hashedPassword(document.getElementById('passwordLogIn').value);	
+  const getLocalStorageJson = JSON.parse(localStorage.getItem("users"));
+  try 
   {
-    if (json_data.users[i].username == inputted_username && hashedPassword(json_data.users[i].password) == hashedPassword(inputted_password)) 
-    // change to hashed password and get from local storage instead of json-> but then whats the point of json as i only need to get the 
-  // information from the json file once, and its stored forever on local storage until the user clears it
-  // also i need to check if user has cleared cache if possible????????????????
+    for (var i = 0; i < getLocalStorageJson.users.length; i++)
+    {
+    if (getLocalStorageJson.users[i].username == inputted_username && getLocalStorageJson.users[i].password == inputted_password) 
+    // no longer working, need to fix this
     {
       authenication = true;
       break;
     }
-  }
-  if (authenication)
+    }
+    if (authenication)
+    {
+      displayHTMLafterLogIn(inputted_username,'outsideContainerforLogIn');
+
+      authenication = false;
+    }
+    else
+    {
+      e.preventDefault();
+      alert("Incorrect username or password"); // keep idea but make it look better
+    }
+ }
+ catch (error)
   {
-    displayHTMLafterLogIn(inputted_username,'outsideContainerforLogIn','logInSquare'); // should i set authenication to false here?
-  }
-  else
-  {
-    alert("Incorrect username or password"); // keep idea but make it look better
+    console.error('Error during SignUp, please try again.', error);
   }
 }
 
 // Checks whether username already exists, if not, adds user to the json file
-function validateSignUp() {  
+function validateSignUp(e) {  
+  e.preventDefault();
   var inputted_username = document.getElementById('usernameSignUp').value;
   var inputted_password = document.getElementById('passwordSignUp').value;
+  const getLocalStorageJson = JSON.parse(localStorage.getItem("users"));
   let user_exists = false;
-  for (var i = 0; i <  json_data.users.length; i++) // change this and similar things to getlocalstoragejson.length????????
+  try {
+  for (var i = 0; i <  getLocalStorageJson.users.length; i++) // change this and similar things to getlocalstoragejson.length????????
   {
-    if (json_data.users[i].username == inputted_username)
+    if (getLocalStorageJson.users[i].username == inputted_username)
     {
       user_exists = true;
       break;
@@ -407,62 +421,113 @@ function validateSignUp() {
   }
   else
   {
-    var inputted_password = hashPassword(inputted_password)
+    var inputted_password = hashedPassword(inputted_password)
     const new_user = 
     {
       "username": inputted_username,
       "password": inputted_password
     }
-    //json_data.users.push(new_user); 
-    local_storage_data.push(new_user);
-    setLocalStorageJSON(temp);
-    displayHTMLafterLogIn(inputted_username,'outsideContainerforSignUp','signUpSquare');
+    setLocalStorageJSON(new_user);
+    displayHTMLafterLogIn(inputted_username,'outsideContainerforSignUp');
   }
+}
+catch (error) {
+  console.error('Error during SignUp, please try again.', error);
+}
 }
 
 // Hashes the password using SHA-256, ensuring a degree of security
 async function hashedPassword(password) {
-    password  = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(password));
-    password  = Array.from(new Uint8Array(password)).map(b => b.toString(16).padStart(2, '0')).join('');
-    return password;
+  password  = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(password));
+  password  = Array.from(new Uint8Array(password)).map(b => b.toString(16).padStart(2, '0')).join('');
+  return password;
 }
 
 function setLocalStorageJSON(input) {
   var array = []
   array.push(JSON.parse(localStorage.getItem("users")));
   array.push(input);
-  localStorage.setItem("users", JSON.stringify(input));
+  localStorage.setItem("users", JSON.stringify(array));
 }
 
 // Displays the username on the website after the user has logged in and goes back to typing test.
-function displayHTMLafterLogIn(inputted_username,container,square) { 
+function displayHTMLafterLogIn(inputted_username,container) { 
   const display_username = document.querySelector("#signedIn p");
   const span_word = document.createElement("span"); 
   span_word.textContent = inputted_username; 
   display_username.appendChild(span_word); 
   document.getElementById('outsideContainer').classList.remove('hidden'); 
   document.getElementById('outsideContainer').classList.add('show');
-  document.getElementById(container).classList.remove('show');
+  document.getElementById(container).classList.remove('show'); 
   document.getElementById(container).classList.add('hidden');
-  document.getElementById(square).classList.add('hidden');
+  document.getElementById("logInAndSignUpButtons").classList.remove('show');  
+  document.getElementById("logInAndSignUpButtons").classList.add('hidden');  
   document.getElementById('signedIn').classList.remove('hidden');
   document.getElementById('signedIn').classList.add('show');
 }
 
 // Reads the json file and stores it in the json_data array
 async function getUserInformation() {  
+ let storedData = localStorage.getItem('users');
+ if (storedData) 
+ { 
+  try 
+  {
+    json_data = JSON.parse(storedData);
+  } catch (error)
+  {
+   fetch('./data.json')
+   .then(response => response.json())
+  .then(data => 
+  {
+    json_data = data;
+    localStorage.setItem('users', JSON.stringify(json_data));
+  })
+  .catch(error => console.error('Error, json file not found', error));
+ }
+}
+ else 
+ {
   fetch('./data.json')
-    .then(response => response.json())
-    .then(data => {
-      json_data = data;
-    })
-    .catch(error => console.error('Error, json file not found', error));
+  .then(response => response.json())
+  .then(data => {
+    json_data = data;
+    localStorage.setItem('users', JSON.stringify(json_data));
+  })
+  .catch(error => console.error('Error, json file not found', error));
+ }
+}
+
+function showPasswordSignUp() {
+  let password = document.getElementById("passwordSignUp");
+  if (password.type === "password") 
+  {
+    password.type = "text";
+  }
+  else
+  {
+    password.type = "password";
+  }
+}
+
+ // show password works but it refreshes the page, need to fix this
+function showPasswordLogIn() {
+  let password = document.getElementById("passwordLogIn");
+  if (password.type === "password") 
+  {
+    password.type = "text";
+  }
+  else
+  {
+    password.type = "password";
+  }
 }
 
 // Main function, calls all the other functions
 async function init() {
 await getUserInformation();
 beginTypingTest();
+console.log(json_data);
 }
 
 init();

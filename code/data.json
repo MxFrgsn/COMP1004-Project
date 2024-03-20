@@ -3,11 +3,11 @@
   [
     {
       "username": "admin",
-      "password": "securepassword"
+      "password": "4abb806d8a2496f726198403e6e175ffbfce51054638da442cd2bd45efe0baf9"
     },
 	{
 		  "username": "user1",
-		  "password": "notsecurepassword"
+		  "password": "0b14d501a594442a01c6859541bcb3e8164d183d32937b851835442f69d5c94e"
 	}
   ]
 }

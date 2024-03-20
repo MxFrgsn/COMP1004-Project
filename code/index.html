@@ -19,7 +19,7 @@
 <body>	
 	<div id="outsideContainer" class = "show">
 		<h1>Typing Test</h1>
-		<div id = "logInAndSignUpButtons">
+		<div id = "logInAndSignUpButtons" class = "show">
 			<div id="logInSquare">
 				<nav>
 					<button onclick = "loadLoginForm(); ">Log in</button>
@@ -30,12 +30,12 @@
 					<button onclick = "loadSignupForm()">Sign up</a></button> 
 				</nav>
 			</div>
-			<div id = signedIn class = "hidden">
-				<p></p>
-			<nav>
-				<button><a href="#" id="logOut">Log out</a></button>
-			</nav>
-			</div>
+		</div>
+		<div id = signedIn class = "hidden">
+			<p></p>
+		<nav>
+			<button onclick = "logOut()">Log out</a></button>
+		</nav>
 		</div>
 		<div id = "squareOptions"> 
 			<form id = "timerOptions" >
@@ -82,10 +82,11 @@
         <form id="loginForm">
             <input type="text" id="usernameLogIn" placeholder="Username" required>
 			<br> <br>
-            <input type="password" id="passwordLogIn"  placeholder="Password" required>
+            <input type="password" id="passwordLogIn" placeholder="Password" required>
+			<button  type = "button" onclick = "showPasswordLogIn()">Show Password</button> 
 			<br> <br>
 			<nav>
-            	<button onclick ="validateLogIn()"> Log In</a></button>
+            	<button onclick ="validateLogIn(event)"> Log In</a></button>
 			</nav>
         </form>
 	</div>
@@ -96,12 +97,13 @@
 			<button class = "back" onclick="backButton('outsideContainerforSignUp')">Back</button>
 		</nav>
         <form id="signupForm">
-            <input type="text" id="usernameSignUp" placeholder="Username" required>
+            <input type="text" id="usernameSignUp" placeholder="Username">
 			<br> <br>
             <input type="password" id="passwordSignUp" placeholder="Password" required>
+			<button type = "button" onclick = "showPasswordSignUp()">Show Password</button> 
 			<br> <br>
 			<nav>
-            	<button onclick = "validateSignUp()">Sign Up</button> 
+            	<button onclick = "validateSignUp(event)">Sign Up</button> 
 			</nav>
         </form>
 	</div>
