@@ -10,13 +10,15 @@ __Features:__
     Typing Test: 
     Users can take a timed typing test and have a result returned.
     The average difficulty is higher due to the complexity of the words in the tests. 
-    This is important to be effective practise, helping with spelling and musucle memory with less familiar words.
+    This is important to be effective practise, helping with spelling and musucle memory 
+    with less familiar words.
 
     Timer:
     Users can decide the length of their typing test in segements of 30s, up to 120s. 
 
     Difficulty Options:
-    Users can customize the typing test by selecting difficulty options such as punctuation, capitalization, and paragraphs. 
+    Users can customize the typing test by selecting difficulty options such as punctuation, 
+    capitalization, and paragraphs. 
     Important to note paragraphs contain capitalization and puncutation, 
     however they are in a more natural placement, making paragraphs a non-exclusive option to the other two. 
     
