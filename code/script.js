@@ -27,11 +27,12 @@ var word_bank = ["farm", "cheese", "apple", "character", "planet", "godfrey", "o
  "jump", "eat", "drink","dream", "hope", "fear", "today", "tomorrow", "yesterday", "afternoon", "evening", "spring", "summer", "autumn", "winter", "one", "two", "three", "four", "five", "six", "seven", "eight", 
  "nine", "ten"]
 
-var paragraph_bank = ["When we hear outlaw we think of criminals. But outlaws aren't just any kind of criminal, they are considered type of criminal, they are considererd outside of the protection of the law. This means that they can be persecuted by anyone A man, who was falsely imprisoned for 10 years, spent most of his time studying law to prove his innocence. After he succeeded, he became a lawyer to help free those who were also falsely convicted.",
+var paragraph_bank = ["When we hear outlaw we think of criminals. But outlaws aren't just any kind of criminal, they are considered type of criminal, they are considererd outside of the protection of the law. This means that they can be persecuted by anyone.",
+"A man, who was falsely imprisoned for 10 years, spent most of his time studying law to prove his innocence. After he succeeded, he became a lawyer to help free those who were also falsely convicted.",
 "It might come as no surprise that guitars are the most popular music instrument, followed closely by pianos. However, neither of them are the best-selling instrument. That title goes to the harmonica." ,
 "You can divide a pie into 8 equal pieces using just 3 cuts! First, make a horizontal cut in the middle, then a vertical cut, and then you stack 4 slices and make a cut a in the middle of that.",
 "In 1998, Sony had the chance to buy the rights to most of the Marvel characters. However, they only bought the rights for Spiderman, stating that no one cares about the other characters." ,
-"Almost all 195 countries in the world have a real-life animal as their national animal, but 6 of them have mythical animals. Scotland, for example,appointed the unicorn as their national animal.",
+"Almost all 195 countries in the world have a real-life animal as their national animal, but 6 of them have mythical animals. Scotland, for example, appointed the unicorn as their national animal.",
 "There is a single plant species that a wide variety of vegetable comes from. It produces kale, brussels sprouts cauliflower, cabbage and broccoli which are all varieties of the same plants. ",
 "A parrot named Willie once saved a toddler's life. When this owner was in another room, the toddler, who was being babysat, began to choke. Willie quickly alerted his owner by screaming, 'mama, baby'.",
 "Despite media portrayal after Steve Irwin died from one, stringray attacks are almost never fatal. In fact, it is quite rare. Every year, only one or two stingray attacks are reported worldwide.",
@@ -118,29 +119,44 @@ function checkEndOfLine() {
 	
   if (next_Span.offsetTop > first_Span.offsetTop) 
   {
-    for (var i = 0; i < words_correct; i++)
-	{
-		if(document.getElementById("Paragraphs").checked)
-		{
-			break; // edit this so more paragraphs are added when finished with line. 
-		}	
-		else
-		{
-			word_bank.shift();
-		}	
-  }
-	display_bank_p.innerHTML = "";
-	paragraph_bank[0]=paragraph_bank[0].slice(chars_correct);
-	console.log(paragraph_bank[0]); // retest this, place this within the if statement?
-  
-	if(document.getElementById("Paragraphs").checked)
-	{
-		displayArray(paragraph_bank);
-	}
-	else
-	{
-		displayArray(word_bank);
-	}
+    if (document.getElementById("Paragraphs").checked) 
+    {
+      if (paragraph_bank[0].length == 0) 
+      {
+        paragraph_bank.shift();
+      }
+      else if (paragraph_bank[0].length > chars_correct)
+      {
+        paragraph_bank[0] = paragraph_bank[0].slice(chars_correct);
+      }
+      else if (paragraph_bank[0].length == chars_correct)
+      {
+        paragraph_bank.shift();
+      }
+      else if (paragraph_bank[0].length < chars_correct)
+      {
+        chars_correct = chars_correct - paragraph_bank[0].length-1;
+        paragraph_bank[0] = paragraph_bank[0].slice(chars_correct);
+        paragraph_bank.shift();
+        paragraph_bank[0] = paragraph_bank[0].slice(chars_correct);
+      }
+    }
+    else 
+    {
+      for (var i = 0; i < words_correct; i++)
+      {
+        word_bank.shift();
+      }
+    }
+    display_bank_p.innerHTML = "";
+    if (document.getElementById("Paragraphs").checked) 
+    {
+      displayArray(paragraph_bank);
+    }
+    else 
+    {
+      displayArray(word_bank);
+    }
     words_correct = 0;
     chars_correct = 0;
   }
@@ -188,7 +204,7 @@ function styleWordBank(input_value) {
 }
 
 function timer() {
-  //Checks the amount of time that has passed
+  // Checks the amount of time that has passed
   let current_Time = new Date();
   time_passed = current_Time - start_time;
   if (time_passed >= time) 
@@ -216,7 +232,7 @@ function updateTimerUI() {
 }
 
 function calculateWPM() {
-  //Calculates WPM, which is to be displayed to the user and alerts the user that the test is finished
+  // Calculates WPM, which is to be displayed to the user and alerts the user that the test is finished
   WPM = written_characters / 5 / (time / 60000);
   updateWpmUI();
   alert("Test finished"); //keep idea but change this
@@ -523,8 +539,6 @@ function showPassword(containerID) {
 function logOut() {
   current_user = {};
   authenication = false;
-  //delete span with username and display login/sign up buttons
-  //style this button a bit!
   const display_username = document.querySelector("#signedIn p");
   display_username.lastChild.remove();
   document.getElementById("logInAndSignUpButtons").classList.remove('hidden'); 
@@ -537,7 +551,9 @@ function logOut() {
 async function init() {
 await getUserInformation();
 beginTypingTest();
-console.log(user_data);
+//console.log(user_data);
 }
 
 init();
+
+// next is stats + ensuring options cant be changed mid test + making it look better
