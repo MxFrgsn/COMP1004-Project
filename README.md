@@ -20,7 +20,7 @@ __Features:__
     Users can customize the typing test by selecting difficulty options such as punctuation, 
     capitalization, and paragraphs. 
     Important to note paragraphs contain capitalization and puncutation, 
-    however they are in a more natural placement, making paragraphs a non-exclusive option to the other two. 
+    however they are in a more natural placement, making paragraphs an exclusive option to the other two.
     
     User Authentication:  
     Users can log in or sign up to access the typing test.
@@ -34,6 +34,7 @@ __Features:__
 
     Viewable Performance Metrics:
     Your WPM is stored, shown as a graph/stats screen or to be exported and downloaded as a json file.
+    Other stats such as number of tests taken and number of correct words is also shown. 
 
 __Prerequistes__
 
