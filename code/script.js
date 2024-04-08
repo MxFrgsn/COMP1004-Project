@@ -641,11 +641,7 @@ function calculateStats() {
 function displayStats() {
   // Displays the user's stats on the website // Change this to the username of the user you want
   let user = JSON_data.users.find(user => user.username === current_user.username);
-  let stats;  
-  if (user) 
-  {
-    stats = user.typingStats;
-  }
+  let stats = user.typingStats;  
   // Display the chart on the website
   if (window.myChart) 
   {
@@ -701,6 +697,18 @@ function updateChart(stats) {
   window.myChart.update();
 }
 
+function exportStats() {
+  // Exports the user's stats to a file
+  let user = JSON_data.users.find(user => user.username === current_user.username);
+  let stats = JSON.stringify(user.typingStats);
+  let blob = new Blob([stats], {type: 'application/json'});
+  let url = URL.createObjectURL(blob);
+  let a = document.createElement('a');
+  a.href = url;
+  a.download = 'stats.json';
+  a.click();
+}
+
 async function init() {
   // Main function, calls all the other functions
   await getUserInformation();
@@ -710,6 +718,18 @@ async function init() {
 
 init();
 
-// use blob to export stats to a file
+// should add a funciton to reset stats 
+// should i add a function to delete account
+// should i add a function to change password
+// should i add a function to change username
+// should i add a function to view average WPM list
+// should i add a funciton to view total play time in seconds in the graph to see what days the user played the most
+// should i add a function to view total tests taken in the graph to see how many tests the user took each day
+// should i add a function to view total words typed in the graph to see how many words the user typed each day
+// should i add a function to view total characters typed in the graph to see how many characters the user typed each day
+// should i add a function to view the average WPM in the graph to see how the user's average WPM changed over time
+
+
+
 // remove alerts and replace with better looking alerts with css
 // do report/documentation for the project
