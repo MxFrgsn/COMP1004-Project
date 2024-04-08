@@ -4,7 +4,8 @@
        "username": "admin",
        "password": "4abb806d8a2496f726198403e6e175ffbfce51054638da442cd2bd45efe0baf9",
        "typingStats": {
-         "averageWPM": 50,
+         "averageWPM": 78.2,
+         "WPMList:": [70, 80, 90, 75,79,78,83,65,91,71],
          "totalPlayTimeInSeconds": 1542,
          "totalTestsTaken": 10,
          "totalWordsTyped": 500,
@@ -15,9 +16,10 @@
        "username": "user1",
        "password": "0b14d501a594442a01c6859541bcb3e8164d183d32937b851835442f69d5c94e",
        "typingStats": {
-         "averageWPM": 45,
+         "averageWPM": 22,
+         "WPMList:": [50, 40,20,23,54,34],
          "totalPlayTimeInSeconds":62,
-         "totalTestsTaken": 0,
+         "totalTestsTaken": 6,
          "totalWordsTyped": 400,
          "totalCharactersTyped": 2000
        }

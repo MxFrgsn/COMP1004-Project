@@ -44,6 +44,7 @@ var time = 60000; // 60000 milliseconds = 60 seconds
 let time_passed = 0; 
 var WPM = 0; 
 const display_bank_p = document.querySelector("#displayWordBank p");
+let total_typed_words = 0; // total number of words typed by the user
 let chars_correct = 0; // number of characters correctly typed, used to check if we are at the end of the word
 let words_correct = 0; // number of words correctly typed, used to check if we are at the end of the line
 let authenication = false; // boolean to check if user is logged in
@@ -105,6 +106,7 @@ function validateInputBox() {
     // If the word is correct, update the word bank and reset the input box
       chars_correct += input_value.length;
       words_correct++;
+      total_typed_words++;
       checkEndOfLine(); 
       document.getElementById("inputBox").value = "";
       written_characters += word_bank[words_correct].length+1; // Add one to include spaces
@@ -238,7 +240,11 @@ function calculateWPM() {
   // Calculates WPM, which is to be displayed to the user and alerts the user that the test is finished
   WPM = written_characters / 5 / (time / 60000);
   updateWpmUI();
-  alert("Test finished"); //keep idea but change this
+  alert("Test finished");
+  if (authenication)
+  {
+    calculateStats();
+  } //keep idea but change this
 }
 
 function updateWpmUI() {
@@ -448,9 +454,10 @@ async function validateSignUp(e) {
   var inputted_password = document.getElementById('passwordSignUp').value;
   const getLocalStorageJson = JSON.parse(localStorage.getItem("users"));
   let user_exists = false;
+  const password_regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()\-_=+[{\]};:'",/?]).{8,}$/;
   try 
   {
-    for (var i = 0; i <  getLocalStorageJson.users.length; i++) // change this and similar things to getlocalstoragejson.length????????
+    for (var i = 0; i <  getLocalStorageJson.users.length; i++)
     {
       if (getLocalStorageJson.users[i].username == inputted_username)
       {
@@ -465,16 +472,24 @@ async function validateSignUp(e) {
     }
     else
     {
-      var inputted_password = await hashedPassword(inputted_password)
-      current_user = 
+      let valid_password = password_regex.test(inputted_password);
+      if (valid_password)
       {
-      "username": inputted_username,
-      "password": inputted_password
+        var inputted_password = await hashedPassword(inputted_password)
+        current_user = 
+        {
+        "username": inputted_username,
+        "password": inputted_password
+        }
+        
+        setLocalStorageJSON(current_user);
+        displayHTMLafterLogIn(inputted_username,'outsideContainerForSignUp');
+        user_stats = getLocalStorageJson.users.find(user => user.password === inputted_password);
       }
-      
-      setLocalStorageJSON(current_user);
-      displayHTMLafterLogIn(inputted_username,'outsideContainerForSignUp');
-      user_stats = getLocalStorageJson.users.find(user => user.password === inputted_password); // change this to idk what 
+      else
+      {
+        alert("Password must contain at least 8 characters, one uppercase letter, one lowercase letter, one number and one special character"); // change this to none alert
+      } 
     }
   }
   catch (error)
@@ -494,7 +509,7 @@ async function hashedPassword(password) {
 function setLocalStorageJSON(input) {
   JSON_data = JSON.parse(localStorage.getItem("users"));
   JSON_data.users.push(input);
-  localStorage.setItem("users", JSON.stringify(array));
+  localStorage.setItem("users", JSON.stringify(JSON_data));
 }
 
 function getLocalStorageJSON() 
@@ -577,30 +592,44 @@ function logOut() {
   document.getElementById('signedIn').classList.add('hidden');
 }
 
-function storeStats() {
-  // Stores the user's stats in the json file 
-  //need a way to calculate the stats and know what stats are being updated.
-  let new_stats = {
-  averageWPM: 60,
-  totalPlayTimeInSeconds: 1800,
-  totalTestsTaken: 15,
-  longestWordTyped: "programming",
-  shortestWordTyped: "a",
-  totalWordsTyped: 600,
-  totalCharactersTyped: 3000
-  };
+//Stores the user's stats in the json file //not working
+function storeStats(new_stats) {
+  let current_user_data = JSON_data.users.find(user => user.username === current_user.username);
+ if (current_user_data) {
+    if (current_user_data.typingStats.WPMList) {
+      current_user_data.typingStats.WPMList.push(new_stats.WPMList[0]); 
+    }
+    current_user_data.typingStats.totalPlayTimeInSeconds += new_stats.totalPlayTimeInSeconds;
+    current_user_data.typingStats.totalTestsTaken += new_stats.totalTestsTaken;
+    current_user_data.typingStats.totalWordsTyped += new_stats.totalWordsTyped;
+    current_user_data.typingStats.totalCharactersTyped += new_stats.totalCharactersTyped;
+ }
+let averageWPM=0;
+ for (let i = 0; i < current_user_data.typingStats.WPMList.length; i++)
+ {
+  averageWPM += current_user_data.typingStats.WPMList[i];
+ }
+ current_user_data.typingStats.averageWPM=averageWPM/current_user_data.typingStats.WPMList.length;
+ // Store the updated JSON_data back into localStorage 
+ localStorage.setItem('users', JSON.stringify(JSON_data));
 
-  JSON_data.users.forEach(user => {
-  if (user.username === current_user.username) {
-    user.typingStats = new_stats;
-  }
-  });
-  localStorage.setItem('users', JSON.stringify(JSON_data));
 }
 
+//Calculates the user's stats //incomplete
+function calculateStats() {
+  let new_stats = {
+  averageWPM: 0,
+  WPMList:[WPM],
+  totalPlayTimeInSeconds: time_passed / 1000,
+  totalTestsTaken: 1,
+  totalWordsTyped: total_typed_words,
+  totalCharactersTyped: written_characters
+  };
+  storeStats(new_stats);
+}
+
+// Displays the user's stats on the website // Change this to the username of the user you want
 function displayStats() {
-  // Displays the user's stats on the website// Change this to the username of the user you want
-  console.log(current_user)
   let user = JSON_data.users.find(user => user.username === current_user.username);
   let stats;  
   if (user) 
@@ -612,7 +641,7 @@ function displayStats() {
   {
     const span_word = document.createElement("span"); 
     span_word.style.whiteSpace = 'pre-line';
-    span_word.textContent = `${stats.averageWPM} WPM \n  ${stats.totalWordsTyped} words typed \n ${stats.totalCharactersTyped} characters typed \n ${stats.totalTestsTaken} tests taken \n${stats.longestWord} took the longest to type \n ${stats.shortestWord} took the shortest to type`; 
+    span_word.textContent = `${stats.averageWPM} WPM \n  ${stats.totalWordsTyped} words typed \n ${stats.totalCharactersTyped} characters typed \n ${stats.totalTestsTaken} tests taken \n ${stats.totalPlayTimeInSeconds} seconds played`; 
     display_stats.appendChild(span_word);
   }  
 }
@@ -629,13 +658,3 @@ init();
 
 // next is stats + making it look better
 // do second DOM of html 
-
-// add stats to json file
-// average wpm accross all typing tests,
-// how long logged in for 
-// how many tests taken
-// which word took the longest to type
-// which word took the shortest to type
-// how many words typed in total
-// how many characters typed in total
-// need to figure out how to access typing stats and store things in typing stats, i thought i found the way using. find using phind.
