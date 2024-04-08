@@ -13,6 +13,7 @@
 	give data to view progress."/>	
 	<link rel="stylesheet" href="style.css"/>
 	<script src="script.js" defer></script>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 	<link rel="icon" href="favicon.ico" type="image/x-icon">
 </head>
 
@@ -88,7 +89,7 @@
             <input type="password" id="passwordLogIn" placeholder="Password" required>
 			<button class ="showPassword" type = "button" onclick = "showPassword('passwordLogIn')">Show Password</button> 
 			<br> <br>
-			<nav>
+			<nav>	
             	<button onclick ="validateLogIn(event)"> Log In</a></button>
 			</nav>
         </form>
@@ -112,12 +113,13 @@
 	</div>
 	<div id = "outsideContainerForStats" class = "hidden">
 		<h1>Typing Test</h1>
-		<h2>Stats</h2>
 		<nav>
 			<button class = "back" onclick="backButton('outsideContainerForStats')">Back</button>
 		</nav>
+		<h2>Stats</h2>
 		<div id = "stats">
 			<p></p>	 
+			<canvas id="chart"></canvas>
 		</div>
 	</div>
 </body>

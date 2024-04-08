@@ -51,6 +51,7 @@ let authenication = false; // boolean to check if user is logged in
 let JSON_data = []; // array to store json data
 let current_user = {};// string to store current user
 let user_stats = {}; // object to store user stats
+let chart = []; // chart to display user stats
 
 
 function displayArray(array) {
@@ -86,6 +87,7 @@ function displayArray(array) {
   }
 }
 
+
 function validateInputBox() {
   //Checks if input box has been written in, if so, starts time and checks if inputted value is correct
   var input_value = document.getElementById("inputBox").value;
@@ -103,7 +105,7 @@ function validateInputBox() {
     const word = input_value.split(" ")[0];
     if (word == display_bank_p.textContent.split(" ")[words_correct]) 
   	{
-    // If the word is correct, update the word bank and reset the input box
+      // If the word is correct, update the word bank and reset the input box
       chars_correct += input_value.length;
       words_correct++;
       total_typed_words++;
@@ -114,8 +116,8 @@ function validateInputBox() {
   }
 }
 
-//Checks whether we are at the end of the first line, if so, removes the line and redisplays words, moving the words up
 function checkEndOfLine() {
+  //Checks whether we are at the end of the first line, if so, removes the line and redisplays words, moving the words up
   /** @type {HTMLSpanElement} */
   const first_Span = document.querySelector(`#displayWordBank p span:nth-child(1)`);
 	
@@ -166,6 +168,7 @@ function checkEndOfLine() {
     chars_correct = 0;
   }
 }
+
 
 function randomiseArray(array) {
   // Durstenfeld shuffle, psuedo-randomises the word_bank
@@ -237,14 +240,14 @@ function updateTimerUI() {
 }
 
 function calculateWPM() {
-  // Calculates WPM, which is to be displayed to the user and alerts the user that the test is finished
-  WPM = written_characters / 5 / (time / 60000);
+// Calculates WPM, which is to be displayed to the user and alerts the user that the test is finished
+  WPM = written_characters / 5 / (time / 60000).toFixed(2);
   updateWpmUI();
   alert("Test finished");
   if (authenication)
   {
     calculateStats();
-  } //keep idea but change this
+  } 
 }
 
 function updateWpmUI() {
@@ -286,99 +289,102 @@ function beginTypingTest() {
 document.getElementById('Punctuation').addEventListener('change', (event) => {
   const possible_punctuation = "-,.;:'";
   if (!timer_started)
+  // Removes punctuation from words if the option is unchecked, adds punctuation to words if the option is checked
   {
-	if (!event.currentTarget.checked) 
-	{
-		for (var i = 0;i < word_bank.length;i++)
-		{
-			var word = word_bank[i];
-			var removed_punct_word = "";
-			for (var j = 0; j < word.length; j++)
-			{
-				if (possible_punctuation.indexOf(word[j])===-1)
-				{
-					removed_punct_word+=word[j];
-				}
-			}	
-			word_bank[i] = removed_punct_word;
-		}	
-	}
-	else
-	{
-		document.getElementById('Paragraphs').checked = false;
-		for (var i = 0;i < word_bank.length;i++)
-		{
-			if (Math.random()<0.5)
-			{
-				word_bank[i]=word_bank[i]+(possible_punctuation[Math.floor(Math.random() * possible_punctuation.length)]);
-			}
-		}
-	}
-	display_bank_p.innerHTML="";
-	displayArray(word_bank);
+    if (!event.currentTarget.checked) 
+    {
+      for (var i = 0;i < word_bank.length;i++)
+      {
+        var word = word_bank[i];
+        var removed_punct_word = "";
+        for (var j = 0; j < word.length; j++)
+        {
+          if (possible_punctuation.indexOf(word[j])===-1)
+          {
+            removed_punct_word+=word[j];
+          }
+        }	
+        word_bank[i] = removed_punct_word;
+      }	
+    }
+    else
+    {
+      document.getElementById('Paragraphs').checked = false;
+      for (var i = 0;i < word_bank.length;i++)
+      {
+        if (Math.random()<0.5)
+        {
+          word_bank[i]=word_bank[i]+(possible_punctuation[Math.floor(Math.random() * possible_punctuation.length)]);
+        }
+      }
+    }
+    display_bank_p.innerHTML="";
+    displayArray(word_bank);
 }
 });
 
 //Event listener for Capitalization difficulty option
 document.getElementById('Capitalization').addEventListener('change', (event) => {
   if (!timer_started)
+  // Changes the capitalization of the words in the word bank
   {
-	if (!event.currentTarget.checked) 
-	{
-		for (var i = 0; i < word_bank.length; i++)
-		{
-			if (word_bank[i].length > 1) 
-			{
-				word_bank[i] =word_bank[i].charAt(0).toLowerCase() + word_bank[i].slice(1);
-			}
-			else 
-			{
-				word_bank[i] = word_bank[i].charAt(0).toLowerCase();
-			}
-		}
-	}
-	else
-	{
-		document.getElementById('Paragraphs').checked = false;
-		for (var i = 0; i < word_bank.length; i++)
-		{
-			if (word_bank[i].length > 1) 
-			{
-				word_bank[i] =word_bank[i].charAt(0).toUpperCase() + word_bank[i].slice(1);
-			}
-			else 
-			{
-				word_bank[i] = word_bank[i].charAt(0).toUpperCase();
-			}
-		}
-	}	
-	display_bank_p.innerHTML="";
-	displayArray(word_bank);
+    if (!event.currentTarget.checked) 
+    {
+      for (var i = 0; i < word_bank.length; i++)
+      {
+        if (word_bank[i].length > 1) 
+        {
+          word_bank[i] =word_bank[i].charAt(0).toLowerCase() + word_bank[i].slice(1);
+        }
+        else 
+        {
+          word_bank[i] = word_bank[i].charAt(0).toLowerCase();
+        }
+      }
+    }
+    else
+    {
+      document.getElementById('Paragraphs').checked = false;
+      for (var i = 0; i < word_bank.length; i++)
+      {
+        if (word_bank[i].length > 1) 
+        {
+          word_bank[i] =word_bank[i].charAt(0).toUpperCase() + word_bank[i].slice(1);
+        }
+        else 
+        {
+          word_bank[i] = word_bank[i].charAt(0).toUpperCase();
+        }
+      }
+    }	
+    display_bank_p.innerHTML="";
+    displayArray(word_bank);
 }
 });
 
 // Event listener for Paragraphs difficulty option
 document.getElementById('Paragraphs').addEventListener('change', (event) => {
+  // Checks if timer has started, ensuring that the difficulty options are not changed during the test
   if (!timer_started)
   {
-	if (!event.currentTarget.checked) 
-	{
-		display_bank_p.innerHTML="";
-		displayArray(word_bank);
-	}	
-	else
-	{
-    //Ensures that the other difficulty options are unchecked, as they are not compatible with the paragraph difficulty option
-		document.getElementById('Capitalization').checked = false;
-		document.getElementById('Punctuation').checked = false;
-		display_bank_p.innerHTML="";
-		displayArray(paragraph_bank);
-	}
+    if (!event.currentTarget.checked) 
+    {
+      display_bank_p.innerHTML="";
+      displayArray(word_bank);
+    }	
+    else
+    {
+      // Ensures that the other difficulty options are unchecked, as they are not compatible with the paragraph difficulty option
+      document.getElementById('Capitalization').checked = false;
+      document.getElementById('Punctuation').checked = false;
+      display_bank_p.innerHTML="";
+      displayArray(paragraph_bank);
+    }
 }
 });
 
-// Changes class of the outside container to show the login form
 function loadLoginForm() { 
+  // Changes class of the outside container to show the login form
   document.getElementById("usernameLogIn").value = "";
   document.getElementById("passwordLogIn").value = "";
 	document.getElementById('outsideContainer').classList.remove('show');
@@ -386,8 +392,8 @@ function loadLoginForm() {
 	document.getElementById('outsideContainerForLogIn').classList.remove('hidden');
 }
 
- // Changes class of the outside container to show the signup form
 function loadSignupForm() {
+  // Changes class of the outside container to show the signup form
   document.getElementById("passwordSignUp").value = "";
   document.getElementById("usernameSignUp").value = "";
   document.getElementById('outsideContainer').classList.remove('show');
@@ -396,21 +402,22 @@ function loadSignupForm() {
 }
 
 function loadStats() {
+  // Changes class of the outside container to show the stats
   document.getElementById('outsideContainer').classList.remove('show');
   document.getElementById('outsideContainer').classList.add('hidden');
   document.getElementById('outsideContainerForStats').classList.remove('hidden');
   displayStats();
 }
 
-// Changes class of the outside container to show the typing test
 function backButton(backLocation) {
+  // Changes class of the outside container to show the typing test
   document.getElementById('outsideContainer').classList.remove('hidden');
   document.getElementById('outsideContainer').classList.add('show');
   document.getElementById(backLocation).classList.add('hidden');
 }
 
-// Ensures user information is correct when attempting to log in
 async function validateLogIn(e) {  
+  // Ensures user information is correct when attempting to log in
   e.preventDefault();
 	const inputted_username = document.getElementById('usernameLogIn').value;
 	const inputted_password = await hashedPassword(document.getElementById('passwordLogIn').value);	
@@ -447,13 +454,15 @@ async function validateLogIn(e) {
   }
 }
 
-// Checks whether username already exists, if not, adds user to the json file
 async function validateSignUp(e) {  
+  // Checks whether username already exists, if not, adds user to the json file
   e.preventDefault();
   var inputted_username = document.getElementById('usernameSignUp').value;
   var inputted_password = document.getElementById('passwordSignUp').value;
   const getLocalStorageJson = JSON.parse(localStorage.getItem("users"));
   let user_exists = false;
+  // Password must contain at least 8 characters, one uppercase letter, one lowercase letter, one number and one special character
+  // Uses regular expressions to check if password is valid
   const password_regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()\-_=+[{\]};:'",/?]).{8,}$/;
   try 
   {
@@ -498,15 +507,15 @@ async function validateSignUp(e) {
   }
 }
 
-// Hashes the password using SHA-256, ensuring a degree of security
 async function hashedPassword(password) {
+  // Hashes the password using SHA-256, ensuring a degree of security
   password  = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(password));
   password  = Array.from(new Uint8Array(password)).map(b => b.toString(16).padStart(2, '0')).join('');
   return password;
 }
 
-// Adds the user to the local storage
 function setLocalStorageJSON(input) {
+  // Adds the user to the local storage
   JSON_data = JSON.parse(localStorage.getItem("users"));
   JSON_data.users.push(input);
   localStorage.setItem("users", JSON.stringify(JSON_data));
@@ -517,8 +526,8 @@ function getLocalStorageJSON()
   JSON_data = JSON.parse(localStorage.getItem("users"));
 }
 
-// Displays the username on the website after the user has logged in and goes back to typing test.
 function displayHTMLafterLogIn(inputted_username,container) { 
+  // Displays the username on the website after the user has logged in and goes back to typing test.
   const display_username = document.querySelector("#signedIn p");
   const span_word = document.createElement("span"); 
   span_word.textContent = inputted_username; 
@@ -533,15 +542,16 @@ function displayHTMLafterLogIn(inputted_username,container) {
   document.getElementById('signedIn').classList.add('show');
 }
 
-// Reads the json file and stores it in the JSON_data array
 async function getUserInformation() {  
+  // Reads the json file and stores it in the JSON_data array
  let stored_data = localStorage.getItem('users'); // Checks if the json file is already stored in local storage
  if (stored_data) 
  { 
   try 
   {
-    data = JSON.parse(stored_data); // This is causing an unexpected error within vscode live preview but works within the browser environment
-    //Thus try and catch is used to catch the error and fetch the json file if it is not found
+    data = JSON.parse(stored_data); 
+    // This is causing an unexpected error within vscode live preview but works within the browser environment
+    // Thus try and catch is used to catch the error and fetch the json file if it is not found
   } 
   catch (error)
   {
@@ -567,8 +577,8 @@ async function getUserInformation() {
  }
 }
 
-// Shows the password when the user is typing it in
 function showPassword(containerID) {
+  // Shows the password when the user is typing it in
   let container = document.getElementById(containerID);
   if (container.type === "password") 
   {
@@ -580,8 +590,8 @@ function showPassword(containerID) {
   }
 }
 
-// Logs out the user, removing the username from the website and displaying the login/sign up buttons
 function logOut() {
+  // Logs out the user, removing the username from the website and displaying the login/sign up buttons
   current_user = {};
   authenication = false;
   const display_username = document.querySelector("#signedIn p");
@@ -592,8 +602,8 @@ function logOut() {
   document.getElementById('signedIn').classList.add('hidden');
 }
 
-//Stores the user's stats in the json file //not working
 function storeStats(new_stats) {
+  // Stores the user's stats in the json file
   let current_user_data = JSON_data.users.find(user => user.username === current_user.username);
  if (current_user_data) {
     if (current_user_data.typingStats.WPMList) {
@@ -615,8 +625,8 @@ let averageWPM=0;
 
 }
 
-//Calculates the user's stats //incomplete
 function calculateStats() {
+  // Calculates the user's stats //incomplete
   let new_stats = {
   averageWPM: 0,
   WPMList:[WPM],
@@ -628,14 +638,24 @@ function calculateStats() {
   storeStats(new_stats);
 }
 
-// Displays the user's stats on the website // Change this to the username of the user you want
 function displayStats() {
+  // Displays the user's stats on the website // Change this to the username of the user you want
   let user = JSON_data.users.find(user => user.username === current_user.username);
   let stats;  
   if (user) 
   {
     stats = user.typingStats;
   }
+  // Display the chart on the website
+  if (window.myChart) 
+  {
+   updateChart(stats);
+  }
+  else
+  {
+    displayChart(stats);
+  }
+  // Display the stats on the website
   let display_stats = document.querySelector("#stats p");
   if (stats != undefined) 
   {
@@ -646,15 +666,50 @@ function displayStats() {
   }  
 }
 
-// Main function, calls all the other functions
+function displayChart(stats) {
+  // Displays the user's WPM over time on a chart using Chart.js
+  let ctx = document.getElementById('chart').getContext('2d');
+  let data_points = stats.WPMList;
+  let labels = data_points.map((_, index) => `Session ${index + 1}`); 
+  chart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: labels,
+      datasets: [{
+        label: 'WPM over time',
+        data: data_points,
+        borderColor: 'rgb(75, 192, 192)',
+        fill: false
+      }]
+      },
+      options: {
+        scales: {
+          y: {
+              beginAtZero: true
+            }
+        }
+      }
+    });
+}
+
+function updateChart(stats) {
+  // Updates chart with the new data
+  let data_points = stats.WPMList;
+  let labels = data_points.map((_, index) => `Session ${index + 1}`);
+  window.myChart.data.labels = labels;
+  window.myChart.data.datasets[0].data = data_points;
+  window.myChart.update();
+}
+
 async function init() {
-await getUserInformation();
-beginTypingTest();
-getLocalStorageJSON();
-console.log(JSON_data);
+  // Main function, calls all the other functions
+  await getUserInformation();
+  beginTypingTest();
+  getLocalStorageJSON();
 }
 
 init();
 
-// next is stats + making it look better
-// do second DOM of html 
+// use blob to export stats to a file
+// remove alerts and replace with better looking alerts with css
+// do report/documentation for the project
