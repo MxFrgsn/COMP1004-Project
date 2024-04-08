@@ -49,7 +49,7 @@ let chars_correct = 0; // number of characters correctly typed, used to check if
 let words_correct = 0; // number of words correctly typed, used to check if we are at the end of the line
 let authenication = false; // boolean to check if user is logged in
 let JSON_data = []; // array to store json data
-let current_user = {};// string to store current user
+let current_user = {};// string to store current user's username and password.
 let user_stats = {}; // object to store user stats
 let chart = []; // chart to display user stats
 
@@ -626,7 +626,7 @@ let averageWPM=0;
 }
 
 function calculateStats() {
-  // Calculates the user's stats //incomplete
+  // Calculates the user's stats 
   let new_stats = {
   averageWPM: 0,
   WPMList:[WPM],
@@ -710,7 +710,7 @@ function exportStats() {
 }
 
 async function init() {
-  // Main function, calls all the other functions
+  // Main function, ensures that the user's information is loaded and the typing test can begin
   await getUserInformation();
   beginTypingTest();
   getLocalStorageJSON();
