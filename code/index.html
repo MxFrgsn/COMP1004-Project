@@ -32,6 +32,9 @@
 			</div>
 		</div>
 		<div id = signedIn class = "hidden">
+			<nav>
+				<button onclick = "loadStats()">Stats</button>
+			</nav>
 			<p></p>
 		<nav>
 			<button onclick = "logOut()">Log out</button>
@@ -106,6 +109,18 @@
             	<button onclick = "validateSignUp(event)">Sign Up</button> 
 			</nav>
         </form>
+	</div>
+	<div id = "outsideContainerForStats" class = "hidden">
+		<h1>Typing Test</h1>
+		<h2>Stats</h2>
+		<nav>
+			<button class = "back" onclick="backButton('outsideContainerForStats')">Back</button>
+		</nav>
+		<div id = "stats">
+			<p>
+
+			</p>	 
+		</div>
 	</div>
 </body>
 

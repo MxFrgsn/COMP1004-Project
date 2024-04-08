@@ -47,8 +47,10 @@ const display_bank_p = document.querySelector("#displayWordBank p");
 let chars_correct = 0; // number of characters correctly typed, used to check if we are at the end of the word
 let words_correct = 0; // number of words correctly typed, used to check if we are at the end of the line
 let authenication = false; // boolean to check if user is logged in
-let user_data = []; // array to store json data
+let JSON_data = []; // array to store json data
 let current_user = {};// string to store current user
+let user_stats = {}; // object to store user stats
+
 
 function displayArray(array) {
   // Displays expected inputs on website
@@ -109,6 +111,7 @@ function validateInputBox() {
     }
   }
 }
+
 //Checks whether we are at the end of the first line, if so, removes the line and redisplays words, moving the words up
 function checkEndOfLine() {
   /** @type {HTMLSpanElement} */
@@ -178,13 +181,13 @@ function styleWordBank(input_value) {
   document.querySelectorAll("#displayWordBank p span").forEach((span, i) => 
   {
     if (i < chars_correct && window.matchMedia("(prefers-color-scheme: dark)").matches) 
-	{
-		span.style.color = "white";
-	}
-	else
-	{
-		span.style.color="black"
-	}
+	  {
+		  span.style.color = "white";
+	  }
+	  else
+	  {
+		  span.style.color="black";
+	  }
   });
   for (var i = 0; i < input_value.length; i++) 
   {
@@ -276,6 +279,8 @@ function beginTypingTest() {
 //Event listener for Punctuation difficulty option
 document.getElementById('Punctuation').addEventListener('change', (event) => {
   const possible_punctuation = "-,.;:'";
+  if (!timer_started)
+  {
 	if (!event.currentTarget.checked) 
 	{
 		for (var i = 0;i < word_bank.length;i++)
@@ -305,10 +310,13 @@ document.getElementById('Punctuation').addEventListener('change', (event) => {
 	}
 	display_bank_p.innerHTML="";
 	displayArray(word_bank);
+}
 });
 
 //Event listener for Capitalization difficulty option
 document.getElementById('Capitalization').addEventListener('change', (event) => {
+  if (!timer_started)
+  {
 	if (!event.currentTarget.checked) 
 	{
 		for (var i = 0; i < word_bank.length; i++)
@@ -340,10 +348,13 @@ document.getElementById('Capitalization').addEventListener('change', (event) => 
 	}	
 	display_bank_p.innerHTML="";
 	displayArray(word_bank);
+}
 });
 
 // Event listener for Paragraphs difficulty option
 document.getElementById('Paragraphs').addEventListener('change', (event) => {
+  if (!timer_started)
+  {
 	if (!event.currentTarget.checked) 
 	{
 		display_bank_p.innerHTML="";
@@ -357,20 +368,32 @@ document.getElementById('Paragraphs').addEventListener('change', (event) => {
 		display_bank_p.innerHTML="";
 		displayArray(paragraph_bank);
 	}
+}
 });
 
 // Changes class of the outside container to show the login form
-function loadLoginForm() { // not styled properly (almost done)
+function loadLoginForm() { 
+  document.getElementById("usernameLogIn").value = "";
+  document.getElementById("passwordLogIn").value = "";
 	document.getElementById('outsideContainer').classList.remove('show');
 	document.getElementById('outsideContainer').classList.add('hidden');
-	document.getElementById('outsideContainerforLogIn').classList.remove('hidden');
+	document.getElementById('outsideContainerForLogIn').classList.remove('hidden');
 }
 
  // Changes class of the outside container to show the signup form
 function loadSignupForm() {
+  document.getElementById("passwordSignUp").value = "";
+  document.getElementById("usernameSignUp").value = "";
   document.getElementById('outsideContainer').classList.remove('show');
   document.getElementById('outsideContainer').classList.add('hidden');
-  document.getElementById('outsideContainerforSignUp').classList.remove('hidden');
+  document.getElementById('outsideContainerForSignUp').classList.remove('hidden');
+}
+
+function loadStats() {
+  document.getElementById('outsideContainer').classList.remove('show');
+  document.getElementById('outsideContainer').classList.add('hidden');
+  document.getElementById('outsideContainerForStats').classList.remove('hidden');
+  displayStats();
 }
 
 // Changes class of the outside container to show the typing test
@@ -403,7 +426,8 @@ async function validateLogIn(e) {
         "username": inputted_username,
         "password": inputted_password
       }
-      displayHTMLafterLogIn(inputted_username,'outsideContainerforLogIn');
+      user_stats = getLocalStorageJson.users[i];
+      displayHTMLafterLogIn(inputted_username,'outsideContainerForLogIn');
     }
     else
     {
@@ -447,8 +471,10 @@ async function validateSignUp(e) {
       "username": inputted_username,
       "password": inputted_password
       }
+      
       setLocalStorageJSON(current_user);
-      displayHTMLafterLogIn(inputted_username,'outsideContainerforSignUp');
+      displayHTMLafterLogIn(inputted_username,'outsideContainerForSignUp');
+      user_stats = getLocalStorageJson.users.find(user => user.password === inputted_password); // change this to idk what 
     }
   }
   catch (error)
@@ -466,10 +492,14 @@ async function hashedPassword(password) {
 
 // Adds the user to the local storage
 function setLocalStorageJSON(input) {
-  var array = []
-  array= JSON.parse(localStorage.getItem("users"));
-  array.users.push(input);
+  JSON_data = JSON.parse(localStorage.getItem("users"));
+  JSON_data.users.push(input);
   localStorage.setItem("users", JSON.stringify(array));
+}
+
+function getLocalStorageJSON() 
+{  
+  JSON_data = JSON.parse(localStorage.getItem("users"));
 }
 
 // Displays the username on the website after the user has logged in and goes back to typing test.
@@ -488,14 +518,14 @@ function displayHTMLafterLogIn(inputted_username,container) {
   document.getElementById('signedIn').classList.add('show');
 }
 
-// Reads the json file and stores it in the user_data array
+// Reads the json file and stores it in the JSON_data array
 async function getUserInformation() {  
  let stored_data = localStorage.getItem('users'); // Checks if the json file is already stored in local storage
  if (stored_data) 
  { 
   try 
   {
-    user_data = JSON.parse(stored_data); // This is causing an unexpected error within vscode live preview but works within the browser environment
+    data = JSON.parse(stored_data); // This is causing an unexpected error within vscode live preview but works within the browser environment
     //Thus try and catch is used to catch the error and fetch the json file if it is not found
   } 
   catch (error)
@@ -504,8 +534,8 @@ async function getUserInformation() {
    .then(response => response.json())
    .then(data => 
    {
-     user_data = data;
-     localStorage.setItem('users', JSON.stringify(user_data));
+     JSON_data = data;
+     localStorage.setItem('users', JSON.stringify(JSON_data));
    })
    .catch(error => console.error('Error, json file not found', error));
   }
@@ -515,8 +545,8 @@ async function getUserInformation() {
    fetch('./data.json')
    .then(response => response.json())
    .then(data => {
-    user_data = data;
-    localStorage.setItem('users', JSON.stringify(user_data));
+    JSON_data = data;
+    localStorage.setItem('users', JSON.stringify(JSON_data));
   })
    .catch(error => console.error('Error, json file not found', error));
  }
@@ -547,14 +577,65 @@ function logOut() {
   document.getElementById('signedIn').classList.add('hidden');
 }
 
+function storeStats() {
+  // Stores the user's stats in the json file 
+  //need a way to calculate the stats and know what stats are being updated.
+  let new_stats = {
+  averageWPM: 60,
+  totalPlayTimeInSeconds: 1800,
+  totalTestsTaken: 15,
+  longestWordTyped: "programming",
+  shortestWordTyped: "a",
+  totalWordsTyped: 600,
+  totalCharactersTyped: 3000
+  };
+
+  JSON_data.users.forEach(user => {
+  if (user.username === current_user.username) {
+    user.typingStats = new_stats;
+  }
+  });
+  localStorage.setItem('users', JSON.stringify(JSON_data));
+}
+
+function displayStats() {
+  // Displays the user's stats on the website// Change this to the username of the user you want
+  console.log(current_user)
+  let user = JSON_data.users.find(user => user.username === current_user.username);
+  let stats;  
+  if (user) 
+  {
+    stats = user.typingStats;
+  }
+  let display_stats = document.querySelector("#stats p");
+  if (stats != undefined) 
+  {
+    const span_word = document.createElement("span"); 
+    span_word.style.whiteSpace = 'pre-line';
+    span_word.textContent = `${stats.averageWPM} WPM \n  ${stats.totalWordsTyped} words typed \n ${stats.totalCharactersTyped} characters typed \n ${stats.totalTestsTaken} tests taken \n${stats.longestWord} took the longest to type \n ${stats.shortestWord} took the shortest to type`; 
+    display_stats.appendChild(span_word);
+  }  
+}
+
 // Main function, calls all the other functions
 async function init() {
 await getUserInformation();
 beginTypingTest();
-//console.log(user_data);
+getLocalStorageJSON();
+console.log(JSON_data);
 }
 
 init();
 
-// next is stats + ensuring options cant be changed mid test + making it look better
+// next is stats + making it look better
 // do second DOM of html 
+
+// add stats to json file
+// average wpm accross all typing tests,
+// how long logged in for 
+// how many tests taken
+// which word took the longest to type
+// which word took the shortest to type
+// how many words typed in total
+// how many characters typed in total
+// need to figure out how to access typing stats and store things in typing stats, i thought i found the way using. find using phind.
