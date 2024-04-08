@@ -20,7 +20,7 @@ __Features:__
     Users can customize the typing test by selecting difficulty options such as punctuation, 
     capitalization, and paragraphs. 
     Important to note paragraphs contain capitalization and puncutation, 
-    however they are in a more natural placement, making paragraphs an exclusive option to the other two.
+    however they are in a more natural placement, making paragraphs an exclusive option.
     
     User Authentication:  
     Users can log in or sign up to access the typing test.
