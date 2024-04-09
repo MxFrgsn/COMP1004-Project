@@ -182,7 +182,7 @@ function styleWordBank(input_value) {
   // Styles wordbank, comparing each letter to input box value, checking if its right or wrong and displays it apporiately. 
   document.querySelectorAll("#displayWordBank p span").forEach((span, i) => 
   {
-    if (i < chars_correct && window.matchMedia("(prefers-color-scheme: dark)").matches) 
+    if (window.matchMedia("(prefers-color-scheme: dark)").matches) 
 	  {
 		  span.style.color = "white";
 	  }
