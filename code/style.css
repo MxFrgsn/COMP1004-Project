@@ -60,6 +60,11 @@
 	{
 		color: white;
 	}
+	
+	#signedIn
+	{
+		color: white;
+	}
 }
 	
 @media (prefers-color-scheme: light)
@@ -121,6 +126,11 @@
 	}
 	
 	h2
+	{
+		color: black;
+	}
+	
+	#signedIn
 	{
 		color: black;
 	}

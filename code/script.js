@@ -51,8 +51,6 @@ let authenication = false; // boolean to check if user is logged in
 let JSON_data = []; // array to store json data
 let current_user = {};// string to store current user's username and password.
 let user_stats = {}; // object to store user stats
-let chart = []; // chart to display user stats
-
 
 function displayArray(array) {
   // Displays expected inputs on website
@@ -631,22 +629,17 @@ function calculateStats() {
 }
 
 function displayStats() {
-  // Displays the user's stats on the website // Change this to the username of the user you want
+  // Displays the user's stats on the website 
   let user = JSON_data.users.find(user => user.username === current_user.username);
   let stats = user.typingStats;  
   // Display the chart on the website
-  if (window.myChart) 
-  {
-   updateChart(stats);
-  }
-  else
-  {
-    displayChart(stats);
-  }
+  deleteChart();
+  displayChart(stats);
   // Display the stats on the website
   let display_stats = document.querySelector("#stats p");
   if (stats != undefined) 
   {
+    display_stats.innerHTML = "";
     const span_word = document.createElement("span"); 
     span_word.style.whiteSpace = 'pre-line';
     span_word.textContent = `${stats.averageWPM} WPM \n  ${stats.totalWordsTyped} words typed \n ${stats.totalCharactersTyped} characters typed \n ${stats.totalTestsTaken} tests taken \n ${stats.totalPlayTimeInSeconds} seconds played`; 
@@ -659,7 +652,7 @@ function displayChart(stats) {
   let ctx = document.getElementById('chart').getContext('2d');
   let data_points = stats.WPMList;
   let labels = data_points.map((_, index) => `Session ${index + 1}`); 
-  chart = new Chart(ctx, {
+  window.myChart = new Chart(ctx, {
     type: 'line',
     data: {
       labels: labels,
@@ -680,13 +673,14 @@ function displayChart(stats) {
     });
 }
 
-function updateChart(stats) {
-  // Updates chart with the new data
-  let data_points = stats.WPMList;
-  let labels = data_points.map((_, index) => `Session ${index + 1}`);
-  window.myChart.data.labels = labels;
-  window.myChart.data.datasets[0].data = data_points;
-  window.myChart.update();
+function deleteChart()
+{
+  // Deletes the chart from the website, allowing new data to be added to the chart
+  // Also allows other users chart to be shown
+  if (window.myChart) {
+    window.myChart.destroy();
+    window.myChart = null;
+ }
 }
 
 function exportStats() {
@@ -722,12 +716,10 @@ password: password1
 // should i add a function to delete account
 // should i add a function to change password
 // should i add a function to change username
-// should i add a function to view average WPM list
 // should i add a funciton to view total play time in seconds in the graph to see what days the user played the most
 // should i add a function to view total tests taken in the graph to see how many tests the user took each day
 // should i add a function to view total words typed in the graph to see how many words the user typed each day
 // should i add a function to view total characters typed in the graph to see how many characters the user typed each day
-// should i add a function to view the average WPM in the graph to see how the user's average WPM changed over time
 
 
 
