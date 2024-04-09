@@ -65,6 +65,11 @@
 	{
 		color: white;
 	}
+
+	#stats 
+	{
+		color: white;
+	}
 }
 	
 @media (prefers-color-scheme: light)
@@ -131,6 +136,11 @@
 	}
 	
 	#signedIn
+	{
+		color: black;
+	}
+
+	#stats 
 	{
 		color: black;
 	}
@@ -282,5 +292,4 @@ h1
 #stats
 {
 	font-size: 20px;
-	color: red;
 }

@@ -215,6 +215,7 @@ function timer() {
   if (time_passed >= time) 
   {
     clearInterval(timer_interval);
+    updateTimerUI();
     calculateWPM();
 	for (let i = 0; i < words_correct; i++)
 	{
