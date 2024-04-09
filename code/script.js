@@ -87,7 +87,6 @@ function displayArray(array) {
   }
 }
 
-
 function validateInputBox() {
   //Checks if input box has been written in, if so, starts time and checks if inputted value is correct
   var input_value = document.getElementById("inputBox").value;
@@ -320,7 +319,7 @@ document.getElementById('Punctuation').addEventListener('change', (event) => {
     }
     display_bank_p.innerHTML="";
     displayArray(word_bank);
-}
+  }
 });
 
 //Event listener for Capitalization difficulty option
@@ -359,7 +358,7 @@ document.getElementById('Capitalization').addEventListener('change', (event) => 
     }	
     display_bank_p.innerHTML="";
     displayArray(word_bank);
-}
+  }
 });
 
 // Event listener for Paragraphs difficulty option
@@ -380,7 +379,7 @@ document.getElementById('Paragraphs').addEventListener('change', (event) => {
       display_bank_p.innerHTML="";
       displayArray(paragraph_bank);
     }
-}
+  }
 });
 
 function loadLoginForm() { 
@@ -421,12 +420,11 @@ async function validateLogIn(e) {
   e.preventDefault();
 	const inputted_username = document.getElementById('usernameLogIn').value;
 	const inputted_password = await hashedPassword(document.getElementById('passwordLogIn').value);	
-  const getLocalStorageJson = JSON.parse(localStorage.getItem("users"));
   try 
   {
-    for (var i = 0; i < getLocalStorageJson.users.length; i++)
+    for (var i = 0; i < JSON_data.users.length; i++)
     {
-      if (getLocalStorageJson.users[i].username == inputted_username && getLocalStorageJson.users[i].password == inputted_password) 
+      if (JSON_data.users[i].username == inputted_username && JSON_data.users[i].password == inputted_password) 
       {
         authenication = true;
         break;
@@ -439,7 +437,7 @@ async function validateLogIn(e) {
         "username": inputted_username,
         "password": inputted_password
       }
-      user_stats = getLocalStorageJson.users[i];
+      user_stats = JSON_data.users[i];
       displayHTMLafterLogIn(inputted_username,'outsideContainerForLogIn');
     }
     else
@@ -459,16 +457,15 @@ async function validateSignUp(e) {
   e.preventDefault();
   var inputted_username = document.getElementById('usernameSignUp').value;
   var inputted_password = document.getElementById('passwordSignUp').value;
-  const getLocalStorageJson = JSON.parse(localStorage.getItem("users"));
   let user_exists = false;
   // Password must contain at least 8 characters, one uppercase letter, one lowercase letter, one number and one special character
   // Uses regular expressions to check if password is valid
   const password_regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()\-_=+[{\]};:'",/?]).{8,}$/;
   try 
   {
-    for (var i = 0; i <  getLocalStorageJson.users.length; i++)
+    for (var i = 0; i <  JSON_data.users.length; i++)
     {
-      if (getLocalStorageJson.users[i].username == inputted_username)
+      if (JSON_data.users[i].username == inputted_username)
       {
         user_exists = true;
         break;
@@ -493,7 +490,7 @@ async function validateSignUp(e) {
         
         setLocalStorageJSON(current_user);
         displayHTMLafterLogIn(inputted_username,'outsideContainerForSignUp');
-        user_stats = getLocalStorageJson.users.find(user => user.password === inputted_password);
+        user_stats = JSON_data.users.find(user => user.password === inputted_password);
       }
       else
       {
@@ -519,11 +516,6 @@ function setLocalStorageJSON(input) {
   JSON_data = JSON.parse(localStorage.getItem("users"));
   JSON_data.users.push(input);
   localStorage.setItem("users", JSON.stringify(JSON_data));
-}
-
-function getLocalStorageJSON() 
-{  
-  JSON_data = JSON.parse(localStorage.getItem("users"));
 }
 
 function displayHTMLafterLogIn(inputted_username,container) { 
@@ -713,10 +705,18 @@ async function init() {
   // Main function, ensures that the user's information is loaded and the typing test can begin
   await getUserInformation();
   beginTypingTest();
-  getLocalStorageJSON();
+  JSON_data = JSON.parse(localStorage.getItem("users"));
 }
 
 init();
+
+/*
+username: admin
+password: unbreakable
+
+username: user1
+password: password1
+*/
 
 // should add a funciton to reset stats 
 // should i add a function to delete account
