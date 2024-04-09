@@ -712,16 +712,10 @@ username: user1
 password: password1
 */
 
-// should add a funciton to reset stats 
+// should i add a function to reset stats 
 // should i add a function to delete account
 // should i add a function to change password
 // should i add a function to change username
-// should i add a funciton to view total play time in seconds in the graph to see what days the user played the most
-// should i add a function to view total tests taken in the graph to see how many tests the user took each day
-// should i add a function to view total words typed in the graph to see how many words the user typed each day
-// should i add a function to view total characters typed in the graph to see how many characters the user typed each day
-
-
 
 // remove alerts and replace with better looking alerts with css
 // do report/documentation for the project
