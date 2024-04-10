@@ -1,3 +1,11 @@
+function loadStats() {
+  // Changes class of the outside container to show the stats
+  document.getElementById('outsideContainer').classList.remove('show');
+  document.getElementById('outsideContainer').classList.add('hidden');
+  document.getElementById('outsideContainerForStats').classList.remove('hidden');
+  displayStats();
+}
+
 function storeStats(new_stats) {
   // Stores the user's stats in the json file
   let current_user_data = JSON_data.users.find(user => user.username === current_user.username);

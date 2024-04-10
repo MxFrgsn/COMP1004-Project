@@ -16,14 +16,6 @@ function loadSignupForm() {
   document.getElementById('outsideContainerForSignUp').classList.remove('hidden');
 }
 
-function loadStats() {
-  // Changes class of the outside container to show the stats
-  document.getElementById('outsideContainer').classList.remove('show');
-  document.getElementById('outsideContainer').classList.add('hidden');
-  document.getElementById('outsideContainerForStats').classList.remove('hidden');
-  displayStats();
-}
-
 function backButton(backLocation) {
   // Changes class of the outside container to show the typing test
   document.getElementById('outsideContainer').classList.remove('hidden');
