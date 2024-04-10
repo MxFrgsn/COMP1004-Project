@@ -642,7 +642,7 @@ function displayStats() {
     display_stats.innerHTML = "";
     const span_word = document.createElement("span"); 
     span_word.style.whiteSpace = 'pre-line';
-    span_word.textContent = `${stats.averageWPM} WPM \n  ${stats.totalWordsTyped} words typed \n ${stats.totalCharactersTyped} characters typed \n ${stats.totalTestsTaken} tests taken \n ${stats.totalPlayTimeInSeconds} seconds played`; 
+    span_word.textContent = `${stats.averageWPM} average WPM \n  ${stats.totalWordsTyped} words typed \n ${stats.totalCharactersTyped} characters typed \n ${stats.totalTestsTaken} tests taken \n ${stats.totalPlayTimeInSeconds} seconds played`; 
     display_stats.appendChild(span_word);
   }  
 }
