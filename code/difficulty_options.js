@@ -99,11 +99,14 @@ document.getElementById('Paragraphs').addEventListener('change', (event) => {
 function validateTimerOptions() {
   // Enables changing of length of typing test (by default its 60s long)
   var timer_options = [30, 60, 90, 120];
-  for (var i = 0; i < timer_options.length; i++) 
+  if (!timer_started)
   {
-    if (document.getElementById(timer_options[i]).checked)
-	{
-      time = timer_options[i] * 1000;
+    for (var i = 0; i < timer_options.length; i++) 
+    {
+      if (document.getElementById(timer_options[i]).checked)
+      {
+        time = timer_options[i] * 1000;
+      }
     }
   }
 }

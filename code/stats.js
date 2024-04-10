@@ -11,16 +11,21 @@ function loadStats() {
 function storeStats(new_stats) {
   // Stores the user's stats in the json file
   let current_user_data = JSON_data.users.find(user => user.username === current_user.username);
- if (current_user_data) {
-    if (current_user_data.typingStats.WPMList) {
-      current_user_data.typingStats.WPMList.push(new_stats.WPMList[0]); 
+
+ if (current_user_data) 
+ {
+    current_user_data.typingStats.WPMList.push(new_stats.WPMList[0]); 
+    for (var i = 0; i < current_user_data.typingStats.WPMList.length; i++)
+    {
+      current_user_data.typingStats.averageWPM += current_user_data.typingStats.WPMList[i];
     }
+    current_user_data.typingStats.averageWPM = current_user_data.typingStats.averageWPM / current_user_data.typingStats.WPMList.length;
     current_user_data.typingStats.totalPlayTimeInSeconds += new_stats.totalPlayTimeInSeconds;
     current_user_data.typingStats.totalTestsTaken += new_stats.totalTestsTaken;
     current_user_data.typingStats.totalWordsTyped += new_stats.totalWordsTyped;
     current_user_data.typingStats.totalCharactersTyped += new_stats.totalCharactersTyped;
  }
-let averageWPM=0;
+ let averageWPM=0;
  for (let i = 0; i < current_user_data.typingStats.WPMList.length; i++)
  {
   averageWPM += current_user_data.typingStats.WPMList[i];
@@ -28,7 +33,6 @@ let averageWPM=0;
  current_user_data.typingStats.averageWPM=averageWPM/current_user_data.typingStats.WPMList.length;
  // Store the updated JSON_data back into localStorage 
  localStorage.setItem('users', JSON.stringify(JSON_data));
-
 }
 
 function calculateStats() {
@@ -49,8 +53,16 @@ function displayStats() {
   let user = JSON_data.users.find(user => user.username === current_user.username);
   let stats = user.typingStats;  
   // Display the chart on the website
-  deleteChart();
-  displayChart(stats);
+  if (stats != undefined) 
+  {
+    deleteChart();
+    displayChart(stats);
+  }
+  else 
+  {
+    let display_stats = document.querySelector("#stats p");
+    display_stats.innerHTML = "No stats available";
+  }
   // Display the stats on the website
   let display_stats = document.querySelector("#stats p");
   if (stats != undefined) 

@@ -4,6 +4,10 @@ let current_user = {};// string to store current user's username and password.
 
 function loadLoginForm() { 
   // Changes class of the outside container to show the login form
+  if(timer_started)
+  {
+   endTest();
+  }
   document.getElementById("usernameLogIn").value = "";
   document.getElementById("passwordLogIn").value = "";
 	document.getElementById('outsideContainer').classList.remove('show');
@@ -13,6 +17,10 @@ function loadLoginForm() {
 
 function loadSignupForm() {
   // Changes class of the outside container to show the signup form
+  if(timer_started)
+  {
+    endTest();
+  }
   document.getElementById("passwordSignUp").value = "";
   document.getElementById("usernameSignUp").value = "";
   document.getElementById('outsideContainer').classList.remove('show');
@@ -113,7 +121,16 @@ async function validateSignUp(e) {
         current_user = 
         {
         "username": inputted_username,
-        "password": inputted_password
+        "password": inputted_password,
+        "typingStats": 
+          {
+            "averageWPM": 0,
+            "WPMList": [],
+            "totalPlayTimeInSeconds":0,
+            "totalTestsTaken": 0,
+            "totalWordsTyped": 0,
+            "totalCharactersTyped": 0,
+          }
         }
         addUserToLocalStorage(current_user);
         displayHTMLafterLogIn(inputted_username,'outsideContainerForSignUp');

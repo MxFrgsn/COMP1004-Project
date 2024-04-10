@@ -40,7 +40,7 @@ var paragraph_bank = ["When we hear outlaw we think of criminals. But outlaws ar
 "The movie Godfather was adapted from a book written by Mario Puzo. Mario was also happened to tbe the screenwriter for the movie adaptation, even though he has not screenwriting experience or knowledge"]
 var written_characters = 0; 
 var timer_started = false; 
-var time = 60000; // 60000 milliseconds = 60 seconds
+var time = 60000;// 60000 milliseconds = 60 seconds
 let time_passed = 0; 
 var WPM = 0; 
 const display_bank_p = document.querySelector("#displayWordBank p");
@@ -89,7 +89,7 @@ function validateInputBox() {
   {
     timer_started = true;
     start_time = new Date();
-    timer_interval = setInterval(timer, 950);
+    timer_interval = setInterval(timer, 100);
   }
   // Checks if the last letter typed is a space, if so, checks if the word is correct and updates the word bank
   styleWordBank(input_value);
@@ -177,18 +177,7 @@ function randomiseArray(array) {
 
 function styleWordBank(input_value) {
   // Styles wordbank, comparing each letter to input box value, checking if its right or wrong and displays it apporiately. 
-  document.querySelectorAll("#displayWordBank p span").forEach((span, i) => 
-  {
-    // This ensures that the text colour changes back after styling it with green/red after word is completed successfully 
-    if (window.matchMedia("(prefers-color-scheme: dark)").matches) 
-	  {
-		  span.style.color = "white";
-	  }
-	  else
-	  {
-		  span.style.color="black";
-	  }
-  });
+  styleWordNormal();
   for (var i = 0; i < input_value.length; i++) 
   {
     if (input_value[i] == display_bank_p.textContent[i + chars_correct])
@@ -212,16 +201,44 @@ function timer() {
   time_passed = current_Time - start_time;
   if (time_passed >= time) 
   {
-    clearInterval(timer_interval);
-    updateTimerUI();
-    calculateWPM();
-	for (let i = 0; i < words_correct; i++)
-	{
+    for (let i = 0; i < words_correct; i++)
+    {
       word_bank.shift();
     }
-    beginTypingTest();
+    endTest();
   }
   updateTimerUI();
+}
+
+function styleWordNormal() {
+  // This ensures that the text colour changes back after styling it with green/red after word is completed successfully
+  document.querySelectorAll("#displayWordBank p span").forEach((span, i) => 
+  { 
+    if (window.matchMedia("(prefers-color-scheme: dark)").matches) 
+	  {
+		  span.style.color = "white";
+	  }
+	  else
+	  {
+		  span.style.color="black";
+	  }
+  });
+}
+
+function endTest() {
+  // Ends the test, calculates WPM and resets the typing test
+  clearInterval(timer_interval);
+  styleWordNormal();
+  calculateWPM();
+  written_characters = 0;
+  time_passed = 0;
+  updateTimerUI();
+  document.getElementById('Capitalization').checked = false;
+  document.getElementById('Punctuation').checked = false;
+  document.getElementById('Paragraphs').checked = false;
+  document.getElementById('60').checked = true;
+  timer_started = false;
+  beginTypingTest();
 }
 
 function updateTimerUI() {
@@ -237,7 +254,7 @@ function updateTimerUI() {
 
 function calculateWPM() {
 // Calculates WPM, which is to be displayed to the user and alerts the user that the test is finished
-  WPM = written_characters / 5 / (time / 60000).toFixed(2);
+  WPM = (written_characters / 5 / (time / 60000)).toFixed(2);
   updateWpmUI();
   alert("Test finished");
   if (authenication)
@@ -255,6 +272,7 @@ function updateWpmUI() {
 
 function beginTypingTest() {
   // Start of typing test
+  document.getElementById('60').checked = true;
   document.getElementById('inputBox').value = "";
   timer_started = false;
   updateWpmUI();
@@ -273,7 +291,8 @@ async function init() {
   // Main function, ensures that the user's information is loaded and the typing test can begin
   await getUserInformation();
   beginTypingTest();
-  JSON_data = JSON.parse(localStorage.getItem("users")); //wonder if i should put this into getuserinformation
+  JSON_data = JSON.parse(localStorage.getItem("users")); 
+  //wonder if i should put this into getuserinformation
 }
 
 init();
