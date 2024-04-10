@@ -486,8 +486,7 @@ async function validateSignUp(e) {
         "username": inputted_username,
         "password": inputted_password
         }
-        
-        setLocalStorageJSON(current_user);
+        addUserToLocalStorage(current_user);
         displayHTMLafterLogIn(inputted_username,'outsideContainerForSignUp');
         user_stats = JSON_data.users.find(user => user.password === inputted_password);
       }
@@ -510,7 +509,7 @@ async function hashedPassword(password) {
   return password;
 }
 
-function setLocalStorageJSON(input) {
+function addUserToLocalStorage(input) {
   // Adds the user to the local storage
   JSON_data = JSON.parse(localStorage.getItem("users"));
   JSON_data.users.push(input);
