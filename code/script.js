@@ -182,6 +182,7 @@ function styleWordBank(input_value) {
   // Styles wordbank, comparing each letter to input box value, checking if its right or wrong and displays it apporiately. 
   document.querySelectorAll("#displayWordBank p span").forEach((span, i) => 
   {
+    // This ensures that the text colour changes back after styling it with green/red after word is completed successfully 
     if (window.matchMedia("(prefers-color-scheme: dark)").matches) 
 	  {
 		  span.style.color = "white";
@@ -442,7 +443,7 @@ async function validateLogIn(e) {
     else
     {
       e.preventDefault();
-      alert("Incorrect username or password"); // keep idea but make it look better
+      alert("Incorrect username or password");
     }
   }
   catch (error)
@@ -472,7 +473,7 @@ async function validateSignUp(e) {
     }
     if (user_exists)
     {
-      alert("Username already exists"); // keep idea but make it look better
+      alert("Username already exists");
       user_exists = false;
     }
     else
@@ -677,7 +678,8 @@ function deleteChart()
 {
   // Deletes the chart from the website, allowing new data to be added to the chart
   // Also allows other users chart to be shown
-  if (window.myChart) {
+  if (window.myChart)
+{
     window.myChart.destroy();
     window.myChart = null;
  }
@@ -699,7 +701,7 @@ async function init() {
   // Main function, ensures that the user's information is loaded and the typing test can begin
   await getUserInformation();
   beginTypingTest();
-  JSON_data = JSON.parse(localStorage.getItem("users"));
+  JSON_data = JSON.parse(localStorage.getItem("users")); //wonder if i should put this into getuserinformation
 }
 
 init();
