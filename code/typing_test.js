@@ -47,10 +47,7 @@ const display_bank_p = document.querySelector("#displayWordBank p");
 let total_typed_words = 0; // total number of words typed by the user
 let chars_correct = 0; // number of characters correctly typed, used to check if we are at the end of the word
 let words_correct = 0; // number of words correctly typed, used to check if we are at the end of the line
-let authenication = false; // boolean to check if user is logged in
-let JSON_data = []; // array to store json data
-let current_user = {};// string to store current user's username and password.
-let user_stats = {}; // object to store user stats
+
 
 function displayArray(array) {
   // Displays expected inputs on website
@@ -289,10 +286,7 @@ username: user1
 password: password1
 */
 
-// should i add a function to reset stats 
 // should i add a function to delete account
-// should i add a function to change password
-// should i add a function to change username
 
 // remove alerts and replace with better looking alerts with css
 // do report/documentation for the project

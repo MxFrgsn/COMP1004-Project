@@ -1,3 +1,7 @@
+let authenication = false; // boolean to check if user is logged in
+let JSON_data = []; // array to store json data
+let current_user = {};// string to store current user's username and password.
+
 function loadLoginForm() { 
   // Changes class of the outside container to show the login form
   document.getElementById("usernameLogIn").value = "";

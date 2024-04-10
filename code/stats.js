@@ -1,3 +1,5 @@
+let user_stats = {}; // object to store user stats
+
 function loadStats() {
   // Changes class of the outside container to show the stats
   document.getElementById('outsideContainer').classList.remove('show');
