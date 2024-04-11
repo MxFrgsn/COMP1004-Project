@@ -155,7 +155,7 @@ async function hashedPassword(password) {
   return password;
 }
 
-function addUserToLocalStorage(input) {
+function addUserToLocalStorage(input) {  
   // Adds the user to the local storage
   JSON_data = JSON.parse(localStorage.getItem("users"));
   JSON_data.users.push(input);
@@ -165,26 +165,10 @@ function addUserToLocalStorage(input) {
 async function getUserInformation() {  
   // Reads the json file and stores it in the JSON_data array
  let stored_data = localStorage.getItem('users'); // Checks if the json file is already stored in local storage
- if (stored_data) 
+ if (stored_data!=null || stored_data!=undefined) 
  { 
-  try 
-  {
-    data = JSON.parse(stored_data); 
-    // This is causing an unexpected error within vscode live preview but works within the browser environment
-    // Thus try and catch is used to catch the error and fetch the json file if it is not found
-  } 
-  catch (error)
-  {
-   fetch('./data.json')
-   .then(response => response.json())
-   .then(data => 
-   {
-     JSON_data = data;
-     localStorage.setItem('users', JSON.stringify(JSON_data));
-   })
-   .catch(error => console.error('Error, json file not found', error));
-  }
-}
+    JSON_data = JSON.parse(stored_data); 
+ }   
  else 
  {
    fetch('./data.json')
