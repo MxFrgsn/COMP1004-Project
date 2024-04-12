@@ -144,7 +144,7 @@ async function validateSignUp(e) {
   }
   catch (error)
   {
-  console.error('Error during SignUp, please try again.', error);
+  alert('Error during SignUp, please try again.',error);
   }
 }
 
