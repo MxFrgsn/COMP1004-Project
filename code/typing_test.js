@@ -51,6 +51,7 @@ let words_correct = 0; // number of words correctly typed, used to check if we a
 
 function displayArray(array) {
   // Displays expected inputs on website
+  display_bank_p.innerHTML = "";
   document.getElementById("inputBox").value = "";
   let max_height = 200; // max height of the word bank
   let current_height = 0; 
@@ -90,6 +91,7 @@ function validateInputBox() {
     timer_started = true;
     start_time = new Date();
     timer_interval = setInterval(timer, 100);
+    document.getElementById('tips').classList.add('hidden');
   }
   // Checks if the last letter typed is a space, if so, checks if the word is correct and updates the word bank
   styleWordBank(input_value);
@@ -149,7 +151,6 @@ function checkEndOfLine() {
         word_bank.shift();
       }
     }
-    display_bank_p.innerHTML = "";
     if (document.getElementById("Paragraphs").checked) 
     {
       displayArray(paragraph_bank);
@@ -208,15 +209,27 @@ function timer() {
     }
     endTest();
   }
-  updateTimerUI();
+  else
+  {
+    updateTimerUI();
+  }
+
 }
 
 function endTest() {
   // Ends typing test
   clearInterval(timer_interval);
   styleWordNormal();
-  calculateWPM();
-  updateTimerUI();
+  if (authenication && time_passed >= time)
+  {
+    calculateWPM();
+    calculateStats();
+  } 
+  else if (time_passed >= time)
+  {
+    calculateWPM();
+  }
+  alert("Test finished");
   resetTypingTest();
 }
 
@@ -250,11 +263,6 @@ function calculateWPM() {
 // Calculates WPM, which is to be displayed to the user and alerts the user that the test is finished
   WPM = (written_characters / 5 / (time / 60000)).toFixed(2);
   updateWpmUI();
-  alert("Test finished, Difficulty Options Reset");
-  if (authenication)
-  {
-    calculateStats();
-  } 
 }
 
 function updateWpmUI() {
@@ -266,27 +274,28 @@ function updateWpmUI() {
 
 function resetTypingTest() {
   // Start of typing test
-  document.getElementById('60').checked = true;
-  document.getElementById('Capitalization').checked = false;
-  document.getElementById('Punctuation').checked = false;
-  document.getElementById('Paragraphs').checked = false;
   document.getElementById('inputBox').value = "";
   timer_started = false;
-  updateWpmUI();
   written_characters = 0;
   time_passed = 0;
   WPM = 0;
   words_correct = 0;
   chars_correct = 0;
   updateTimerUI();
-  randomiseArray(paragraph_bank)
-  randomiseArray(word_bank);
-  displayArray(word_bank);
+  
 }
 
 async function init() {
-  // Main function, ensures that the user's information is loaded and the typing test can begin
+  // Main function, ensures that the all users information is loaded and the typing test can begin
+  document.getElementById('60').checked = true;
+  document.getElementById('Capitalization').checked = false;
+  document.getElementById('Punctuation').checked = false;
+  document.getElementById('Paragraphs').checked = false;
   await getUserInformation();
+  randomiseArray(paragraph_bank)
+  randomiseArray(word_bank);
+  displayArray(word_bank);
+  updateWpmUI()
   resetTypingTest();
 }
 
