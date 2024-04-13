@@ -305,7 +305,3 @@ username: user1
 password: password1
 */
 
-// should i add a function to delete account
-
-// remove alerts and replace with better looking alerts with css
-// do report/documentation for the project
