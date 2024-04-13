@@ -195,6 +195,7 @@ function styleWordBank(input_value) {
   }
 }
 
+
 function timer() {
   // Checks the amount of time that has passed
   let current_Time = new Date();
@@ -208,6 +209,15 @@ function timer() {
     endTest();
   }
   updateTimerUI();
+}
+
+function endTest() {
+  // Ends typing test
+  clearInterval(timer_interval);
+  styleWordNormal();
+  calculateWPM();
+  updateTimerUI();
+  resetTypingTest();
 }
 
 function styleWordNormal() {
@@ -225,22 +235,6 @@ function styleWordNormal() {
   });
 }
 
-function endTest() {
-  // Ends the test, calculates WPM and resets the typing test
-  clearInterval(timer_interval);
-  styleWordNormal();
-  calculateWPM();
-  written_characters = 0;
-  time_passed = 0;
-  updateTimerUI();
-  document.getElementById('Capitalization').checked = false;
-  document.getElementById('Punctuation').checked = false;
-  document.getElementById('Paragraphs').checked = false;
-  document.getElementById('60').checked = true;
-  timer_started = false;
-  beginTypingTest();
-}
-
 function updateTimerUI() {
   // Formats amount of time passed onto website
   let timer_HTML = document.getElementById("timer");
@@ -256,7 +250,7 @@ function calculateWPM() {
 // Calculates WPM, which is to be displayed to the user and alerts the user that the test is finished
   WPM = (written_characters / 5 / (time / 60000)).toFixed(2);
   updateWpmUI();
-  alert("Test finished");
+  alert("Test finished, Difficulty Options Reset");
   if (authenication)
   {
     calculateStats();
@@ -270,9 +264,12 @@ function updateWpmUI() {
   wpm_HTML.innerHTML = formatted_WPM;
 }
 
-function beginTypingTest() {
+function resetTypingTest() {
   // Start of typing test
   document.getElementById('60').checked = true;
+  document.getElementById('Capitalization').checked = false;
+  document.getElementById('Punctuation').checked = false;
+  document.getElementById('Paragraphs').checked = false;
   document.getElementById('inputBox').value = "";
   timer_started = false;
   updateWpmUI();
@@ -290,9 +287,7 @@ function beginTypingTest() {
 async function init() {
   // Main function, ensures that the user's information is loaded and the typing test can begin
   await getUserInformation();
-  beginTypingTest();
-  JSON_data = JSON.parse(localStorage.getItem("users")); 
-  //wonder if i should put this into getuserinformation
+  resetTypingTest();
 }
 
 init();

@@ -7,13 +7,13 @@
     // Changes class of the outside container to show the login form
     if(timer_started)
     {
-    endTest();
+        endTest();
     }
     document.getElementById("usernameLogIn").value = "";
     document.getElementById("passwordLogIn").value = "";
-        document.getElementById('outsideContainer').classList.remove('show');
-        document.getElementById('outsideContainer').classList.add('hidden');
-        document.getElementById('outsideContainerForLogIn').classList.remove('hidden');
+    document.getElementById('outsideContainer').classList.remove('show');
+    document.getElementById('outsideContainer').classList.add('hidden');
+    document.getElementById('outsideContainerForLogIn').classList.remove('hidden');
     }
 
     function loadSignupForm() {
