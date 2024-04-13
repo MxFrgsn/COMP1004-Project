@@ -32,7 +32,7 @@ __Features:__
     Dark Mode & Light Mode:
     The application supports both based on the user's system settings.
     Note: May not work in all browsers. 
-    (Works on chrome but not firefox etc)
+    (Works on chrome but not firefox, etc.)
 
     Viewable Performance Metrics:
     Your WPM is stored, shown as a graph/stats screen or to be exported and downloaded as a json file.
