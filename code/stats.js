@@ -11,26 +11,21 @@ function loadStats() {
 function storeStats(new_stats) {
   // Stores the user's stats in the json file
   let current_user_data = JSON_data.users.find(user => user.username === current_user.username);
+  const sum = 0;
 
  if (current_user_data) 
  {
     current_user_data.typingStats.WPMList.push(new_stats.WPMList[0]); 
     for (var i = 0; i < current_user_data.typingStats.WPMList.length; i++)
     {
-      current_user_data.typingStats.averageWPM += current_user_data.typingStats.WPMList[i];
+      sum += current_user_data.typingStats.WPMList[i];
     }
-    current_user_data.typingStats.averageWPM = current_user_data.typingStats.averageWPM / current_user_data.typingStats.WPMList.length;
+    current_user_data.typingStats.averageWPM = sum / current_user_data.typingStats.WPMList.length;
     current_user_data.typingStats.totalPlayTimeInSeconds += new_stats.totalPlayTimeInSeconds;
     current_user_data.typingStats.totalTestsTaken += new_stats.totalTestsTaken;
     current_user_data.typingStats.totalWordsTyped += new_stats.totalWordsTyped;
     current_user_data.typingStats.totalCharactersTyped += new_stats.totalCharactersTyped;
  }
- let averageWPM=0;
- for (let i = 0; i < current_user_data.typingStats.WPMList.length; i++)
- {
-  averageWPM += current_user_data.typingStats.WPMList[i];
- }
- current_user_data.typingStats.averageWPM=averageWPM/current_user_data.typingStats.WPMList.length;
  // Store the updated JSON_data back into localStorage 
  localStorage.setItem('users', JSON.stringify(JSON_data));
 }

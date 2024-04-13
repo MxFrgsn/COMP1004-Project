@@ -21,24 +21,17 @@
 		<h1>Typing Test</h1>
 		<div id = "logInAndSignUpButtons" class = "show">
 			<div id="logInSquare">
-				<nav>
-					<button onclick = "loadLoginForm(); ">Log in</button>
-				</nav>
+				<button onclick = "loadLoginForm(); ">Log in</button>
 			</div>
 			<div id="signUpSquare">
-				<nav>
-					<button onclick = "loadSignupForm()">Sign up</a></button> 
-				</nav>
+				
+				<button onclick = "loadSignupForm()">Sign up</a></button> 
 			</div>
 		</div>
 		<div id = signedIn class = "hidden">
-			<nav>
-				<button onclick = "loadStats()">Stats</button>
-			</nav>
+			<button onclick = "loadStats()">Stats</button>
 			<p></p>
-		<nav>
 			<button onclick = "logOut()">Log out</button>
-		</nav>
 		</div>
 		<div id = "squareOptions"> 
 			<form id = "timerOptions" >
@@ -79,48 +72,37 @@
 	<div id = "outsideContainerForLogIn" class = "hidden">
 	<h1>Typing Test</h1>
 		<h2>Login</h2>
-		<nav>
-			<button class = "back" onclick="backButton('outsideContainerForLogIn')">Back</a></button>
-		</nav>
+		<button class = "back" onclick="backButton('outsideContainerForLogIn')">Back</a></button>
         <form id="loginForm">
             <input type="text" id="usernameLogIn" placeholder="Username" required>
 			<br> <br>
             <input type="password" id="passwordLogIn" placeholder="Password" required>
 			<button class ="showPassword" type = "button" onclick = "showPassword('passwordLogIn')">Show Password</button> 
 			<br> <br>
-			<nav>	
-            	<button onclick ="validateLogIn(event)"> Log In</a></button>
-			</nav>
+        	<button onclick ="validateLogIn(event)"> Log In</a></button>
         </form>
 	</div>
 	<div id = "outsideContainerForSignUp" class = "hidden">
 	<h1>Typing Test</h1>
 		<h2>Sign Up</h2>
-		<nav>
-			<button class = "back" onclick="backButton('outsideContainerForSignUp')">Back</button>
-		</nav>
+		<button class = "back" onclick="backButton('outsideContainerForSignUp')">Back</button>
         <form id="signupForm">
             <input type="text" id="usernameSignUp" placeholder="Username">
 			<br> <br>
             <input type="password" id="passwordSignUp" placeholder="Password" required>
 			<button class ="showPassword" type = "button" onclick = "showPassword('passwordSignUp')">Show Password</button> 
 			<br> <br>
-			<nav>
-            	<button onclick = "validateSignUp(event)">Sign Up</button> 
-			</nav>
+            <button onclick = "validateSignUp(event)">Sign Up</button> 
         </form>
 	</div>
 	<div id = "outsideContainerForStats" class = "hidden">
 		<h1>Typing Test</h1>
-		<nav>
-			<button class = "back" onclick="backButton('outsideContainerForStats')">Back</button>
-		</nav>
+		<button class = "back" onclick="backButton('outsideContainerForStats')">Back</button>
+		<button onclick = "deleteAccount()">Delete Account</button> 
 		<h2>Stats</h2>
 		<div id = "stats">
 			<p></p>	 
-			<nav>
-				<button id = "export" onclick="exportStats()">Export</button>
-			</nav>
+			<button id = "export" onclick="exportStats()">Export</button>
 			<canvas id="chart" width="600" height="210"></canvas>
 		</div>
 	</div>
