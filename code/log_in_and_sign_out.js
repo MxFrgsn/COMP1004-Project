@@ -113,6 +113,10 @@
         alert("Username already exists");
         user_exists = false;
         }
+        else if (inputted_username == "" || inputted_password == "")
+        {
+        alert("Username and/or password cannot be empty");
+        }
         else
         {
         let valid_password = password_regex.test(inputted_password);
