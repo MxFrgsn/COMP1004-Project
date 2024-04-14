@@ -97,7 +97,7 @@
     let user_exists = false;
     // Password must contain at least 8 characters, one uppercase letter, one lowercase letter, one number and one special character
     // Uses regular expressions to check if password is valid
-    const password_regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()\-_=+[{\]};:'",/?]).{8,}$/;
+    const password_regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()\-_=+{};:'",/?]).{8,}$/;
     try 
     {
         for (var i = 0; i <  JSON_data.users.length; i++)
@@ -110,36 +110,36 @@
         }
         if (user_exists)
         {
-        alert("Username already exists");
-        user_exists = false;
+            alert("Username already exists");
+            user_exists = false;
         }
         else if (inputted_username == "" || inputted_password == "")
         {
-        alert("Username and/or password cannot be empty");
+            alert("Username and/or password cannot be empty");
         }
         else
         {
-        let valid_password = password_regex.test(inputted_password);
-        if (valid_password)
-        {
-            var inputted_password = await hashedPassword(inputted_password)
-            current_user = 
+            let valid_password = password_regex.test(inputted_password);
+            if (valid_password)
             {
-            "username": inputted_username,
-            "password": inputted_password,
-            "typingStats": 
-            {
-                "averageWPM": 0,
-                "WPMList": [],
-                "totalPlayTimeInSeconds":0,
-                "totalTestsTaken": 0,
-                "totalWordsTyped": 0,
-                "totalCharactersTyped": 0,
-            }
-            }
-            addUserToLocalStorage(current_user);
-            displayHTMLafterLogIn(inputted_username,'outsideContainerForSignUp');
-            user_stats = JSON_data.users.find(user => user.password === inputted_password);
+                var inputted_password = await hashedPassword(inputted_password)
+                current_user = 
+                {
+                "username": inputted_username,
+                "password": inputted_password,
+                "typingStats": 
+                    {
+                    "averageWPM": 0,
+                    "WPMList": [],
+                    "totalPlayTimeInSeconds":0,
+                    "totalTestsTaken": 0,
+                    "totalWordsTyped": 0,
+                    "totalCharactersTyped": 0,
+                    }
+                }
+                addUserToLocalStorage(current_user);
+                displayHTMLafterLogIn(inputted_username,'outsideContainerForSignUp');
+                user_stats = JSON_data.users.find(user => user.password === inputted_password);
         }
         else
         {
