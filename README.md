@@ -32,7 +32,7 @@ __Features:__
     Dark Mode & Light Mode:
     The application supports both based on the user's system settings.
     Note: May not work in all browsers. 
-    (Works on chrome but not firefox, etc.)
+    (Works on chrome but not firefox, etc.) 
 
     Viewable Performance Metrics:
     Your WPM is stored, shown as a graph/stats screen or to be exported and downloaded as a json file.
@@ -53,7 +53,7 @@ __Getting Started__
 
 To run this project locally, follow these steps:
 
-    1. Clone this repository to your local machine.
+    1. Download/Clone this repository to your local machine.
     2. Ensure python is installed on your device. 
     -   Visual Studio Code is an alternative.
     3. Run the bat file to start a local web server, allowing the JSON file to be accessed. 
