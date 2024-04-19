@@ -254,8 +254,7 @@ function updateTimerUI() {
   let total_seconds = Math.floor(time_passed / 1000);
   let minutes = Math.floor(total_seconds / 60);
   let seconds = total_seconds % 60;
-  let formatted_time =
-    " ‎ ‎ " + minutes + ":" + (seconds < 10 ? "0" : "") + seconds + " ‎ ‎ ‎";
+  let formatted_time = minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
   timer_HTML.innerHTML = formatted_time;
 }
 
