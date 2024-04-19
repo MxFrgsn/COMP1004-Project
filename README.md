@@ -57,7 +57,8 @@ To run this project locally, follow these steps:
     2. Ensure python is installed on your device. 
     -   Visual Studio Code is an alternative.
     3. Run the bat file to start a local web server, allowing the JSON file to be accessed. 
-    -   Alternatively, Run the task '> Live Preview: Start Server' within Visual Studio Code.
+    -   Alternatively, ensure 'Live preview' extension is installed and
+        Run the task '> Live Preview: Start Server' within Visual Studio Code.
     4. Open the index.html file in your web browser.
     5. Log in with existing credentials from the json file or sign up for a new account.
     6. Customize the test options and start the typing test by typing in the input field. 
